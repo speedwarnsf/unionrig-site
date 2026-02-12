@@ -26,10 +26,15 @@ export const metadata: Metadata = {
     "NATO rail",
     "on set camera support",
   ],
+  alternates: {
+    canonical: "https://unionrig-site.vercel.app",
+  },
   openGraph: {
     title: "UNION RIG | Modular Camera Rig System",
     description:
       "Build a rig that moves with you. UNION RIG delivers fast swaps, balanced handheld control, and clean cable discipline.",
+    url: "https://unionrig-site.vercel.app",
+    siteName: "UNION RIG",
     type: "website",
   },
   twitter: {
