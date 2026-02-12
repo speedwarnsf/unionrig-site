@@ -1,0 +1,16 @@
+{
+  "name": "UNION RIG",
+  "short_name": "Union Rig",
+  "description": "Modular camera rig system built for fast reconfiguration, balanced handheld work, and clean on-set builds.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0e12",
+  "theme_color": "#0b0e12",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -86,6 +86,25 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="manifest" href="/manifest.json" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Union Rig",
+              url: "https://unionrig-site.vercel.app",
+              description:
+                "Modular camera rig system built for fast reconfiguration, balanced handheld work, and clean on-set builds.",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "hello@unionrig.com",
+                contactType: "sales",
+              },
+            }),
+          }}
+        />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${archivo.variable} font-sans antialiased`}
