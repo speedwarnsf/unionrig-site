@@ -21,7 +21,7 @@ export default function UnionLogo({ width = 280, className = "" }: { width?: num
           letterSpacing: "0.28em",
           fontWeight: 500,
           color: "#fff",
-          marginTop: 4,
+          marginTop: -4,
           textAlign: "center",
         }}
       >
