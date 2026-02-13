@@ -114,7 +114,7 @@ export default function Home() {
               marginBottom: 32,
             }}
           >
-            <strong>Union Rig&apos;s</strong> AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, fully analogue signal chain does.
+            <strong>Union Rig&apos;s</strong> AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, <strong>fully analogue</strong> signal chain does.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
