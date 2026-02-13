@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaincraft.dev/schemas/prefs.v1.json",
+  "title": "Chaincraft Preference Vector v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "created",
+    "updated",
+    "learn_enabled",
+    "bias",
+    "stats"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "learn_enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "bias": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "touch",
+        "heat",
+        "body",
+        "depth",
+        "motion",
+        "tempo"
+      ],
+      "properties": {
+        "touch": {
+          "type": "number",
+          "minimum": -0.25,
+          "maximum": 0.25,
+          "default": 0.0
+        },
+        "heat": {
+          "type": "number",
+          "minimum": -0.25,
+          "maximum": 0.25,
+          "default": 0.0
+        },
+        "body": {
+          "type": "number",
+          "minimum": -0.25,
+          "maximum": 0.25,
+          "default": 0.0
+        },
+        "depth": {
+          "type": "number",
+          "minimum": -0.25,
+          "maximum": 0.25,
+          "default": 0.0
+        },
+        "motion": {
+          "type": "number",
+          "minimum": -0.25,
+          "maximum": 0.25,
+          "default": 0.0
+        },
+        "tempo": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode_bias",
+            "bpm_bias"
+          ],
+          "properties": {
+            "mode_bias": {
+              "type": "number",
+              "minimum": -0.25,
+              "maximum": 0.25,
+              "default": 0.0,
+              "description": "Bias toward tempo-synced (positive) vs free-running (negative) behavior."
+            },
+            "bpm_bias": {
+              "type": "number",
+              "minimum": -0.25,
+              "maximum": 0.25,
+              "default": 0.0,
+              "description": "Bias toward slower (negative) or faster (positive) preferred tempo in normalized space."
+            }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commits",
+        "accepted_mutations",
+        "manual_macro_commits",
+        "last_commit_reason"
+      ],
+      "properties": {
+        "commits": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "accepted_mutations": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "manual_macro_commits": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "last_commit_reason": {
+          "type": "string",
+          "maxLength": 120,
+          "default": ""
+        }
+      }
+    }
+  }
+}

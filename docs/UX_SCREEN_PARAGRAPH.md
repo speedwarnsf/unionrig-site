@@ -1,0 +1,3 @@
+**Why the Screen Works This Way**
+
+Chaincraft’s screen isn’t meant to follow every movement of your hands. The sound already does that better. We chose e-ink because it behaves like an instrument label or a patch card — quiet, readable, and deliberate. While you turn knobs and switch scenes, your ears stay in charge. When you pause, the screen updates to confirm where you’ve landed: which rig you’re in, which scene is active, and what kind of change you just made. There are no meters to chase and no animations to distract you. Chaincraft is designed so you play first, listen second, and look only when you need orientation — not permission.

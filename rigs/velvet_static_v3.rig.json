@@ -1,0 +1,141 @@
+{
+  "version": "1.0.0",
+  "rig_id": "velvet_static_v3",
+  "name": "Velvet Static v3",
+  "tags": [
+    "shoegaze",
+    "wide",
+    "club"
+  ],
+  "parent": "shoegaze_clean_v2",
+  "created": "2025-12-15T09:00:00Z",
+  "notes": "Wide shoegaze texture with restrained drive. Scene B blooms for choruses.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Verse",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -22.0,
+          "ratio": 2.5,
+          "knee_db": 6.0,
+          "attack_ms": 18.0,
+          "release_ms": 220.0,
+          "makeup_db": 4.0,
+          "mix": 0.55
+        },
+        "drv": {
+          "type": 1,
+          "pre_gain_db": 9.0,
+          "asym": 0.25,
+          "tone_tilt": -0.15,
+          "low_cut_hz": 90.0,
+          "high_cut_hz": 8500.0,
+          "mix": 0.65,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.45,
+          "depth": 0.25,
+          "mix": 0.3,
+          "tone": -0.1
+        },
+        "stp": {
+          "width": 0.55,
+          "micro_delay_ms": 6.5,
+          "micro_pitch_cents": 4.0,
+          "seed": 0.42
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 24.0,
+          "decay_s": 3.2,
+          "damp": 0.45,
+          "diffusion": 0.65,
+          "mod": 0.2,
+          "wet": 0.38,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 3,
+          "low_res_hz": 110.0,
+          "low_res_q": 0.9,
+          "mid_scoop_db": -2.5,
+          "high_roll_hz": 6800.0,
+          "air": 0.3
+        },
+        "out": {
+          "level_db": -3.0,
+          "lim_thresh_db": -6.0,
+          "lim_release_ms": 160.0
+        }
+      }
+    },
+    "B": {
+      "label": "Chorus",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -24.0,
+          "ratio": 3.2,
+          "knee_db": 8.0,
+          "attack_ms": 22.0,
+          "release_ms": 260.0,
+          "makeup_db": 5.5,
+          "mix": 0.65
+        },
+        "drv": {
+          "type": 3,
+          "pre_gain_db": 14.0,
+          "asym": 0.55,
+          "tone_tilt": -0.05,
+          "low_cut_hz": 100.0,
+          "high_cut_hz": 7800.0,
+          "mix": 0.75,
+          "level_db": 1.5
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.38,
+          "depth": 0.35,
+          "mix": 0.38,
+          "tone": -0.05
+        },
+        "stp": {
+          "width": 0.75,
+          "micro_delay_ms": 9.0,
+          "micro_pitch_cents": 6.5,
+          "seed": 0.42
+        },
+        "spc": {
+          "mode": 2,
+          "pre_delay_ms": 36.0,
+          "decay_s": 6.8,
+          "damp": 0.35,
+          "diffusion": 0.78,
+          "mod": 0.3,
+          "wet": 0.52,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 120.0,
+          "low_res_q": 0.8,
+          "mid_scoop_db": -3.5,
+          "high_roll_hz": 6400.0,
+          "air": 0.45
+        },
+        "out": {
+          "level_db": -2.0,
+          "lim_thresh_db": -6.0,
+          "lim_release_ms": 200.0
+        }
+      }
+    }
+  }
+}

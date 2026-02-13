@@ -1,0 +1,13 @@
+Create a realistic industrial design rendering of a premium pedalboard-format guitar instrument called Chaincraft.
+
+The device should feel like a serious studio instrument, not a gadget. Calm, intentional, precision engineered. Restraint in the lineage of Elektron and Strymon.
+
+Form factor: pedalboard-sized, wide and low-profile, solid weighty presence, machined one-piece aluminum top shell with subtle radiused edges, no visible screws on the top surface.
+
+Interface: vertically oriented monochrome e-ink screen near the top center, like a patch card or studio note (not a dashboard), slightly recessed and protected, no animations or meters.
+
+Controls: five large knurled aluminum rotary knobs arranged symmetrically around the screen, engraved labels Touch, Heat, Motion, Depth, Body. Four understated footswitches along the bottom edge.
+
+Visual language: matte black/dark anodized aluminum, subtle highlights, neutral minimal typography, no branding clutter, no RGB/flashy LEDs, no sci-fi styling.
+
+Presentation: realistic studio lighting, neutral background, physically believable proportions, looks like a real object on a pedalboard today.

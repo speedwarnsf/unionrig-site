@@ -1,0 +1,223 @@
+{
+  "version": "1.0.0",
+  "notes": "Chaincraft v1 allowlist defining smoothing, crossfade, scope, and safety limits per parameter.",
+  "defaults": {
+    "llm_only": true,
+    "scene_scoped": true,
+    "requires_crossfade": false,
+    "smoothing": "MED",
+    "max_delta": null
+  },
+  "blocks": {
+    "dyn": {
+      "macro_touch": {
+        "llm_only": false,
+        "scene_scoped": false,
+        "smoothing": "FAST"
+      },
+      "enable": {
+        "smoothing": "FAST"
+      },
+      "thresh_db": {
+        "smoothing": "MED",
+        "max_delta": 6.0
+      },
+      "ratio": {
+        "smoothing": "MED",
+        "max_delta": 1.5
+      },
+      "knee_db": {
+        "smoothing": "MED"
+      },
+      "attack_ms": {
+        "smoothing": "MED",
+        "max_delta": 20.0
+      },
+      "release_ms": {
+        "smoothing": "SLOW",
+        "max_delta": 120.0
+      },
+      "makeup_db": {
+        "smoothing": "FAST",
+        "max_delta": 6.0
+      },
+      "mix": {
+        "smoothing": "FAST",
+        "max_delta": 0.25
+      }
+    },
+    "drv": {
+      "macro_heat": {
+        "llm_only": false,
+        "scene_scoped": false,
+        "smoothing": "FAST"
+      },
+      "type": {
+        "requires_crossfade": true,
+        "smoothing": "XFAD",
+        "scene_scoped": true
+      },
+      "pre_gain_db": {
+        "smoothing": "FAST",
+        "max_delta": 8.0
+      },
+      "asym": {
+        "smoothing": "MED",
+        "max_delta": 0.4
+      },
+      "tone_tilt": {
+        "smoothing": "MED",
+        "max_delta": 0.4
+      },
+      "low_cut_hz": {
+        "smoothing": "SLOW",
+        "max_delta": 80.0
+      },
+      "high_cut_hz": {
+        "smoothing": "SLOW",
+        "max_delta": 2000.0
+      },
+      "mix": {
+        "smoothing": "FAST",
+        "max_delta": 0.25
+      },
+      "level_db": {
+        "smoothing": "FAST",
+        "max_delta": 6.0
+      }
+    },
+    "chr": {
+      "macro_motion": {
+        "llm_only": false,
+        "scene_scoped": false,
+        "smoothing": "FAST"
+      },
+      "mode": {
+        "requires_crossfade": true,
+        "smoothing": "XFAD"
+      },
+      "rate_hz": {
+        "smoothing": "SLOW",
+        "max_delta": 1.0
+      },
+      "depth": {
+        "smoothing": "MED",
+        "max_delta": 0.3
+      },
+      "mix": {
+        "smoothing": "FAST",
+        "max_delta": 0.25
+      },
+      "tone": {
+        "smoothing": "MED",
+        "max_delta": 0.4
+      }
+    },
+    "stp": {
+      "width": {
+        "smoothing": "MED",
+        "max_delta": 0.25
+      },
+      "micro_delay_ms": {
+        "smoothing": "SLOW",
+        "max_delta": 4.0
+      },
+      "micro_pitch_cents": {
+        "smoothing": "SLOW",
+        "max_delta": 4.0
+      },
+      "seed": {
+        "smoothing": "SLOW",
+        "requires_crossfade": true,
+        "max_delta": 1.0
+      }
+    },
+    "spc": {
+      "macro_depth": {
+        "llm_only": false,
+        "scene_scoped": false,
+        "smoothing": "FAST"
+      },
+      "mode": {
+        "requires_crossfade": true,
+        "smoothing": "XFAD"
+      },
+      "pre_delay_ms": {
+        "smoothing": "MED",
+        "max_delta": 30.0
+      },
+      "decay_s": {
+        "smoothing": "SLOW",
+        "max_delta": 2.5
+      },
+      "damp": {
+        "smoothing": "SLOW",
+        "max_delta": 0.3
+      },
+      "diffusion": {
+        "smoothing": "SLOW",
+        "max_delta": 0.3
+      },
+      "mod": {
+        "smoothing": "SLOW",
+        "max_delta": 0.25
+      },
+      "wet": {
+        "smoothing": "FAST",
+        "max_delta": 0.25
+      },
+      "dry": {
+        "smoothing": "FAST",
+        "max_delta": 0.25
+      }
+    },
+    "cab": {
+      "macro_body": {
+        "llm_only": false,
+        "scene_scoped": false,
+        "smoothing": "FAST"
+      },
+      "voicing": {
+        "requires_crossfade": true,
+        "smoothing": "XFAD"
+      },
+      "low_res_hz": {
+        "smoothing": "SLOW",
+        "max_delta": 30.0
+      },
+      "low_res_q": {
+        "smoothing": "SLOW",
+        "max_delta": 0.4
+      },
+      "mid_scoop_db": {
+        "smoothing": "SLOW",
+        "max_delta": 4.0
+      },
+      "high_roll_hz": {
+        "smoothing": "SLOW",
+        "max_delta": 1500.0
+      },
+      "air": {
+        "smoothing": "SLOW",
+        "max_delta": 0.25
+      }
+    },
+    "out": {
+      "level_db": {
+        "scene_scoped": false,
+        "smoothing": "FAST",
+        "max_delta": 6.0
+      },
+      "lim_thresh_db": {
+        "scene_scoped": false,
+        "smoothing": "MED",
+        "max_delta": 6.0
+      },
+      "lim_release_ms": {
+        "scene_scoped": false,
+        "smoothing": "SLOW",
+        "max_delta": 120.0
+      }
+    }
+  }
+}

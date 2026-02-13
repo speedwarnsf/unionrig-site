@@ -1,0 +1,39 @@
+Generate a mechanically accurate exploded assembly rendering of ONLY the Chaincraft v1 4.2-inch portrait e-ink display subsystem. This is an engineering design review artifact, not concept art.
+
+INCLUDE ONLY: CNC aluminum top shell segment with display cutout + internal ledge (rabbet), clamp frame (retention bezel), 4.2" e-ink panel (portrait), 0.5mm compression gasket, controller PCB, 8mm metal standoffs, 4× M2 screws, FPC cable with service loop.
+
+DISPLAY (non-negotiable):
+- Portrait orientation only
+- Active area: 84.8mm (H) × 63.6mm (W)
+- Overall glass/module envelope: ~91 × 77mm
+- Glass thickness ~1.3mm
+
+TOP SHELL MACHINING:
+- Machined ledge depth 1.8mm
+- Ledge land width 2.5–3.5mm around perimeter
+- Reveal gap/shadow line 0.25–0.40mm per side between aluminum and clamp frame
+- Display rests on ledge (ledge supports load); clamp frame prevents lift
+
+RETENTION (locked):
+- Clamp frame thickness 2.5mm
+- 4× M2 screws into aluminum bosses
+
+CONTROLLER PCB:
+- PCB thickness 1.6mm
+- Mounted on 8mm standoffs
+- ≥2.0mm clearance between top of PCB components and glass underside
+
+FPC:
+- Exits bottom edge of display
+- Bend radius ≥5mm
+- Service loop slack 10–15mm
+- Show strain relief (clamp tab or adhesive anchor)
+
+Z-STACK REALITY CHECK:
+- Show 12–15mm internal Z depth under glass plane (glass + gasket + clearance + PCB + component height + standoffs). No compressed spacing.
+
+PRESENTATION:
+- True exploded view with realistic spacing
+- Orthographic or near-orthographic camera
+- Neutral background
+- No stylization, no extra parts, no labels.

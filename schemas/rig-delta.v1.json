@@ -1,0 +1,636 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaincraft.dev/schemas/rig-delta.v1.json",
+  "title": "Chaincraft Rig Delta v1 (LLM Patch Updates)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "op",
+    "rig_id",
+    "changes"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "op": {
+      "type": "string",
+      "enum": [
+        "set_params",
+        "set_scene_label",
+        "set_metadata",
+        "clone_rig"
+      ]
+    },
+    "rig_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_\\-]{3,64}$"
+    },
+    "scene": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "both"
+      ],
+      "default": "both"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 280,
+      "default": ""
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requires_crossfade": {
+          "type": "boolean",
+          "default": false
+        },
+        "estimated_risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "low"
+        }
+      },
+      "default": {}
+    },
+    "changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "params": {
+          "$ref": "#/$defs/paramPatch"
+        },
+        "scene_label": {
+          "$ref": "#/$defs/sceneLabelPatch"
+        },
+        "metadata": {
+          "$ref": "#/$defs/metadataPatch"
+        },
+        "clone": {
+          "$ref": "#/$defs/clonePatch"
+        },
+        "macros": {
+          "$ref": "#/$defs/macroPatch"
+        }
+      },
+      "minProperties": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "set_params"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "changes": {
+            "required": [
+              "params"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "set_scene_label"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "changes": {
+            "required": [
+              "scene_label"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "set_metadata"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "changes": {
+            "required": [
+              "metadata"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "op": {
+            "const": "clone_rig"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "changes": {
+            "required": [
+              "clone"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sceneLabelPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "A": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24
+        },
+        "B": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24
+        }
+      },
+      "minProperties": 1
+    },
+    "metadataPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "tags_add": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9_\\-]+$"
+          },
+          "uniqueItems": true
+        },
+        "tags_remove": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9_\\-]+$"
+          },
+          "uniqueItems": true
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 512
+        },
+        "parent": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z0-9_\\-]{3,64}$"
+        }
+      },
+      "minProperties": 1
+    },
+    "clonePatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "new_rig_id",
+        "new_name"
+      ],
+      "properties": {
+        "new_rig_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_\\-]{3,64}$"
+        },
+        "new_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "copy_from": {
+          "type": "string",
+          "enum": [
+            "current",
+            "rig_id"
+          ],
+          "default": "current"
+        },
+        "source_rig_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_\\-]{3,64}$"
+        },
+        "set_parent_to_source": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "copy_from": {
+                "const": "rig_id"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "source_rig_id"
+            ]
+          }
+        }
+      ]
+    },
+    "paramPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dyn": {
+          "$ref": "#/$defs/dynPatch"
+        },
+        "drv": {
+          "$ref": "#/$defs/drvPatch"
+        },
+        "chr": {
+          "$ref": "#/$defs/chrPatch"
+        },
+        "stp": {
+          "$ref": "#/$defs/stpPatch"
+        },
+        "spc": {
+          "$ref": "#/$defs/spcPatch"
+        },
+        "cab": {
+          "$ref": "#/$defs/cabPatch"
+        },
+        "out": {
+          "$ref": "#/$defs/outPatch"
+        }
+      },
+      "minProperties": 1
+    },
+    "dynPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "boolean"
+        },
+        "thresh_db": {
+          "type": "number",
+          "minimum": -40.0,
+          "maximum": 0.0
+        },
+        "ratio": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 8.0
+        },
+        "knee_db": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 12.0
+        },
+        "attack_ms": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 80.0
+        },
+        "release_ms": {
+          "type": "number",
+          "minimum": 20.0,
+          "maximum": 600.0
+        },
+        "makeup_db": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 18.0
+        },
+        "mix": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "minProperties": 1
+    },
+    "drvType": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "drvPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/drvType"
+        },
+        "pre_gain_db": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 36.0
+        },
+        "asym": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0
+        },
+        "tone_tilt": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0
+        },
+        "low_cut_hz": {
+          "type": "number",
+          "minimum": 20.0,
+          "maximum": 300.0
+        },
+        "high_cut_hz": {
+          "type": "number",
+          "minimum": 2000.0,
+          "maximum": 18000.0
+        },
+        "mix": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "level_db": {
+          "type": "number",
+          "minimum": -18.0,
+          "maximum": 18.0
+        }
+      },
+      "minProperties": 1
+    },
+    "chrMode": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "chrPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/chrMode"
+        },
+        "rate_hz": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 8.0
+        },
+        "depth": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "mix": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "tone": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0
+        }
+      },
+      "minProperties": 1
+    },
+    "stpPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "micro_delay_ms": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 12.0
+        },
+        "micro_pitch_cents": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 12.0
+        },
+        "seed": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "minProperties": 1
+    },
+    "spcMode": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "spcPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/spcMode"
+        },
+        "pre_delay_ms": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 120.0
+        },
+        "decay_s": {
+          "type": "number",
+          "minimum": 0.2,
+          "maximum": 12.0
+        },
+        "damp": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "diffusion": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "mod": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "wet": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "dry": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "minProperties": 1
+    },
+    "cabVoicing": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "cabPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "voicing": {
+          "$ref": "#/$defs/cabVoicing"
+        },
+        "low_res_hz": {
+          "type": "number",
+          "minimum": 60.0,
+          "maximum": 180.0
+        },
+        "low_res_q": {
+          "type": "number",
+          "minimum": 0.3,
+          "maximum": 2.0
+        },
+        "mid_scoop_db": {
+          "type": "number",
+          "minimum": -12.0,
+          "maximum": 6.0
+        },
+        "high_roll_hz": {
+          "type": "number",
+          "minimum": 2500.0,
+          "maximum": 12000.0
+        },
+        "air": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      },
+      "minProperties": 1
+    },
+    "outPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level_db": {
+          "type": "number",
+          "minimum": -60.0,
+          "maximum": 6.0
+        },
+        "lim_thresh_db": {
+          "type": "number",
+          "minimum": -18.0,
+          "maximum": 0.0
+        },
+        "lim_release_ms": {
+          "type": "number",
+          "minimum": 20.0,
+          "maximum": 400.0
+        }
+      },
+      "minProperties": 1
+    },
+    "macroPatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "touch": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "heat": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "body": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "depth": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "motion": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "tempo_bpm": {
+          "type": "number",
+          "minimum": 40.0,
+          "maximum": 240.0
+        },
+        "tempo_sync": {
+          "type": "boolean"
+        }
+      },
+      "minProperties": 1
+    }
+  }
+}

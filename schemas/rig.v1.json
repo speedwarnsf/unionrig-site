@@ -1,0 +1,494 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chaincraft.dev/schemas/rig.v1.json",
+  "title": "Chaincraft Rig v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "rig_id",
+    "name",
+    "io",
+    "created",
+    "scenes"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "rig_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_\\-]{3,64}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 24,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 24,
+        "pattern": "^[a-z0-9_\\-]+$"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "parent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9_\\-]{3,64}$",
+      "default": null
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 512,
+      "default": ""
+    },
+    "io": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "in",
+        "out"
+      ],
+      "properties": {
+        "in": {
+          "type": "string",
+          "const": "mono"
+        },
+        "out": {
+          "type": "string",
+          "const": "stereo"
+        }
+      }
+    },
+    "scenes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "A",
+        "B"
+      ],
+      "properties": {
+        "A": {
+          "$ref": "#/$defs/scene"
+        },
+        "B": {
+          "$ref": "#/$defs/scene"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "params"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24
+        },
+        "params": {
+          "$ref": "#/$defs/params"
+        }
+      }
+    },
+    "params": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dyn",
+        "drv",
+        "chr",
+        "stp",
+        "spc",
+        "cab",
+        "out"
+      ],
+      "properties": {
+        "dyn": {
+          "$ref": "#/$defs/dynParams"
+        },
+        "drv": {
+          "$ref": "#/$defs/drvParams"
+        },
+        "chr": {
+          "$ref": "#/$defs/chrParams"
+        },
+        "stp": {
+          "$ref": "#/$defs/stpParams"
+        },
+        "spc": {
+          "$ref": "#/$defs/spcParams"
+        },
+        "cab": {
+          "$ref": "#/$defs/cabParams"
+        },
+        "out": {
+          "$ref": "#/$defs/outParams"
+        }
+      }
+    },
+    "dynParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enable",
+        "thresh_db",
+        "ratio",
+        "knee_db",
+        "attack_ms",
+        "release_ms",
+        "makeup_db",
+        "mix"
+      ],
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "default": true
+        },
+        "thresh_db": {
+          "type": "number",
+          "minimum": -40.0,
+          "maximum": 0.0
+        },
+        "ratio": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 8.0
+        },
+        "knee_db": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 12.0
+        },
+        "attack_ms": {
+          "type": "number",
+          "minimum": 1.0,
+          "maximum": 80.0
+        },
+        "release_ms": {
+          "type": "number",
+          "minimum": 20.0,
+          "maximum": 600.0
+        },
+        "makeup_db": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 18.0
+        },
+        "mix": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "drvType": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "description": "0 CleanBoost, 1 SoftClip, 2 HardClip, 3 AsymClip, 4 FoldHeat, 5 FuzzHybrid"
+    },
+    "drvParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "pre_gain_db",
+        "asym",
+        "tone_tilt",
+        "low_cut_hz",
+        "high_cut_hz",
+        "mix",
+        "level_db"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/drvType"
+        },
+        "pre_gain_db": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 36.0
+        },
+        "asym": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0
+        },
+        "tone_tilt": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0
+        },
+        "low_cut_hz": {
+          "type": "number",
+          "minimum": 20.0,
+          "maximum": 300.0
+        },
+        "high_cut_hz": {
+          "type": "number",
+          "minimum": 2000.0,
+          "maximum": 18000.0
+        },
+        "mix": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "level_db": {
+          "type": "number",
+          "minimum": -18.0,
+          "maximum": 18.0
+        }
+      }
+    },
+    "chrMode": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "description": "0 Off, 1 Chorus, 2 Vibrato, 3 Tremolo, 4 FilterDrift, 5 TapeWarble"
+    },
+    "chrParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "rate_hz",
+        "depth",
+        "mix",
+        "tone"
+      ],
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/chrMode"
+        },
+        "rate_hz": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 8.0
+        },
+        "depth": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "mix": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "tone": {
+          "type": "number",
+          "minimum": -1.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "stpParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "width",
+        "micro_delay_ms",
+        "micro_pitch_cents",
+        "seed"
+      ],
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "micro_delay_ms": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 12.0
+        },
+        "micro_pitch_cents": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 12.0
+        },
+        "seed": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "spcMode": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "description": "0 Room, 1 Plate, 2 Hall, 3 TapeDelay, 4 VerbDelayHybrid"
+    },
+    "spcParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "pre_delay_ms",
+        "decay_s",
+        "damp",
+        "diffusion",
+        "mod",
+        "wet",
+        "dry"
+      ],
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/spcMode"
+        },
+        "pre_delay_ms": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 120.0
+        },
+        "decay_s": {
+          "type": "number",
+          "minimum": 0.2,
+          "maximum": 12.0
+        },
+        "damp": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "diffusion": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "mod": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "wet": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "dry": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "cabVoicing": {
+      "type": "integer",
+      "enum": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "description": "0 Direct, 1 Tight, 2 Wide, 3 Warm, 4 Bite"
+    },
+    "cabParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "voicing",
+        "low_res_hz",
+        "low_res_q",
+        "mid_scoop_db",
+        "high_roll_hz",
+        "air"
+      ],
+      "properties": {
+        "voicing": {
+          "$ref": "#/$defs/cabVoicing"
+        },
+        "low_res_hz": {
+          "type": "number",
+          "minimum": 60.0,
+          "maximum": 180.0
+        },
+        "low_res_q": {
+          "type": "number",
+          "minimum": 0.3,
+          "maximum": 2.0
+        },
+        "mid_scoop_db": {
+          "type": "number",
+          "minimum": -12.0,
+          "maximum": 6.0
+        },
+        "high_roll_hz": {
+          "type": "number",
+          "minimum": 2500.0,
+          "maximum": 12000.0
+        },
+        "air": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "outParams": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level_db",
+        "lim_thresh_db",
+        "lim_release_ms"
+      ],
+      "properties": {
+        "level_db": {
+          "type": "number",
+          "minimum": -60.0,
+          "maximum": 6.0
+        },
+        "lim_thresh_db": {
+          "type": "number",
+          "minimum": -18.0,
+          "maximum": 0.0
+        },
+        "lim_release_ms": {
+          "type": "number",
+          "minimum": 20.0,
+          "maximum": 400.0
+        }
+      }
+    }
+  }
+}
