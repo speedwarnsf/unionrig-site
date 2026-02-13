@@ -2,413 +2,747 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
-import FadeIn from "@/components/FadeIn";
-
-const section: React.CSSProperties = {
-  maxWidth: 1200,
-  margin: "0 auto",
-  padding: "80px 24px",
-};
-
-const dimText: React.CSSProperties = {
-  color: "var(--fg-dim)",
-  fontSize: 15,
-  lineHeight: 1.7,
-  maxWidth: 560,
-};
+import ScrollReveal from "@/components/ScrollReveal";
+import UnionLogo from "@/components/UnionLogo";
+import SignalChainGraphic from "@/components/SignalChainGraphic";
+import KnobGraphic from "@/components/KnobGraphic";
+import FootswitchGraphic from "@/components/FootswitchGraphic";
+import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
 
 export default function Home() {
   return (
     <>
       <Nav />
 
-      {/* Hero */}
+      {/* ═══════ HERO ═══════ */}
       <section
         style={{
           position: "relative",
-          minHeight: "100vh",
+          minHeight: "100svh",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          flexDirection: "column",
+          justifyContent: "flex-end",
           overflow: "hidden",
         }}
       >
-        <Image
-          src="/union-rig-hero.jpg"
-          alt="Union Rig"
-          fill
-          priority
-          style={{ objectFit: "cover", opacity: 0.4 }}
-        />
+        {/* Hero image — full bleed, allowed to breathe */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            src="/union-rig-hero.jpg"
+            alt="Union Rig — AI-powered guitar instrument"
+            fill
+            priority
+            sizes="100vw"
+            style={{
+              objectFit: "contain",
+              objectPosition: "center 40%",
+              opacity: 0.55,
+            }}
+          />
+          {/* Bottom gradient for text legibility */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "50%",
+              background: "linear-gradient(to top, var(--bg) 0%, transparent 100%)",
+            }}
+          />
+        </div>
+
+        {/* Hero content — logo + tagline at bottom */}
         <div
           style={{
             position: "relative",
             zIndex: 1,
-            textAlign: "center",
-            padding: "0 24px",
+            padding: "0 24px 64px",
+            maxWidth: 1200,
+            margin: "0 auto",
+            width: "100%",
           }}
         >
-          <FadeIn>
-            <h1
-              style={{
-                fontSize: "clamp(40px, 8vw, 80px)",
-                fontWeight: 300,
-                letterSpacing: "-0.03em",
-                marginBottom: 16,
-              }}
-            >
-              Union Rig
-            </h1>
-          </FadeIn>
-          <FadeIn delay={200}>
+          <ScrollReveal>
+            <UnionLogo width={220} />
+          </ScrollReveal>
+          <ScrollReveal delay={200}>
             <p
               style={{
-                fontSize: "clamp(16px, 2.5vw, 22px)",
+                fontSize: "clamp(18px, 3vw, 26px)",
                 color: "var(--fg-dim)",
                 fontWeight: 300,
-                maxWidth: 500,
-                margin: "0 auto 48px",
+                maxWidth: 520,
+                marginTop: 20,
+                marginBottom: 32,
+                lineHeight: 1.5,
               }}
             >
-              Trust what works.
+              AI builds your sound. Analog keeps your soul.
             </p>
-          </FadeIn>
-          <FadeIn delay={400}>
+          </ScrollReveal>
+          <ScrollReveal delay={350}>
             <p
               style={{
-                fontSize: 13,
+                fontSize: 12,
                 color: "var(--fg-dim)",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.1em",
                 textTransform: "uppercase",
+                fontWeight: 500,
               }}
             >
-              $849 -- Coming 2026
+              $849 — Shipping 2026
             </p>
-          </FadeIn>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* What it is */}
-      <section style={section}>
+      {/* ═══════ THE PITCH — How it works ═══════ */}
+      <section
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "120px 24px 80px",
+        }}
+      >
+        <ScrollReveal>
+          <p
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 24,
+              fontWeight: 600,
+            }}
+          >
+            How it works
+          </p>
+        </ScrollReveal>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 0,
+          }}
+        >
+          {/* Step 1 */}
+          <ScrollReveal>
+            <div
+              style={{
+                borderTop: "1px solid var(--border)",
+                padding: "48px 0",
+                display: "grid",
+                gridTemplateColumns: "48px 1fr",
+                gap: 24,
+                alignItems: "start",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 32,
+                  fontWeight: 200,
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                }}
+              >
+                01
+              </span>
+              <div>
+                <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
+                  Plug in your guitar.
+                </h2>
+                <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
+                  One cable in, stereo out. Your signal enters Union Rig and stays analog the entire way through.
+                  No conversion. No latency. The full weight of your pickups, your fingers, your attack —
+                  preserved exactly as your instrument delivers it.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Step 2 */}
+          <ScrollReveal>
+            <div
+              style={{
+                borderTop: "1px solid var(--border)",
+                padding: "48px 0",
+                display: "grid",
+                gridTemplateColumns: "48px 1fr",
+                gap: 24,
+                alignItems: "start",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 32,
+                  fontWeight: 200,
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                }}
+              >
+                02
+              </span>
+              <div>
+                <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
+                  AI builds 12 custom sounds for you.
+                </h2>
+                <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
+                  Trained on the collective understanding of all guitar music ever recorded, the AI inside
+                  Union Rig knows what makes a great clean shimmer, what makes a lead cut through a mix,
+                  and what makes a rhythm part sit perfectly in a band. It builds 12 sounds — your working
+                  set — shaped to your playing style and the way you use your instrument.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Step 3 */}
+          <ScrollReveal>
+            <div
+              style={{
+                borderTop: "1px solid var(--border)",
+                padding: "48px 0",
+                display: "grid",
+                gridTemplateColumns: "48px 1fr",
+                gap: 24,
+                alignItems: "start",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 32,
+                  fontWeight: 200,
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                }}
+              >
+                03
+              </span>
+              <div>
+                <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
+                  The signal stays analog. Always.
+                </h2>
+                <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
+                  Here is where Union Rig breaks from everything else: the AI shapes the parameters —
+                  drive character, spatial depth, tonal weight — but your guitar signal never touches a
+                  digital converter. It passes through analog circuitry the entire time. Hi-fidelity.
+                  No artifacts. The warmth and power of your pickups, untouched.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Step 4 */}
+          <ScrollReveal>
+            <div
+              style={{
+                borderTop: "1px solid var(--border)",
+                padding: "48px 0",
+                display: "grid",
+                gridTemplateColumns: "48px 1fr",
+                gap: 24,
+                alignItems: "start",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 32,
+                  fontWeight: 200,
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                }}
+              >
+                04
+              </span>
+              <div>
+                <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
+                  Intelligence meets warmth. That is the point.
+                </h2>
+                <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
+                  AI that understands tone at the deepest level. Analog signal path that refuses to
+                  compromise your sound. Union Rig is the marriage of those two ideas — the precision
+                  of machine learning with the soul of real circuitry. Not AI for the sake of AI.
+                  AI in service of making you sound like yourself, but better.
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══════ BOLD STATEMENT ═══════ */}
+      <section
+        style={{
+          borderTop: "1px solid var(--border)",
+          borderBottom: "1px solid var(--border)",
+          padding: "100px 24px",
+          textAlign: "center",
+        }}
+      >
+        <ScrollReveal>
+          <p
+            style={{
+              fontSize: "clamp(28px, 5vw, 52px)",
+              fontWeight: 300,
+              lineHeight: 1.2,
+              maxWidth: 800,
+              margin: "0 auto",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Every sound you have ever loved was made by someone who trusted their gear.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={200}>
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--accent)",
+              marginTop: 32,
+              fontWeight: 400,
+            }}
+          >
+            Trust what works.
+          </p>
+        </ScrollReveal>
+      </section>
+
+      {/* ═══════ SIGNAL CHAIN ═══════ */}
+      <section
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "100px 24px",
+        }}
+      >
+        <ScrollReveal>
+          <p
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 12,
+              fontWeight: 600,
+            }}
+          >
+            Fixed Signal Chain
+          </p>
+          <p
+            style={{
+              color: "var(--fg-dim)",
+              fontSize: 15,
+              lineHeight: 1.7,
+              maxWidth: 540,
+              marginBottom: 40,
+            }}
+          >
+            One topology. No menus. Six stages, always in the same order — because
+            decisions make better instruments than options do.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={150}>
+          <SignalChainGraphic />
+        </ScrollReveal>
+      </section>
+
+      {/* ═══════ CONTROLS — Knobs + Footswitches ═══════ */}
+      <section
+        style={{
+          borderTop: "1px solid var(--border)",
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "100px 24px",
+        }}
+      >
+        <ScrollReveal>
+          <p
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 48,
+              fontWeight: 600,
+            }}
+          >
+            Six knobs. Four footswitches. Nothing else.
+          </p>
+        </ScrollReveal>
+
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: 64,
+            marginBottom: 64,
           }}
         >
-          <FadeIn>
+          {/* Tone / Feel */}
+          <ScrollReveal direction="left">
             <div>
-              <h2
+              <p
                 style={{
-                  fontSize: 28,
-                  fontWeight: 400,
-                  marginBottom: 24,
-                  color: "var(--accent)",
+                  fontSize: 11,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--fg-dim)",
+                  marginBottom: 32,
                 }}
               >
-                One instrument. Everything you need for the set.
-              </h2>
-              <p style={dimText}>
-                Union Rig is a mono-in, stereo-out guitar instrument. Fixed signal
-                chain. Six knobs. Four footswitches. Twelve sounds with two scenes
-                each. A looper. Nothing else.
+                Tone / Feel
+              </p>
+              <div style={{ display: "flex", gap: 32, marginBottom: 24 }}>
+                <KnobGraphic label="Touch" value={0.35} />
+                <KnobGraphic label="Heat" value={0.7} />
+                <KnobGraphic label="Body" value={0.55} />
+              </div>
+              <p style={{ color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7 }}>
+                Touch controls how much your pick attack matters. Heat dials in saturation from
+                clean push to full breakup. Body shapes the tonal weight — thin and cutting to
+                thick and warm.
               </p>
             </div>
-          </FadeIn>
-          <FadeIn delay={150}>
-            <div>
-              <h2
-                style={{
-                  fontSize: 28,
-                  fontWeight: 400,
-                  marginBottom: 24,
-                  color: "var(--accent)",
-                }}
-              >
-                Machines are useless if you can&apos;t trust them.
-              </h2>
-              <p style={dimText}>
-                No dropouts. No surprise behavior. No reset feeling between songs.
-                Your sounds are there when you step on stage and they stay there
-                until you decide to change them.
-              </p>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+          </ScrollReveal>
 
-      {/* Signal Chain */}
-      <section
-        style={{
-          ...section,
-          borderTop: "1px solid var(--border)",
-        }}
-      >
-        <FadeIn>
-          <p
-            style={{
-              fontSize: 12,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--fg-dim)",
-              marginBottom: 32,
-            }}
-          >
-            Signal Chain
-          </p>
+          {/* Space / Time */}
+          <ScrollReveal direction="right">
+            <div>
+              <p
+                style={{
+                  fontSize: 11,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--fg-dim)",
+                  marginBottom: 32,
+                }}
+              >
+                Space / Time
+              </p>
+              <div style={{ display: "flex", gap: 32, marginBottom: 24 }}>
+                <KnobGraphic label="Depth" value={0.45} />
+                <KnobGraphic label="Motion" value={0.6} />
+                <KnobGraphic label="Tempo" value={0.5} />
+              </div>
+              <p style={{ color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7 }}>
+                Depth sets how much space surrounds the signal — from dry to cathedral. Motion
+                adds movement and modulation. Tempo locks time-based effects to your feel.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* Footswitches */}
+        <ScrollReveal>
           <div
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "8px 4px",
-              alignItems: "center",
-              fontSize: "clamp(16px, 2.5vw, 22px)",
-              fontWeight: 300,
-              color: "var(--fg)",
+              borderTop: "1px solid var(--border)",
+              paddingTop: 48,
             }}
           >
-            {[
-              "Dynamics",
-              "Drive",
-              "Character / Motion",
-              "Stereo Width",
-              "Space",
-              "Output Shaping",
-            ].map((block, i, arr) => (
-              <span key={block} style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                <span>{block}</span>
-                {i < arr.length - 1 && (
-                  <span style={{ color: "var(--fg-dim)", margin: "0 4px" }}>
-                    &rarr;
-                  </span>
-                )}
-              </span>
-            ))}
+            <p
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--fg-dim)",
+                marginBottom: 32,
+              }}
+            >
+              Footswitches — left to right
+            </p>
+            <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
+              <FootswitchGraphic label="Looper" active />
+              <FootswitchGraphic label="Scene A/B" />
+              <FootswitchGraphic label="Next" />
+              <FootswitchGraphic label="Previous" />
+            </div>
           </div>
-        </FadeIn>
+        </ScrollReveal>
       </section>
 
-      {/* Controls */}
+      {/* ═══════ WORKING SET + E-INK ═══════ */}
       <section
         style={{
-          ...section,
           borderTop: "1px solid var(--border)",
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "100px 24px",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: 64,
+            alignItems: "start",
           }}
         >
-          <FadeIn>
+          {/* Working set */}
+          <ScrollReveal>
             <div>
+              <p
+                style={{
+                  fontSize: 12,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--accent)",
+                  marginBottom: 24,
+                  fontWeight: 600,
+                }}
+              >
+                12 sounds. 2 scenes each. No banks.
+              </p>
+              <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
+                Your working set is always loaded. Step through sounds with your feet.
+                Switch scenes within a song. Hold the scene switch to morph between A and B,
+                release to come back. Twenty-four playable states, zero menu diving.
+              </p>
+              <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7 }}>
+                The AI learns how you adjust sound over time — not who you are. A local
+                preference memory nudges future changes toward your tendencies. No cloud.
+                No tracking. Reset it whenever you want.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* E-ink display */}
+          <ScrollReveal delay={200}>
+            <div style={{ textAlign: "center" }}>
+              <EinkDisplayGraphic />
               <p
                 style={{
                   fontSize: 12,
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   color: "var(--fg-dim)",
-                  marginBottom: 24,
+                  marginTop: 24,
                 }}
               >
-                Tone / Feel
+                4.2&quot; e-ink display
               </p>
-              {["Touch", "Heat", "Body"].map((k) => (
-                <p
-                  key={k}
-                  style={{
-                    fontSize: 24,
-                    fontWeight: 300,
-                    marginBottom: 8,
-                  }}
-                >
-                  {k}
-                </p>
-              ))}
-            </div>
-          </FadeIn>
-          <FadeIn delay={100}>
-            <div>
-              <p
-                style={{
-                  fontSize: 12,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--fg-dim)",
-                  marginBottom: 24,
-                }}
-              >
-                Space / Time
+              <p style={{ color: "var(--fg-dim)", fontSize: 13, lineHeight: 1.6, marginTop: 8, maxWidth: 280, margin: "8px auto 0" }}>
+                Shows where you are. Not what to do. No meters. No animations.
+                Orientation, not permission.
               </p>
-              {["Depth", "Motion", "Tempo"].map((k) => (
-                <p
-                  key={k}
-                  style={{
-                    fontSize: 24,
-                    fontWeight: 300,
-                    marginBottom: 8,
-                  }}
-                >
-                  {k}
-                </p>
-              ))}
             </div>
-          </FadeIn>
-          <FadeIn delay={200}>
-            <div>
-              <p
-                style={{
-                  fontSize: 12,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--fg-dim)",
-                  marginBottom: 24,
-                }}
-              >
-                Footswitches
-              </p>
-              {["Looper", "Scene A/B", "Next Sound", "Previous Sound"].map(
-                (k) => (
-                  <p
-                    key={k}
-                    style={{
-                      fontSize: 24,
-                      fontWeight: 300,
-                      marginBottom: 8,
-                    }}
-                  >
-                    {k}
-                  </p>
-                )
-              )}
-            </div>
-          </FadeIn>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Working Set */}
+      {/* ═══════ LOOPER ═══════ */}
       <section
         style={{
-          ...section,
           borderTop: "1px solid var(--border)",
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "100px 24px",
         }}
       >
-        <FadeIn>
-          <div style={{ maxWidth: 640 }}>
-            <h2
+        <ScrollReveal>
+          <div style={{ maxWidth: 560 }}>
+            <p
               style={{
-                fontSize: 28,
-                fontWeight: 400,
-                marginBottom: 24,
+                fontSize: 12,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
                 color: "var(--accent)",
+                marginBottom: 24,
+                fontWeight: 600,
               }}
             >
-              12 sounds. 2 scenes each. No banks.
+              Performance Looper
+            </p>
+            <h2
+              style={{
+                fontSize: "clamp(22px, 4vw, 32px)",
+                fontWeight: 400,
+                marginBottom: 20,
+                lineHeight: 1.2,
+              }}
+            >
+              Your loop lives inside the instrument.
             </h2>
-            <p style={dimText}>
-              Your working set is always loaded. Step through sounds with your
-              feet. Switch scenes within a song. Hold the scene switch to morph
-              between A and B, release to come back. Twenty-four playable states,
-              zero menu diving.
+            <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7 }}>
+              Single loop, sound-on-sound overdub. Recorded post-dynamics, pre-space —
+              so when you change the space or switch scenes, the loop responds. It is not
+              a separate device bolted on. It is part of the instrument. Change sounds,
+              change scenes — the loop persists. Clear it when you are done.
             </p>
           </div>
-        </FadeIn>
+        </ScrollReveal>
       </section>
 
-      {/* Looper */}
+      {/* ═══════ SPECS STRIP ═══════ */}
       <section
         style={{
-          ...section,
           borderTop: "1px solid var(--border)",
+          borderBottom: "1px solid var(--border)",
+          padding: "64px 24px",
+          background: "var(--surface)",
         }}
       >
-        <FadeIn>
-          <div style={{ maxWidth: 640 }}>
-            <h2
-              style={{
-                fontSize: 28,
-                fontWeight: 400,
-                marginBottom: 24,
-                color: "var(--accent)",
-              }}
-            >
-              Looper that stays out of your way.
-            </h2>
-            <p style={dimText}>
-              Single loop. Sound-on-sound. Recorded post-dynamics, pre-space, so
-              your loop lives inside the instrument. Change sounds, change scenes --
-              the loop persists. Clear it when you are done.
-            </p>
-          </div>
-        </FadeIn>
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: 40,
+            textAlign: "center",
+          }}
+        >
+          {[
+            { value: "Mono In", label: "Stereo Out" },
+            { value: "6", label: "Macro Knobs" },
+            { value: "4", label: "Footswitches" },
+            { value: "12", label: "Sounds Loaded" },
+            { value: "24", label: "Playable States" },
+            { value: "0", label: "Menu Dives" },
+          ].map((stat) => (
+            <ScrollReveal key={stat.label}>
+              <div>
+                <p
+                  style={{
+                    fontSize: "clamp(28px, 4vw, 40px)",
+                    fontWeight: 300,
+                    color: "var(--fg)",
+                    marginBottom: 4,
+                  }}
+                >
+                  {stat.value}
+                </p>
+                <p
+                  style={{
+                    fontSize: 11,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "var(--fg-dim)",
+                  }}
+                >
+                  {stat.label}
+                </p>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
       </section>
 
-      {/* E-ink */}
+      {/* ═══════ HARDWARE ═══════ */}
       <section
         style={{
-          ...section,
-          borderTop: "1px solid var(--border)",
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "100px 24px",
         }}
       >
-        <FadeIn>
-          <div style={{ maxWidth: 640 }}>
-            <h2
-              style={{
-                fontSize: 28,
-                fontWeight: 400,
-                marginBottom: 24,
-                color: "var(--accent)",
-              }}
-            >
-              The screen shows orientation, not permission.
-            </h2>
-            <p style={dimText}>
-              A 4.2-inch e-ink display. No meters. No animations. It tells you
-              where you are -- which sound, which scene, what just changed. You play
-              first, listen second, and look only when you need to.
-            </p>
-          </div>
-        </FadeIn>
+        <ScrollReveal>
+          <p
+            style={{
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              marginBottom: 24,
+              fontWeight: 600,
+            }}
+          >
+            Built to last
+          </p>
+        </ScrollReveal>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: 48,
+          }}
+        >
+          {[
+            {
+              title: "CNC Aluminum Enclosure",
+              desc: "Machined from solid aluminum. No plastic. Stage-proof and studio-grade.",
+            },
+            {
+              title: "Internal Power Supply",
+              desc: "IEC C14 inlet with universal AC-DC conversion. No wall wart. Earth bonded to chassis.",
+            },
+            {
+              title: "Deterministic DSP Engine",
+              desc: "Audio processing is isolated and real-time. No OS jitter. No dropouts. Ever.",
+            },
+            {
+              title: "AI on the Control Plane",
+              desc: "The AI shapes parameters and builds sounds. It never touches your audio signal. That stays analog.",
+            },
+          ].map((item, i) => (
+            <ScrollReveal key={item.title} delay={i * 100}>
+              <div>
+                <h3
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 500,
+                    marginBottom: 10,
+                    color: "var(--fg)",
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p style={{ color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7 }}>
+                  {item.desc}
+                </p>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
       </section>
 
-      {/* Waitlist */}
+      {/* ═══════ WAITLIST ═══════ */}
       <section
         style={{
-          ...section,
           borderTop: "1px solid var(--border)",
+          padding: "120px 24px",
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <FadeIn>
+        <ScrollReveal>
           <h2
             style={{
-              fontSize: 28,
-              fontWeight: 400,
-              marginBottom: 12,
+              fontSize: "clamp(28px, 5vw, 44px)",
+              fontWeight: 300,
+              marginBottom: 16,
+              letterSpacing: "-0.02em",
             }}
           >
-            Get notified.
+            $849. Shipping 2026.
           </h2>
           <p
             style={{
-              ...dimText,
-              marginBottom: 32,
-              maxWidth: 400,
+              color: "var(--fg-dim)",
+              fontSize: 15,
+              marginBottom: 40,
+              maxWidth: 440,
+              lineHeight: 1.6,
             }}
           >
-            Union Rig ships in 2026. Leave your email and we will let you know
-            when it is ready.
+            Leave your email and we will let you know the moment Union Rig is ready.
           </p>
-        </FadeIn>
-        <FadeIn delay={150}>
+        </ScrollReveal>
+        <ScrollReveal delay={150}>
           <WaitlistForm />
-        </FadeIn>
+        </ScrollReveal>
       </section>
 
       <Footer />
