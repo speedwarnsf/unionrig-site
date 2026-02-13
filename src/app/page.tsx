@@ -89,8 +89,8 @@ export default function Home() {
                 lineHeight: 1.4,
               }}
             >
-              Our AI just permanently broke your pedalboard.{" "}
-              <span style={{ fontWeight: 700 }}>You&apos;re welcome.</span>
+              Six stages. Fixed order. Twelve sounds.{" "}
+              <span style={{ fontWeight: 700 }}>Trust what works.</span>
             </p>
           </ScrollReveal>
         </div>
@@ -114,7 +114,7 @@ export default function Home() {
               marginBottom: 32,
             }}
           >
-            <strong>Union Rig&apos;s</strong> AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, <strong>fully analogue</strong> signal chain does.
+            <strong>Union Rig</strong> is a mono-in, stereo-out guitar instrument with a fixed signal chain, a twelve-sound working set, and an engine that was built to be trusted on stage.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
@@ -209,12 +209,13 @@ export default function Home() {
               </span>
               <div>
                 <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
-                  Plug in your guitar.
+                  One cable in. Stereo out.
                 </h2>
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
-                  One cable in, stereo out. Your signal enters Union Rig and stays analog the entire way through.
-                  No conversion. No latency. The full weight of your pickups, your fingers, your attack —
-                  preserved exactly as your instrument delivers it.
+                  Your signal enters a fixed topology — six processing stages, always in the same
+                  order. We tried every other arrangement. This is the one where nothing fights
+                  anything else. The weight of your pickups, the way you dig in — it all passes
+                  through intact.
                 </p>
               </div>
             </div>
@@ -244,13 +245,13 @@ export default function Home() {
               </span>
               <div>
                 <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
-                  AI builds 12 custom sounds for you.
+                  Twelve sounds. Built for your hands.
                 </h2>
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
-                  Trained on the collective understanding of all guitar music ever recorded, the AI inside
-                  Union Rig knows what makes a great clean shimmer, what makes a lead cut through a mix,
-                  and what makes a rhythm part sit perfectly in a band. It builds 12 sounds — your working
-                  set — shaped to your playing style and the way you use your instrument.
+                  The engine builds your working set — twelve sounds shaped to how you actually
+                  play. Not presets pulled from a library. Each one is a complete signal state:
+                  dynamics, saturation character, spatial depth, stereo field, output shaping.
+                  All tuned together so they work as a set, not a collection.
                 </p>
               </div>
             </div>
@@ -280,13 +281,13 @@ export default function Home() {
               </span>
               <div>
                 <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
-                  The signal stays analog. Always.
+                  Every knob moves multiple things at once.
                 </h2>
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
-                  Here is where Union Rig breaks from everything else: the AI shapes the parameters —
-                  drive character, spatial depth, tonal weight — but your guitar signal never touches a
-                  digital converter. It passes through analog circuitry the entire time. Hi-fidelity.
-                  No artifacts. The warmth and power of your pickups, untouched.
+                  Each macro control maps to several parameters simultaneously through curved
+                  relationships. Turn Heat up and the saturation doesn&apos;t just clip — it breathes.
+                  Asymmetric harmonics shift the overtone balance while the frequency response
+                  reshapes around them. One knob. Many variables. All moving together on purpose.
                 </p>
               </div>
             </div>
@@ -316,13 +317,13 @@ export default function Home() {
               </span>
               <div>
                 <h2 style={{ fontSize: "clamp(22px, 4vw, 32px)", fontWeight: 400, marginBottom: 16, lineHeight: 1.2 }}>
-                  Intelligence meets warmth. That is the point.
+                  Scenes morph. The sound never breaks.
                 </h2>
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
-                  AI that understands tone at the deepest level. Analog signal path that refuses to
-                  compromise your sound. Union Rig is the marriage of those two ideas — the precision
-                  of machine learning with the soul of real circuitry. Not AI for the sake of AI.
-                  AI in service of making you sound like yourself, but better.
+                  Hold the scene switch and the engine crossfades every parameter between A and B —
+                  smoothly, with no stepping, no zipper noise, no dropout. Release and it comes back.
+                  Every transition is shaped so the midpoint sounds as intentional as the endpoints.
+                  Twenty-four playable states. Zero interruptions.
                 </p>
               </div>
             </div>
@@ -357,8 +358,23 @@ export default function Home() {
           <p
             style={{
               fontSize: 15,
-              color: "var(--accent)",
+              color: "var(--fg-dim)",
               marginTop: 32,
+              fontWeight: 400,
+              maxWidth: 500,
+              margin: "32px auto 0",
+              lineHeight: 1.6,
+            }}
+          >
+            Machines are useless if you can&apos;t trust them.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={350}>
+          <p
+            style={{
+              fontSize: 15,
+              color: "var(--accent)",
+              marginTop: 16,
               fontWeight: 400,
             }}
           >
@@ -394,11 +410,27 @@ export default function Home() {
               fontSize: 15,
               lineHeight: 1.7,
               maxWidth: 540,
+              marginBottom: 16,
+            }}
+          >
+            Six stages. Fixed order. Each one exists because we tried removing it and the sound got worse.
+          </p>
+          <p
+            style={{
+              color: "var(--fg-dim)",
+              fontSize: 15,
+              lineHeight: 1.7,
+              maxWidth: 540,
               marginBottom: 40,
             }}
           >
-            One topology. No menus. Six stages, always in the same order — because{" "}
-            <strong>decisions make better instruments than options do.</strong>
+            Dynamics reshape how your playing enters the chain — not just compression, but
+            sensitivity to your touch. Drive stages use nonlinear saturation with asymmetric
+            harmonic content that shifts as you push harder. The stereo field is built from
+            mono through time-domain processing — real width, no phase tricks. The space
+            engine doesn&apos;t simulate a room. It builds one around your signal, sample by
+            sample. Cabinet modeling adds dimensional character. The output stage limits
+            transparently so nothing clips on the way out.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
@@ -458,9 +490,11 @@ export default function Home() {
                 <KnobGraphic label="Body" value={0.55} />
               </div>
               <p style={{ color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7 }}>
-                Touch controls how much your pick attack matters. Heat dials in saturation from
-                clean push to full breakup. Body shapes the tonal weight — thin and cutting to
-                thick and warm.
+                Touch reshapes how your dynamics hit the chain. It&apos;s not a volume knob —
+                it&apos;s a sensitivity curve that changes threshold, ratio, and response time
+                together. Heat is multi-stage saturation with asymmetric harmonics that shift
+                the overtone balance as you push harder. Body moves the tonal center of gravity —
+                low-end resonance, high-frequency rolloff, and air, all on one control.
               </p>
             </div>
           </ScrollReveal>
@@ -485,8 +519,10 @@ export default function Home() {
                 <KnobGraphic label="Tempo" value={0.5} />
               </div>
               <p style={{ color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7 }}>
-                Depth sets how much space surrounds the signal — from dry to cathedral. Motion
-                adds movement and modulation. Tempo locks time-based effects to your feel.
+                Depth controls the space engine — algorithmic reverb that responds to
+                your signal, not a static impulse. Wet level, decay time, and damping
+                all move together. Motion adds character and movement through the
+                modulation stage. Tempo sets the time reference for anything rhythmic.
               </p>
             </div>
           </ScrollReveal>
