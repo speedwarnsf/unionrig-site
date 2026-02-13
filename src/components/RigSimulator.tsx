@@ -218,9 +218,13 @@ export default function RigSimulator() {
   const [engaged, setEngaged] = useState(true);
   const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
 
-  const startAudio = useCallback(() => {
+  const startAudio = useCallback(async () => {
     if (engineRef.current) return;
     const engine = buildAudioEngine();
+    // Mobile Safari requires explicit resume from user gesture
+    if (engine.ctx.state === "suspended") {
+      await engine.ctx.resume();
+    }
     engineRef.current = engine;
     setAnalyser(engine.analyser);
     setPlaying(true);
