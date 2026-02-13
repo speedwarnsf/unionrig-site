@@ -6,12 +6,16 @@ export default function KnobGraphic({
   label,
   value: initialValue = 0.6,
   size = 64,
+  onChange,
 }: {
   label: string;
   value?: number;
   size?: number;
+  onChange?: (value: number) => void;
 }) {
   const [value, setValue] = useState(initialValue);
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
   const velocityRef = useRef(0);
   const animFrameRef = useRef<number>(0);
   const draggingRef = useRef(false);
@@ -85,6 +89,10 @@ export default function KnobGraphic({
     draggingRef.current = false;
     startPhysics();
   }, [startPhysics]);
+
+  useEffect(() => {
+    onChangeRef.current?.(value);
+  }, [value]);
 
   useEffect(() => {
     return () => cancelAnimationFrame(animFrameRef.current);

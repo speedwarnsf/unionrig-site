@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -42,15 +43,19 @@ export default function Nav() {
         <Link
           href="/"
           style={{
-            color: "var(--accent)",
+            display: "flex",
+            alignItems: "center",
             textDecoration: "none",
-            fontSize: 15,
-            fontWeight: 600,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
           }}
         >
-          Union
+          <Image
+            src="/images/union-logo.png"
+            alt="UNION"
+            width={320}
+            height={72}
+            style={{ width: 80, height: "auto", display: "block" }}
+            priority
+          />
         </Link>
 
         {/* Desktop links */}
