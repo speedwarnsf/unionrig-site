@@ -67,7 +67,7 @@ export default function Home() {
           style={{
             position: "relative",
             zIndex: 1,
-            padding: "120px 24px 0",
+            padding: "32svh 24px 0",
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
