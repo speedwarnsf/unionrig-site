@@ -1,17 +1,53 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const siteUrl = "https://unionrig-site.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Union Rig -- Trust what works.",
+  title: {
+    default: "Union Rig -- Trust what works.",
+    template: "%s -- Union Rig",
+  },
   description:
-    "Union Rig is a mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper, and nothing you don't need.",
+    "Union Rig is a mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper, and nothing you don't need. $849, shipping 2026.",
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: "Union Rig",
-    description: "Trust what works.",
-    url: "https://unionrig-site.vercel.app",
+    description:
+      "Mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper, and nothing you don't need. Trust what works.",
+    url: siteUrl,
     siteName: "Union Rig",
     type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Union Rig -- Trust what works.",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Union Rig -- Trust what works.",
+    description:
+      "Mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper. $849, shipping 2026.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0a0a0a",
 };
 
 export default function RootLayout({

@@ -4,14 +4,29 @@ import { useState } from "react";
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setStatus("done");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
-  if (submitted) {
+  if (status === "done") {
     return (
       <p
         style={{
@@ -36,6 +51,7 @@ export default function WaitlistForm() {
         placeholder="Your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        disabled={status === "sending"}
         style={{
           flex: 1,
           padding: "12px 16px",
@@ -49,20 +65,22 @@ export default function WaitlistForm() {
       />
       <button
         type="submit"
+        disabled={status === "sending"}
         style={{
           padding: "12px 24px",
-          background: "var(--accent)",
+          background: status === "sending" ? "var(--fg-dim)" : "var(--accent)",
           color: "var(--bg)",
           border: "none",
           fontSize: 13,
           fontWeight: 600,
           letterSpacing: "0.06em",
           textTransform: "uppercase",
-          cursor: "pointer",
+          cursor: status === "sending" ? "default" : "pointer",
           fontFamily: "inherit",
+          transition: "background 0.2s",
         }}
       >
-        Notify Me
+        {status === "sending" ? "..." : status === "error" ? "Try Again" : "Notify Me"}
       </button>
     </form>
   );

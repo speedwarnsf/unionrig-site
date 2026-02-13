@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const links = [
-  { href: "/", label: "Union Rig" },
   { href: "/technical", label: "Technical" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
     <nav
@@ -22,6 +24,7 @@ export default function Nav() {
         zIndex: 100,
         background: "rgba(10,10,10,0.92)",
         backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
         borderBottom: "1px solid var(--border)",
       }}
     >
@@ -49,14 +52,15 @@ export default function Nav() {
         >
           Union
         </Link>
-        <div style={{ display: "flex", gap: 32 }}>
-          {links.slice(1).map((l) => (
+
+        {/* Desktop links */}
+        <div className="nav-desktop" style={{ display: "flex", gap: 32 }}>
+          {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               style={{
-                color:
-                  pathname === l.href ? "var(--fg)" : "var(--fg-dim)",
+                color: pathname === l.href ? "var(--fg)" : "var(--fg-dim)",
                 textDecoration: "none",
                 fontSize: 13,
                 fontWeight: 400,
@@ -68,7 +72,58 @@ export default function Nav() {
             </Link>
           ))}
         </div>
+
+        {/* Mobile toggle */}
+        <button
+          className="nav-toggle"
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+          style={{
+            display: "none",
+            background: "none",
+            border: "none",
+            color: "var(--fg)",
+            fontSize: 20,
+            cursor: "pointer",
+            padding: "4px 0",
+            fontFamily: "inherit",
+          }}
+        >
+          {open ? "\u00D7" : "\u2261"}
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div
+          className="nav-mobile"
+          style={{
+            background: "rgba(10,10,10,0.98)",
+            borderBottom: "1px solid var(--border)",
+            padding: "16px 24px 24px",
+          }}
+        >
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              style={{
+                display: "block",
+                color: pathname === l.href ? "var(--fg)" : "var(--fg-dim)",
+                textDecoration: "none",
+                fontSize: 16,
+                fontWeight: 400,
+                padding: "10px 0",
+                borderBottom: "1px solid var(--border)",
+                letterSpacing: "0.02em",
+              }}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
