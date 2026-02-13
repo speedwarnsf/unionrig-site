@@ -48,15 +48,16 @@ export default function Home() {
               opacity: 0.6,
             }}
           />
-          {/* Bottom gradient for text legibility */}
+          {/* Subtle edge fade — does not obscure center */}
           <div
             style={{
               position: "absolute",
               bottom: 0,
               left: 0,
               right: 0,
-              height: "40%",
-              background: "linear-gradient(to top, var(--bg) 0%, transparent 80%)",
+              height: "30%",
+              background: "linear-gradient(to top, var(--bg) 0%, transparent 50%)",
+              opacity: 0.7,
             }}
           />
         </div>
@@ -117,19 +118,27 @@ export default function Home() {
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
-          <Image
-            src="/union-rig-hero.jpg"
-            alt="Union Rig pedal"
-            width={1200}
-            height={800}
+          <div
             style={{
-              width: "100%",
-              maxWidth: 560,
-              height: "auto",
-              display: "block",
+              width: "100vw",
+              position: "relative",
+              left: "50%",
+              transform: "translateX(-50%)",
               marginBottom: 32,
             }}
-          />
+          >
+            <Image
+              src="/union-rig-hero.jpg"
+              alt="Union Rig pedal"
+              width={1200}
+              height={800}
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+              }}
+            />
+          </div>
         </ScrollReveal>
         <ScrollReveal delay={250}>
           <p
