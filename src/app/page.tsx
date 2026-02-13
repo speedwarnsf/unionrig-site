@@ -8,6 +8,7 @@ import SignalChainGraphic from "@/components/SignalChainGraphic";
 import KnobGraphic from "@/components/KnobGraphic";
 import FootswitchGraphic from "@/components/FootswitchGraphic";
 import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
+import AudioCompare from "@/components/AudioCompare";
 
 export default function Home() {
   return (
@@ -468,6 +469,20 @@ export default function Home() {
               <FootswitchGraphic label="Previous" />
             </div>
           </div>
+        </ScrollReveal>
+      </section>
+
+      {/* ═══════ AUDIO COMPARISON ═══════ */}
+      <section
+        style={{
+          borderTop: "1px solid var(--border)",
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "80px 24px",
+        }}
+      >
+        <ScrollReveal>
+          <AudioCompare />
         </ScrollReveal>
       </section>
 
