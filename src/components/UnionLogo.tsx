@@ -17,7 +17,7 @@ export default function UnionLogo({ width = 280, className = "" }: { width?: num
       />
       <p
         style={{
-          fontSize: width * 0.08,
+          fontSize: width * 0.092,
           letterSpacing: "0.28em",
           fontWeight: 500,
           color: "#fff",

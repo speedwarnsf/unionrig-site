@@ -55,8 +55,8 @@ export default function Home() {
               bottom: 0,
               left: 0,
               right: 0,
-              height: "50%",
-              background: "linear-gradient(to top, var(--bg) 0%, transparent 100%)",
+              height: "40%",
+              background: "linear-gradient(to top, var(--bg) 0%, transparent 80%)",
             }}
           />
         </div>
@@ -78,7 +78,7 @@ export default function Home() {
           <ScrollReveal delay={200}>
             <p
               style={{
-                fontSize: "clamp(22px, 4vw, 36px)",
+                fontSize: "clamp(18px, 3.2vw, 29px)",
                 color: "var(--fg)",
                 fontWeight: 300,
                 fontStyle: "italic",
@@ -117,6 +117,21 @@ export default function Home() {
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
+          <Image
+            src="/union-rig-hero.jpg"
+            alt="Union Rig pedal"
+            width={1200}
+            height={800}
+            style={{
+              width: "100%",
+              maxWidth: 560,
+              height: "auto",
+              display: "block",
+              marginBottom: 32,
+            }}
+          />
+        </ScrollReveal>
+        <ScrollReveal delay={250}>
           <p
             style={{
               fontSize: 12,
