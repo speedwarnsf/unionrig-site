@@ -36,15 +36,15 @@ export default function Home() {
           }}
         >
           <Image
-            src="/union-rig-hero.jpg"
+            src="/images/guitarist-hero.jpg"
             alt="Union Rig — AI-powered guitar instrument"
             fill
             priority
             sizes="100vw"
             style={{
-              objectFit: "contain",
-              objectPosition: "center 40%",
-              opacity: 0.55,
+              objectFit: "cover",
+              objectPosition: "center 30%",
+              opacity: 0.6,
             }}
           />
           {/* Bottom gradient for text legibility */}
@@ -72,7 +72,7 @@ export default function Home() {
           }}
         >
           <ScrollReveal>
-            <UnionLogo width={220} />
+            <UnionLogo width={320} />
           </ScrollReveal>
           <ScrollReveal delay={200}>
             <p
