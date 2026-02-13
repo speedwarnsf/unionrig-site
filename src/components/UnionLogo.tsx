@@ -4,14 +4,13 @@ export default function UnionLogo({ width = 280, className = "" }: { width?: num
   return (
     <div className={className} style={{ width, position: "relative" }}>
       <Image
-        src="/images/union-logo.jpg"
+        src="/images/union-logo.png"
         alt="UNION"
-        width={1400}
-        height={400}
+        width={1600}
+        height={360}
         style={{
           width: "100%",
           height: "auto",
-          mixBlendMode: "screen",
           display: "block",
         }}
         priority
