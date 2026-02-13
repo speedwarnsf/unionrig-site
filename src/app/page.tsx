@@ -8,7 +8,7 @@ import SignalChainGraphic from "@/components/SignalChainGraphic";
 import KnobGraphic from "@/components/KnobGraphic";
 import FootswitchGraphic from "@/components/FootswitchGraphic";
 import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
-import AudioCompare from "@/components/AudioCompare";
+import RigSimulator from "@/components/RigSimulator";
 
 export default function Home() {
   return (
@@ -472,7 +472,7 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* ═══════ AUDIO COMPARISON ═══════ */}
+      {/* ═══════ TRY THE RIG ═══════ */}
       <section
         style={{
           borderTop: "1px solid var(--border)",
@@ -482,7 +482,7 @@ export default function Home() {
         }}
       >
         <ScrollReveal>
-          <AudioCompare />
+          <RigSimulator />
         </ScrollReveal>
       </section>
 
