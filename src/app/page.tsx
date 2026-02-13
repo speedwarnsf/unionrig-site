@@ -89,8 +89,8 @@ export default function Home() {
                 lineHeight: 1.4,
               }}
             >
-              Six stages. Fixed order. Twelve sounds.{" "}
-              <span style={{ fontWeight: 700 }}>Trust what works.</span>
+              Our AI just permanently broke your pedalboard.{" "}
+              <span style={{ fontWeight: 700 }}>You&apos;re welcome.</span>
             </p>
           </ScrollReveal>
         </div>
@@ -114,7 +114,7 @@ export default function Home() {
               marginBottom: 32,
             }}
           >
-            <strong>Union Rig</strong> is a mono-in, stereo-out guitar instrument with a fixed signal chain, a twelve-sound working set, and an engine that was built to be trusted on stage.
+            <strong>Union Rig&apos;s</strong> AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, <strong>fully analogue</strong> signal chain does.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
