@@ -11,7 +11,7 @@ export default function UnionLogo({ width = 280, className = "" }: { width?: num
         style={{
           width: "100%",
           height: "auto",
-          mixBlendMode: "lighten",
+          mixBlendMode: "screen",
           display: "block",
         }}
         priority

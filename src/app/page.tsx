@@ -99,7 +99,7 @@ export default function Home() {
                 fontWeight: 500,
               }}
             >
-              $849 — Shipping 2026
+              $849 — Shipping 2027
             </p>
           </ScrollReveal>
         </div>
@@ -726,7 +726,7 @@ export default function Home() {
               letterSpacing: "-0.02em",
             }}
           >
-            $849. Shipping 2026.
+            $849. Shipping 2027.
           </h2>
           <p
             style={{
