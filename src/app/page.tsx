@@ -397,8 +397,8 @@ export default function Home() {
               marginBottom: 40,
             }}
           >
-            One topology. No menus. Six stages, always in the same order — because
-            decisions make better instruments than options do.
+            One topology. No menus. Six stages, always in the same order — because{" "}
+            <strong>decisions make better instruments than options do.</strong>
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
