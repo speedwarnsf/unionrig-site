@@ -20,8 +20,9 @@ export default function UnionLogo({ width = 280, className = "" }: { width?: num
           fontSize: width * 0.08,
           letterSpacing: "0.28em",
           fontWeight: 500,
-          color: "var(--accent)",
+          color: "#fff",
           marginTop: 4,
+          textAlign: "center",
         }}
       >
         RIG

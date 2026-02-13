@@ -78,45 +78,57 @@ export default function Home() {
           <ScrollReveal delay={200}>
             <p
               style={{
-                fontSize: "clamp(18px, 3vw, 26px)",
-                color: "var(--fg-dim)",
+                fontSize: "clamp(22px, 4vw, 36px)",
+                color: "var(--fg)",
                 fontWeight: 300,
-                maxWidth: 520,
-                marginTop: 20,
-                marginBottom: 32,
-                lineHeight: 1.5,
+                fontStyle: "italic",
+                maxWidth: 600,
+                marginTop: 40,
+                marginBottom: 0,
+                lineHeight: 1.4,
               }}
             >
-              Our AI just permanently broke your pedalboard. You&apos;re welcome.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={350}>
-            <p
-              style={{
-                fontSize: 12,
-                color: "var(--fg-dim)",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                fontWeight: 500,
-              }}
-            >
-              $849 — Shipping 2027
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={500}>
-            <p
-              style={{
-                fontSize: "clamp(14px, 2vw, 18px)",
-                color: "var(--fg-dim)",
-                maxWidth: 520,
-                lineHeight: 1.6,
-                marginTop: 32,
-              }}
-            >
-              Union Rig&apos;s AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, fully analogue signal chain does.
+              Our AI just permanently broke your pedalboard.{" "}
+              <span style={{ fontWeight: 700 }}>You&apos;re welcome.</span>
             </p>
           </ScrollReveal>
         </div>
+      </section>
+
+      {/* ═══════ SECOND PARAGRAPH + PRICE ═══════ */}
+      <section
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "80px 24px 0",
+        }}
+      >
+        <ScrollReveal>
+          <p
+            style={{
+              fontSize: "clamp(16px, 2.5vw, 20px)",
+              color: "var(--fg-dim)",
+              maxWidth: 580,
+              lineHeight: 1.7,
+              marginBottom: 32,
+            }}
+          >
+            Union Rig&apos;s AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, fully analogue signal chain does.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={150}>
+          <p
+            style={{
+              fontSize: 12,
+              color: "var(--fg-dim)",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              fontWeight: 500,
+            }}
+          >
+            $849 — Shipping 2027
+          </p>
+        </ScrollReveal>
       </section>
 
       {/* ═══════ THE PITCH — How it works ═══════ */}
@@ -124,7 +136,7 @@ export default function Home() {
         style={{
           maxWidth: 1200,
           margin: "0 auto",
-          padding: "120px 24px 80px",
+          padding: "80px 24px 80px",
         }}
       >
         <ScrollReveal>
