@@ -22,7 +22,7 @@ export default function Home() {
           minHeight: "100svh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "flex-start",
           overflow: "hidden",
         }}
       >
@@ -48,16 +48,16 @@ export default function Home() {
               opacity: 0.6,
             }}
           />
-          {/* Subtle edge fade — does not obscure center */}
+          {/* Top fade for text legibility */}
           <div
             style={{
               position: "absolute",
-              bottom: 0,
+              top: 0,
               left: 0,
               right: 0,
-              height: "30%",
-              background: "linear-gradient(to top, var(--bg) 0%, transparent 50%)",
-              opacity: 0.7,
+              height: "50%",
+              background: "linear-gradient(to bottom, var(--bg) 0%, transparent 70%)",
+              opacity: 0.75,
             }}
           />
         </div>
@@ -67,7 +67,7 @@ export default function Home() {
           style={{
             position: "relative",
             zIndex: 1,
-            padding: "0 24px 64px",
+            padding: "120px 24px 0",
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
