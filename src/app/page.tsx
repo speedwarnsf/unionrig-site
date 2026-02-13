@@ -531,6 +531,19 @@ export default function Home() {
         }}
       >
         <ScrollReveal>
+          <p
+            style={{
+              fontSize: "clamp(20px, 3vw, 32px)",
+              fontStyle: "italic",
+              fontWeight: 300,
+              color: "var(--fg)",
+              marginBottom: 48,
+            }}
+          >
+            Sound is math with a little bit of chaos.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal delay={150}>
           <RigSimulator />
         </ScrollReveal>
       </section>
