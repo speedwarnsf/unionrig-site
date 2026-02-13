@@ -87,7 +87,7 @@ export default function Home() {
                 lineHeight: 1.5,
               }}
             >
-              AI builds your sound. Analog keeps your soul.
+              Our AI just permanently broke your pedalboard. You&apos;re welcome.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={350}>
@@ -101,6 +101,19 @@ export default function Home() {
               }}
             >
               $849 — Shipping 2027
+            </p>
+          </ScrollReveal>
+          <ScrollReveal delay={500}>
+            <p
+              style={{
+                fontSize: "clamp(14px, 2vw, 18px)",
+                color: "var(--fg-dim)",
+                maxWidth: 520,
+                lineHeight: 1.6,
+                marginTop: 32,
+              }}
+            >
+              Union Rig&apos;s AI-driven effects engine doesn&apos;t care about your feelings. The warm, compressed, fully analogue signal chain does.
             </p>
           </ScrollReveal>
         </div>
