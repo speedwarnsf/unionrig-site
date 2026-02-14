@@ -443,7 +443,7 @@ function makeDriveCurve(type: number, asym: number, preGainLin: number, toneTilt
 interface AudioEngine {
   ctx: AudioContext;
   source: AudioBufferSourceNode;
-  subOctaveShaper: WaveShaperNode;
+  subOctaveProcessor: ScriptProcessorNode;
   subOctaveGain: GainNode;
   audioBuffer: AudioBuffer;
   sourceMix: GainNode;
@@ -498,25 +498,34 @@ function buildEngine(): AudioEngine {
   const sourceMix = ctx.createGain(); sourceMix.gain.value = 1.0;
   source.connect(sourceMix);
 
-  // Sub-octave generator: octave-down via ring modulation technique
-  // Divide frequency by 2 using a waveshaper (full-wave rectify) + low-pass filter
+  // Sub-octave generator: Boss OC-2 style flip-flop frequency divider via AudioWorklet
+  // Uses ScriptProcessorNode as fallback for zero-crossing flip-flop
   const subOctaveGain = ctx.createGain(); subOctaveGain.gain.value = 0; // off by default
   const subOctaveFilter = ctx.createBiquadFilter();
-  subOctaveFilter.type = "lowpass"; subOctaveFilter.frequency.value = 400; subOctaveFilter.Q.value = 1.0;
-  // Full-wave rectifier waveshaper to generate sub-harmonics
-  const subOctaveShaper = ctx.createWaveShaper();
-  const subCurve = new Float32Array(4096);
-  for (let i = 0; i < 4096; i++) {
-    const x = (i / 4096) * 2 - 1;
-    // Square the signal to double frequency, then filter down = sub-octave content
-    subCurve[i] = x * x * 2 - 1;
-  }
-  subOctaveShaper.curve = subCurve;
-  subOctaveShaper.oversample = "2x";
-  sourceMix.connect(subOctaveShaper);
-  subOctaveShaper.connect(subOctaveFilter);
-  subOctaveFilter.connect(subOctaveGain);
-  // Connected to inputGain in chain setup below
+  subOctaveFilter.type = "lowpass"; subOctaveFilter.frequency.value = 600; subOctaveFilter.Q.value = 0.7;
+  const subOctaveFilter2 = ctx.createBiquadFilter();
+  subOctaveFilter2.type = "lowpass"; subOctaveFilter2.frequency.value = 800; subOctaveFilter2.Q.value = 0.5;
+
+  // Flip-flop: track zero crossings, output toggles between +1/-1 at half the input frequency
+  const scriptNode = ctx.createScriptProcessor(256, 1, 1);
+  let flipState = 1;
+  let prevSample = 0;
+  scriptNode.onaudioprocess = (e) => {
+    const input = e.inputBuffer.getChannelData(0);
+    const output = e.outputBuffer.getChannelData(0);
+    for (let i = 0; i < input.length; i++) {
+      // Detect positive-going zero crossing
+      if (prevSample <= 0 && input[i] > 0) {
+        flipState = -flipState; // toggle at half rate = octave down
+      }
+      prevSample = input[i];
+      output[i] = flipState * 0.5; // square wave at half frequency
+    }
+  };
+  sourceMix.connect(scriptNode);
+  scriptNode.connect(subOctaveFilter);
+  subOctaveFilter.connect(subOctaveFilter2);
+  subOctaveFilter2.connect(subOctaveGain);
   // ====== END GUITAR LOOP SOURCE ======
 
   const inputGain = ctx.createGain(); inputGain.gain.value = 1;
@@ -655,7 +664,7 @@ function buildEngine(): AudioEngine {
   // source.start() called after buffer is loaded
 
   return {
-    ctx, source, subOctaveShaper, subOctaveGain, audioBuffer: source.buffer!, sourceMix,
+    ctx, source, subOctaveProcessor: scriptNode, subOctaveGain, audioBuffer: source.buffer!, sourceMix,
     inputGain, compressor, compMakeupGain, compDryGain, compWetGain, compMerge,
     driveHP, driveLP, waveshaper, driveDryGain, driveWetGain, driveLevelGain, driveMerge,
     chorusDelay, chorusLFO, chorusLFOGain, chorusDryGain, chorusWetGain, chorusMerge,
