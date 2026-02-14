@@ -19,6 +19,8 @@ export default function SignalChainGraphic() {
         overflowX: "auto",
         padding: "24px 0",
         WebkitOverflowScrolling: "touch",
+        maxWidth: "100%",
+        width: "100%",
       }}
     >
       {blocks.map((block, i) => (

@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "kevin_shields_mbv_wash",
+  "name": "Kevin Shields MBV Wash",
+  "tags": [
+    "my-bloody-valentine",
+    "kevin-shields",
+    "shoegaze",
+    "reverse-reverb",
+    "tremolo",
+    "infinite-sustain"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Kevin Shields' reverse reverb wash with extreme tremolo bar modulation and infinite sustain. Hall reverb with maximum decay and heavy modulation for shoegaze texture.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Ambient Wash",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -25.0,
+          "ratio": 6.0,
+          "knee_db": 10.0,
+          "attack_ms": 40.0,
+          "release_ms": 500.0,
+          "makeup_db": 8.0,
+          "mix": 0.9
+        },
+        "drv": {
+          "type": 3,
+          "pre_gain_db": 12.0,
+          "asym": 0.3,
+          "tone_tilt": -0.2,
+          "low_cut_hz": 80.0,
+          "high_cut_hz": 8000.0,
+          "mix": 0.6,
+          "level_db": 1.0
+        },
+        "chr": {
+          "mode": 3,
+          "rate_hz": 2.5,
+          "depth": 0.6,
+          "mix": 0.7,
+          "tone": -0.4
+        },
+        "stp": {
+          "width": 0.9,
+          "micro_delay_ms": 10.0,
+          "micro_pitch_cents": 8.0,
+          "seed": 0.2
+        },
+        "spc": {
+          "mode": 2,
+          "pre_delay_ms": 60.0,
+          "decay_s": 10.0,
+          "damp": 0.2,
+          "diffusion": 0.9,
+          "mod": 0.8,
+          "wet": 0.7,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 90.0,
+          "low_res_q": 0.6,
+          "mid_scoop_db": -3.0,
+          "high_roll_hz": 6000.0,
+          "air": 0.3
+        },
+        "out": {
+          "level_db": -2.0,
+          "lim_thresh_db": -6.0,
+          "lim_release_ms": 300.0
+        }
+      }
+    },
+    "B": {
+      "label": "Infinite Sustain",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -30.0,
+          "ratio": 8.0,
+          "knee_db": 12.0,
+          "attack_ms": 50.0,
+          "release_ms": 600.0,
+          "makeup_db": 10.0,
+          "mix": 1.0
+        },
+        "drv": {
+          "type": 5,
+          "pre_gain_db": 20.0,
+          "asym": 0.5,
+          "tone_tilt": -0.4,
+          "low_cut_hz": 100.0,
+          "high_cut_hz": 7000.0,
+          "mix": 0.8,
+          "level_db": 3.0
+        },
+        "chr": {
+          "mode": 3,
+          "rate_hz": 3.2,
+          "depth": 0.8,
+          "mix": 0.9,
+          "tone": -0.5
+        },
+        "stp": {
+          "width": 1.0,
+          "micro_delay_ms": 12.0,
+          "micro_pitch_cents": 10.0,
+          "seed": 0.2
+        },
+        "spc": {
+          "mode": 2,
+          "pre_delay_ms": 80.0,
+          "decay_s": 12.0,
+          "damp": 0.15,
+          "diffusion": 1.0,
+          "mod": 1.0,
+          "wet": 0.85,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 85.0,
+          "low_res_q": 0.5,
+          "mid_scoop_db": -4.0,
+          "high_roll_hz": 5500.0,
+          "air": 0.2
+        },
+        "out": {
+          "level_db": 0.5,
+          "lim_thresh_db": -3.0,
+          "lim_release_ms": 400.0
+        }
+      }
+    }
+  }
+}

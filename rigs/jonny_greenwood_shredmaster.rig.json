@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "jonny_greenwood_shredmaster",
+  "name": "Jonny Greenwood Shredmaster",
+  "tags": [
+    "radiohead",
+    "jonny-greenwood",
+    "shredmaster",
+    "twin-reverb",
+    "shimmer",
+    "aggressive"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Greenwood's shimmering clean to aggressive distortion. Marshall Shredmaster into Fender Twin Reverb, contrasting ethereal cleans with harsh, aggressive drive.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Shimmer Clean",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -20.0,
+          "ratio": 2.8,
+          "knee_db": 6.0,
+          "attack_ms": 20.0,
+          "release_ms": 250.0,
+          "makeup_db": 3.5,
+          "mix": 0.6
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 3.0,
+          "asym": 0.05,
+          "tone_tilt": 0.3,
+          "low_cut_hz": 50.0,
+          "high_cut_hz": 16000.0,
+          "mix": 0.25,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.3,
+          "depth": 0.2,
+          "mix": 0.3,
+          "tone": 0.2
+        },
+        "stp": {
+          "width": 0.75,
+          "micro_delay_ms": 6.0,
+          "micro_pitch_cents": 4.5,
+          "seed": 0.35
+        },
+        "spc": {
+          "mode": 2,
+          "pre_delay_ms": 30.0,
+          "decay_s": 3.8,
+          "damp": 0.3,
+          "diffusion": 0.8,
+          "mod": 0.4,
+          "wet": 0.4,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 75.0,
+          "low_res_q": 0.7,
+          "mid_scoop_db": 0.5,
+          "high_roll_hz": 12000.0,
+          "air": 0.6
+        },
+        "out": {
+          "level_db": -4.0,
+          "lim_thresh_db": -8.0,
+          "lim_release_ms": 200.0
+        }
+      }
+    },
+    "B": {
+      "label": "Shredmaster Aggro",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -12.0,
+          "ratio": 4.5,
+          "knee_db": 3.0,
+          "attack_ms": 5.0,
+          "release_ms": 80.0,
+          "makeup_db": 5.0,
+          "mix": 0.7
+        },
+        "drv": {
+          "type": 2,
+          "pre_gain_db": 28.0,
+          "asym": 0.6,
+          "tone_tilt": 0.5,
+          "low_cut_hz": 140.0,
+          "high_cut_hz": 8500.0,
+          "mix": 0.95,
+          "level_db": 4.5
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.5,
+          "micro_delay_ms": 3.5,
+          "micro_pitch_cents": 2.5,
+          "seed": 0.35
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 15.0,
+          "decay_s": 1.8,
+          "damp": 0.6,
+          "diffusion": 0.5,
+          "mod": 0.15,
+          "wet": 0.25,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 100.0,
+          "low_res_q": 1.0,
+          "mid_scoop_db": -2.0,
+          "high_roll_hz": 7500.0,
+          "air": 0.3
+        },
+        "out": {
+          "level_db": 1.5,
+          "lim_thresh_db": -2.0,
+          "lim_release_ms": 100.0
+        }
+      }
+    }
+  }
+}

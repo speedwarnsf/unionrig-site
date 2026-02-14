@@ -1,0 +1,145 @@
+{
+  "version": "1.0.0",
+  "rig_id": "john_frusciante_funk_ds2",
+  "name": "John Frusciante Funk DS-2",
+  "tags": [
+    "rhcp",
+    "frusciante",
+    "funk",
+    "ds-2",
+    "ce-1",
+    "strat",
+    "clean"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Frusciante's clean funk compression with DS-2 leads. CE-1 chorus for texture, heavy compression for percussive funk attack, smooth DS-2 drive for solos.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Funk Clean",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -12.0,
+          "ratio": 4.0,
+          "knee_db": 3.0,
+          "attack_ms": 2.0,
+          "release_ms": 80.0,
+          "makeup_db": 5.0,
+          "mix": 0.8
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 2.0,
+          "asym": 0.0,
+          "tone_tilt": 0.2,
+          "low_cut_hz": 50.0,
+          "high_cut_hz": 16000.0,
+          "mix": 0.2,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.4,
+          "depth": 0.3,
+          "mix": 0.4,
+          "tone": -0.3
+        },
+        "stp": {
+          "width": 0.6,
+          "micro_delay_ms": 4.0,
+          "micro_pitch_cents": 2.5,
+          "seed": 0.4
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 5.0,
+          "decay_s": 0.6,
+          "damp": 0.7,
+          "diffusion": 0.3,
+          "mod": 0.05,
+          "wet": 0.1,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 80.0,
+          "low_res_q": 0.7,
+          "mid_scoop_db": 0.5,
+          "high_roll_hz": 10000.0,
+          "air": 0.5
+        },
+        "out": {
+          "level_db": -3.5,
+          "lim_thresh_db": -7.0,
+          "lim_release_ms": 120.0
+        }
+      }
+    },
+    "B": {
+      "label": "DS-2 Lead",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -15.0,
+          "ratio": 3.5,
+          "knee_db": 5.0,
+          "attack_ms": 8.0,
+          "release_ms": 120.0,
+          "makeup_db": 4.5,
+          "mix": 0.7
+        },
+        "drv": {
+          "type": 3,
+          "pre_gain_db": 16.0,
+          "asym": 0.4,
+          "tone_tilt": 0.1,
+          "low_cut_hz": 100.0,
+          "high_cut_hz": 9000.0,
+          "mix": 0.8,
+          "level_db": 2.5
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.35,
+          "depth": 0.2,
+          "mix": 0.25,
+          "tone": -0.2
+        },
+        "stp": {
+          "width": 0.65,
+          "micro_delay_ms": 5.0,
+          "micro_pitch_cents": 3.0,
+          "seed": 0.4
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 15.0,
+          "decay_s": 2.0,
+          "damp": 0.4,
+          "diffusion": 0.6,
+          "mod": 0.2,
+          "wet": 0.25,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 90.0,
+          "low_res_q": 0.8,
+          "mid_scoop_db": -0.5,
+          "high_roll_hz": 8500.0,
+          "air": 0.4
+        },
+        "out": {
+          "level_db": -1.0,
+          "lim_thresh_db": -4.0,
+          "lim_release_ms": 150.0
+        }
+      }
+    }
+  }
+}
