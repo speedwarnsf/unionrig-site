@@ -1,0 +1,133 @@
+{
+  "version": "1.0.0",
+  "rig_id": "octdown_v1",
+  "name": "Octdown",
+  "tags": ["dual-amp", "vintage", "stereo", "small-venue"],
+  "created": "2026-02-13T16:46:00Z",
+  "notes": "Silvertone 1484 left, Fender Princeton right with sub-octave. Two amps spaced on a small club stage.",
+  "io": { "in": "mono", "out": "stereo" },
+  "scenes": {
+    "A": {
+      "label": "Clean Duo",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -18.0,
+          "ratio": 3.8,
+          "knee_db": 4.0,
+          "attack_ms": 12.0,
+          "release_ms": 180.0,
+          "makeup_db": 5.0,
+          "mix": 0.60
+        },
+        "drv": {
+          "type": 1,
+          "pre_gain_db": 7.0,
+          "asym": 0.35,
+          "tone_tilt": -0.25,
+          "low_cut_hz": 70.0,
+          "high_cut_hz": 7200.0,
+          "mix": 0.55,
+          "level_db": -1.0
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.28,
+          "depth": 0.18,
+          "mix": 0.22,
+          "tone": -0.18
+        },
+        "stp": {
+          "width": 0.82,
+          "micro_delay_ms": 11.0,
+          "micro_pitch_cents": 8.0,
+          "seed": 0.67
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 18.0,
+          "decay_s": 1.8,
+          "damp": 0.52,
+          "diffusion": 0.58,
+          "mod": 0.15,
+          "wet": 0.28,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 4,
+          "low_res_hz": 95.0,
+          "low_res_q": 1.1,
+          "mid_scoop_db": -1.5,
+          "high_roll_hz": 7400.0,
+          "air": 0.38
+        },
+        "out": {
+          "level_db": -3.0,
+          "lim_thresh_db": -5.0,
+          "lim_release_ms": 140.0
+        }
+      }
+    },
+    "B": {
+      "label": "Pushed",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -24.0,
+          "ratio": 4.5,
+          "knee_db": 3.0,
+          "attack_ms": 8.0,
+          "release_ms": 240.0,
+          "makeup_db": 6.5,
+          "mix": 0.70
+        },
+        "drv": {
+          "type": 3,
+          "pre_gain_db": 16.0,
+          "asym": 0.48,
+          "tone_tilt": -0.18,
+          "low_cut_hz": 75.0,
+          "high_cut_hz": 6400.0,
+          "mix": 0.72,
+          "level_db": 1.0
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.32,
+          "depth": 0.30,
+          "mix": 0.28,
+          "tone": -0.12
+        },
+        "stp": {
+          "width": 0.88,
+          "micro_delay_ms": 11.5,
+          "micro_pitch_cents": 9.0,
+          "seed": 0.67
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 22.0,
+          "decay_s": 2.4,
+          "damp": 0.42,
+          "diffusion": 0.65,
+          "mod": 0.22,
+          "wet": 0.35,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 3,
+          "low_res_hz": 88.0,
+          "low_res_q": 1.0,
+          "mid_scoop_db": -2.8,
+          "high_roll_hz": 6800.0,
+          "air": 0.42
+        },
+        "out": {
+          "level_db": -2.0,
+          "lim_thresh_db": -5.0,
+          "lim_release_ms": 180.0
+        }
+      }
+    }
+  }
+}

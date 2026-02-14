@@ -80,6 +80,27 @@ const SOUNDS: SoundDef[] = [
     }),
   },
   {
+    name: "Octdown",
+    sceneA: makeRig({
+      dyn: { thresh_db: -18, ratio: 3.8, attack_ms: 12, release_ms: 180, makeup_db: 5, mix: 0.60 },
+      drv: { type: 1, pre_gain_db: 7, asym: 0.35, tone_tilt: -0.25, low_cut_hz: 70, high_cut_hz: 7200, mix: 0.55, level_db: -1 },
+      chr: { mode: 1, rate_hz: 0.28, depth: 0.18, mix: 0.22, tone: -0.18 },
+      stp: { width: 0.82, micro_delay_ms: 11.0 },
+      spc: { decay_s: 1.8, damp: 0.52, wet: 0.28, dry: 1.0 },
+      cab: { low_res_hz: 95, high_roll_hz: 7400, air: 0.38 },
+      out: { level_db: -3, lim_thresh_db: -5, lim_release_ms: 140 },
+    }),
+    sceneB: makeRig({
+      dyn: { thresh_db: -24, ratio: 4.5, attack_ms: 8, release_ms: 240, makeup_db: 6.5, mix: 0.70 },
+      drv: { type: 3, pre_gain_db: 16, asym: 0.48, tone_tilt: -0.18, low_cut_hz: 75, high_cut_hz: 6400, mix: 0.72, level_db: 1 },
+      chr: { mode: 1, rate_hz: 0.32, depth: 0.30, mix: 0.28, tone: -0.12 },
+      stp: { width: 0.88, micro_delay_ms: 11.5 },
+      spc: { decay_s: 2.4, damp: 0.42, wet: 0.35, dry: 1.0 },
+      cab: { low_res_hz: 88, high_roll_hz: 6800, air: 0.42 },
+      out: { level_db: -2, lim_thresh_db: -5, lim_release_ms: 180 },
+    }),
+  },
+  {
     name: "Glass Clean",
     sceneA: makeRig({
       dyn: { thresh_db: -18, ratio: 1.8, attack_ms: 12, release_ms: 180, makeup_db: 2, mix: 0.4 },
