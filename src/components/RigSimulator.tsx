@@ -419,8 +419,8 @@ function makeDriveCurve(type: number, asym: number, preGainLin: number, toneTilt
 
 interface AudioEngine {
   ctx: AudioContext;
-  source: OscillatorNode;
-  harmonics: OscillatorNode[];
+  source: AudioBufferSourceNode;
+  audioBuffer: AudioBuffer;
   sourceMix: GainNode;
   inputGain: GainNode;
   compressor: DynamicsCompressorNode;
@@ -467,19 +467,13 @@ interface AudioEngine {
 function buildEngine(): AudioEngine {
   const ctx = new AudioContext({ sampleRate: 48000 });
 
-  // ====== DEMO TONE -- swap with real guitar audio input here ======
-  const source = ctx.createOscillator();
-  source.type = "sawtooth";
-  source.frequency.value = 110;
-  const h2 = ctx.createOscillator(); h2.type = "sine"; h2.frequency.value = 220;
-  const h2g = ctx.createGain(); h2g.gain.value = 0.3;
-  const h3 = ctx.createOscillator(); h3.type = "sine"; h3.frequency.value = 330;
-  const h3g = ctx.createGain(); h3g.gain.value = 0.15;
-  const sourceMix = ctx.createGain(); sourceMix.gain.value = 0.4;
+  // ====== GUITAR LOOP SOURCE ======
+  // Placeholder source; real buffer loaded async via loadGuitarLoop()
+  const source = ctx.createBufferSource();
+  source.loop = true;
+  const sourceMix = ctx.createGain(); sourceMix.gain.value = 1.0;
   source.connect(sourceMix);
-  h2.connect(h2g).connect(sourceMix);
-  h3.connect(h3g).connect(sourceMix);
-  // ====== END DEMO TONE ======
+  // ====== END GUITAR LOOP SOURCE ======
 
   const inputGain = ctx.createGain(); inputGain.gain.value = 1;
 
@@ -612,10 +606,11 @@ function buildEngine(): AudioEngine {
   bypassGain.connect(analyser);
   analyser.connect(ctx.destination);
 
-  source.start(); h2.start(); h3.start(); chorusLFO.start();
+  chorusLFO.start();
+  // source.start() called after buffer is loaded
 
   return {
-    ctx, source, harmonics: [h2, h3], sourceMix,
+    ctx, source, audioBuffer: source.buffer!, sourceMix,
     inputGain, compressor, compMakeupGain, compDryGain, compWetGain, compMerge,
     driveHP, driveLP, waveshaper, driveDryGain, driveWetGain, driveLevelGain, driveMerge,
     chorusDelay, chorusLFO, chorusLFOGain, chorusDryGain, chorusWetGain, chorusMerge,
@@ -1061,6 +1056,19 @@ export default function RigSimulator() {
     const engine = buildEngine();
     // Mobile Safari fix
     if (engine.ctx.state === "suspended") await engine.ctx.resume();
+    // Load guitar loop
+    try {
+      const resp = await fetch("/audio/guitar-loop.mp3");
+      const arrayBuf = await resp.arrayBuffer();
+      const audioBuffer = await engine.ctx.decodeAudioData(arrayBuf);
+      engine.audioBuffer = audioBuffer;
+      engine.source.buffer = audioBuffer;
+      engine.source.loop = true;
+      engine.source.start();
+    } catch (e) {
+      console.error("Failed to load guitar loop:", e);
+      return;
+    }
     engineRef.current = engine;
     setAnalyser(engine.analyser);
     setPlaying(true);
@@ -1069,7 +1077,7 @@ export default function RigSimulator() {
   const stopAudio = useCallback(() => {
     const engine = engineRef.current;
     if (!engine) return;
-    try { engine.source.stop(); engine.harmonics.forEach(h => h.stop()); engine.chorusLFO.stop(); } catch { /* */ }
+    try { engine.source.stop(); engine.chorusLFO.stop(); } catch { /* */ }
     engine.ctx.close();
     engineRef.current = null;
     setAnalyser(null);
@@ -1245,7 +1253,7 @@ export default function RigSimulator() {
   useEffect(() => {
     return () => {
       if (engineRef.current) {
-        try { engineRef.current.source.stop(); engineRef.current.harmonics.forEach(h => h.stop()); engineRef.current.chorusLFO.stop(); } catch { /* */ }
+        try { engineRef.current.source.stop(); engineRef.current.chorusLFO.stop(); } catch { /* */ }
         engineRef.current.ctx.close();
       }
       cancelAnimationFrame(morphAnimRef.current);
