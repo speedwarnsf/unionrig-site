@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "stevie_ray_vaughan_tube_screamer",
+  "name": "Stevie Ray Vaughan Tube Screamer",
+  "tags": [
+    "srv",
+    "texas-blues",
+    "tube-screamer",
+    "vibroverb",
+    "tremolo",
+    "strat"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "SRV's Tube Screamer into Fender Vibroverb. Mid-focused boost with soft clipping, slight tremolo, and dynamics that respond to his heavy pick attack.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Clean Texas",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -10.0,
+          "ratio": 2.2,
+          "knee_db": 2.0,
+          "attack_ms": 4.0,
+          "release_ms": 90.0,
+          "makeup_db": 2.0,
+          "mix": 0.4
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 4.0,
+          "asym": 0.1,
+          "tone_tilt": 0.0,
+          "low_cut_hz": 60.0,
+          "high_cut_hz": 14000.0,
+          "mix": 0.3,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 3,
+          "rate_hz": 1.2,
+          "depth": 0.15,
+          "mix": 1.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.4,
+          "micro_delay_ms": 2.5,
+          "micro_pitch_cents": 1.0,
+          "seed": 0.6
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 8.0,
+          "decay_s": 1.8,
+          "damp": 0.5,
+          "diffusion": 0.5,
+          "mod": 0.15,
+          "wet": 0.25,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 85.0,
+          "low_res_q": 0.8,
+          "mid_scoop_db": 1.5,
+          "high_roll_hz": 8500.0,
+          "air": 0.35
+        },
+        "out": {
+          "level_db": -3.0,
+          "lim_thresh_db": -6.0,
+          "lim_release_ms": 120.0
+        }
+      }
+    },
+    "B": {
+      "label": "Tube Screamer",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -12.0,
+          "ratio": 2.8,
+          "knee_db": 3.0,
+          "attack_ms": 6.0,
+          "release_ms": 110.0,
+          "makeup_db": 3.5,
+          "mix": 0.55
+        },
+        "drv": {
+          "type": 1,
+          "pre_gain_db": 15.0,
+          "asym": 0.25,
+          "tone_tilt": -0.2,
+          "low_cut_hz": 120.0,
+          "high_cut_hz": 7500.0,
+          "mix": 0.75,
+          "level_db": 2.0
+        },
+        "chr": {
+          "mode": 3,
+          "rate_hz": 1.0,
+          "depth": 0.12,
+          "mix": 1.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.45,
+          "micro_delay_ms": 3.0,
+          "micro_pitch_cents": 1.5,
+          "seed": 0.6
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 12.0,
+          "decay_s": 2.5,
+          "damp": 0.45,
+          "diffusion": 0.6,
+          "mod": 0.2,
+          "wet": 0.3,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 95.0,
+          "low_res_q": 0.9,
+          "mid_scoop_db": 2.0,
+          "high_roll_hz": 7800.0,
+          "air": 0.3
+        },
+        "out": {
+          "level_db": -1.0,
+          "lim_thresh_db": -4.0,
+          "lim_release_ms": 140.0
+        }
+      }
+    }
+  }
+}

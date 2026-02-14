@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "david_gilmour_big_muff",
+  "name": "David Gilmour Big Muff",
+  "tags": [
+    "pink-floyd",
+    "gilmour",
+    "big-muff",
+    "sustain",
+    "hiwatt",
+    "lead"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Gilmour's sustaining lead tone. Big Muff Pi fuzz into Hiwatt amp simulation with smooth compression for singing sustain and long plate reverb.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Clean Comp",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -16.0,
+          "ratio": 3.0,
+          "knee_db": 8.0,
+          "attack_ms": 25.0,
+          "release_ms": 300.0,
+          "makeup_db": 4.0,
+          "mix": 0.7
+        },
+        "drv": {
+          "type": 1,
+          "pre_gain_db": 4.0,
+          "asym": 0.05,
+          "tone_tilt": -0.1,
+          "low_cut_hz": 60.0,
+          "high_cut_hz": 14000.0,
+          "mix": 0.3,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.5,
+          "micro_delay_ms": 3.0,
+          "micro_pitch_cents": 1.5,
+          "seed": 0.4
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 15.0,
+          "decay_s": 2.8,
+          "damp": 0.4,
+          "diffusion": 0.75,
+          "mod": 0.25,
+          "wet": 0.35,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 90.0,
+          "low_res_q": 0.7,
+          "mid_scoop_db": -1.0,
+          "high_roll_hz": 7500.0,
+          "air": 0.3
+        },
+        "out": {
+          "level_db": -5.0,
+          "lim_thresh_db": -8.0,
+          "lim_release_ms": 200.0
+        }
+      }
+    },
+    "B": {
+      "label": "Big Muff Lead",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -18.0,
+          "ratio": 4.0,
+          "knee_db": 10.0,
+          "attack_ms": 30.0,
+          "release_ms": 400.0,
+          "makeup_db": 6.0,
+          "mix": 0.85
+        },
+        "drv": {
+          "type": 5,
+          "pre_gain_db": 18.0,
+          "asym": 0.2,
+          "tone_tilt": -0.3,
+          "low_cut_hz": 100.0,
+          "high_cut_hz": 6000.0,
+          "mix": 0.9,
+          "level_db": 3.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.6,
+          "micro_delay_ms": 4.0,
+          "micro_pitch_cents": 2.0,
+          "seed": 0.4
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 25.0,
+          "decay_s": 4.5,
+          "damp": 0.3,
+          "diffusion": 0.8,
+          "mod": 0.3,
+          "wet": 0.45,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 100.0,
+          "low_res_q": 0.8,
+          "mid_scoop_db": -2.5,
+          "high_roll_hz": 6800.0,
+          "air": 0.25
+        },
+        "out": {
+          "level_db": -1.0,
+          "lim_thresh_db": -4.0,
+          "lim_release_ms": 250.0
+        }
+      }
+    }
+  }
+}

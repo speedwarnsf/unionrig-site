@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "jimmy_page_marshall_crunch",
+  "name": "Jimmy Page Marshall Crunch",
+  "tags": [
+    "led-zeppelin",
+    "jimmy-page",
+    "marshall",
+    "superlead",
+    "crunch",
+    "rock"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Page's Marshall Superlead crunch. Les Paul into cranked Marshall stack at volume 10, producing hard asymmetric clipping with tight room ambience.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Rhythm Crunch",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -14.0,
+          "ratio": 2.2,
+          "knee_db": 3.0,
+          "attack_ms": 8.0,
+          "release_ms": 120.0,
+          "makeup_db": 2.0,
+          "mix": 0.45
+        },
+        "drv": {
+          "type": 2,
+          "pre_gain_db": 20.0,
+          "asym": 0.35,
+          "tone_tilt": 0.4,
+          "low_cut_hz": 100.0,
+          "high_cut_hz": 10000.0,
+          "mix": 0.8,
+          "level_db": 1.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.4,
+          "micro_delay_ms": 2.5,
+          "micro_pitch_cents": 1.0,
+          "seed": 0.6
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 8.0,
+          "decay_s": 1.2,
+          "damp": 0.6,
+          "diffusion": 0.5,
+          "mod": 0.1,
+          "wet": 0.25,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 1,
+          "low_res_hz": 120.0,
+          "low_res_q": 1.2,
+          "mid_scoop_db": -1.5,
+          "high_roll_hz": 7000.0,
+          "air": 0.2
+        },
+        "out": {
+          "level_db": -2.0,
+          "lim_thresh_db": -5.0,
+          "lim_release_ms": 100.0
+        }
+      }
+    },
+    "B": {
+      "label": "Lead Sustain",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -16.0,
+          "ratio": 3.0,
+          "knee_db": 4.0,
+          "attack_ms": 10.0,
+          "release_ms": 150.0,
+          "makeup_db": 3.5,
+          "mix": 0.55
+        },
+        "drv": {
+          "type": 2,
+          "pre_gain_db": 26.0,
+          "asym": 0.45,
+          "tone_tilt": 0.5,
+          "low_cut_hz": 110.0,
+          "high_cut_hz": 9000.0,
+          "mix": 0.9,
+          "level_db": 2.5
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.45,
+          "micro_delay_ms": 3.0,
+          "micro_pitch_cents": 1.5,
+          "seed": 0.6
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 12.0,
+          "decay_s": 1.8,
+          "damp": 0.55,
+          "diffusion": 0.6,
+          "mod": 0.15,
+          "wet": 0.3,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 1,
+          "low_res_hz": 130.0,
+          "low_res_q": 1.4,
+          "mid_scoop_db": -1.0,
+          "high_roll_hz": 7500.0,
+          "air": 0.25
+        },
+        "out": {
+          "level_db": 0.0,
+          "lim_thresh_db": -3.0,
+          "lim_release_ms": 120.0
+        }
+      }
+    }
+  }
+}

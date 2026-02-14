@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "kurt_cobain_ds1_twin",
+  "name": "Kurt Cobain DS-1 Twin",
+  "tags": [
+    "nirvana",
+    "kurt-cobain",
+    "ds-1",
+    "twin-reverb",
+    "grunge",
+    "chorus"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Cobain's DS-1 into Twin Reverb setup. Scooped mids with aggressive hard clipping for grunge, chorus on clean for ethereal textures.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Clean Chorus",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -16.0,
+          "ratio": 2.0,
+          "knee_db": 4.0,
+          "attack_ms": 10.0,
+          "release_ms": 140.0,
+          "makeup_db": 2.5,
+          "mix": 0.4
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 3.0,
+          "asym": 0.05,
+          "tone_tilt": 0.1,
+          "low_cut_hz": 60.0,
+          "high_cut_hz": 15000.0,
+          "mix": 0.25,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 1,
+          "rate_hz": 0.6,
+          "depth": 0.4,
+          "mix": 0.5,
+          "tone": -0.2
+        },
+        "stp": {
+          "width": 0.7,
+          "micro_delay_ms": 5.0,
+          "micro_pitch_cents": 3.0,
+          "seed": 0.5
+        },
+        "spc": {
+          "mode": 1,
+          "pre_delay_ms": 20.0,
+          "decay_s": 2.2,
+          "damp": 0.5,
+          "diffusion": 0.6,
+          "mod": 0.2,
+          "wet": 0.3,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 85.0,
+          "low_res_q": 0.6,
+          "mid_scoop_db": 0.0,
+          "high_roll_hz": 9000.0,
+          "air": 0.4
+        },
+        "out": {
+          "level_db": -4.0,
+          "lim_thresh_db": -8.0,
+          "lim_release_ms": 160.0
+        }
+      }
+    },
+    "B": {
+      "label": "DS-1 Grunge",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -10.0,
+          "ratio": 2.8,
+          "knee_db": 2.0,
+          "attack_ms": 5.0,
+          "release_ms": 90.0,
+          "makeup_db": 3.0,
+          "mix": 0.5
+        },
+        "drv": {
+          "type": 2,
+          "pre_gain_db": 22.0,
+          "asym": 0.3,
+          "tone_tilt": 0.6,
+          "low_cut_hz": 150.0,
+          "high_cut_hz": 8000.0,
+          "mix": 0.85,
+          "level_db": 3.5
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.5,
+          "micro_delay_ms": 3.0,
+          "micro_pitch_cents": 2.0,
+          "seed": 0.5
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 10.0,
+          "decay_s": 1.5,
+          "damp": 0.6,
+          "diffusion": 0.5,
+          "mod": 0.1,
+          "wet": 0.2,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 2,
+          "low_res_hz": 95.0,
+          "low_res_q": 0.8,
+          "mid_scoop_db": -5.0,
+          "high_roll_hz": 7500.0,
+          "air": 0.2
+        },
+        "out": {
+          "level_db": 0.5,
+          "lim_thresh_db": -4.0,
+          "lim_release_ms": 100.0
+        }
+      }
+    }
+  }
+}

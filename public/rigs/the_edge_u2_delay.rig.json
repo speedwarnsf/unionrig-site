@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "the_edge_u2_delay",
+  "name": "The Edge U2 Delay",
+  "tags": [
+    "u2",
+    "delay",
+    "edge",
+    "dotted-eighth",
+    "ambient",
+    "clean"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "The Edge's signature dotted-eighth delay shimmer. Vox AC30 warmth with Memory Man delay timing. Clean boost for leads, minimal saturation.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Clean Rhythm",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -18.0,
+          "ratio": 2.0,
+          "knee_db": 4.0,
+          "attack_ms": 12.0,
+          "release_ms": 180.0,
+          "makeup_db": 2.0,
+          "mix": 0.4
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 6.0,
+          "asym": 0.1,
+          "tone_tilt": 0.2,
+          "low_cut_hz": 80.0,
+          "high_cut_hz": 12000.0,
+          "mix": 0.5,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.6,
+          "micro_delay_ms": 4.0,
+          "micro_pitch_cents": 2.0,
+          "seed": 0.3
+        },
+        "spc": {
+          "mode": 3,
+          "pre_delay_ms": 90.0,
+          "decay_s": 0.8,
+          "damp": 0.3,
+          "diffusion": 0.4,
+          "mod": 0.1,
+          "wet": 0.45,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 3,
+          "low_res_hz": 100.0,
+          "low_res_q": 0.8,
+          "mid_scoop_db": 0.0,
+          "high_roll_hz": 8000.0,
+          "air": 0.4
+        },
+        "out": {
+          "level_db": -4.0,
+          "lim_thresh_db": -8.0,
+          "lim_release_ms": 150.0
+        }
+      }
+    },
+    "B": {
+      "label": "Lead Boost",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -20.0,
+          "ratio": 2.5,
+          "knee_db": 5.0,
+          "attack_ms": 15.0,
+          "release_ms": 200.0,
+          "makeup_db": 3.0,
+          "mix": 0.5
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 12.0,
+          "asym": 0.15,
+          "tone_tilt": 0.3,
+          "low_cut_hz": 90.0,
+          "high_cut_hz": 10000.0,
+          "mix": 0.65,
+          "level_db": 2.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.7,
+          "micro_delay_ms": 5.0,
+          "micro_pitch_cents": 3.0,
+          "seed": 0.3
+        },
+        "spc": {
+          "mode": 3,
+          "pre_delay_ms": 90.0,
+          "decay_s": 1.2,
+          "damp": 0.25,
+          "diffusion": 0.5,
+          "mod": 0.15,
+          "wet": 0.55,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 3,
+          "low_res_hz": 110.0,
+          "low_res_q": 0.9,
+          "mid_scoop_db": 1.0,
+          "high_roll_hz": 9000.0,
+          "air": 0.5
+        },
+        "out": {
+          "level_db": -2.0,
+          "lim_thresh_db": -6.0,
+          "lim_release_ms": 180.0
+        }
+      }
+    }
+  }
+}

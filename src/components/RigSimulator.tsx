@@ -1031,6 +1031,200 @@ function Screw({ style }: { style: React.CSSProperties }) {
 }
 
 // ============================================================
+// Preset Loader — converts .rig.json to SoundDef
+// ============================================================
+
+interface RigJsonScene {
+  label: string;
+  params: {
+    dyn: Record<string, number | boolean>;
+    drv: Record<string, number>;
+    chr: Record<string, number>;
+    stp: Record<string, number>;
+    spc: Record<string, number>;
+    cab: Record<string, number>;
+    out: Record<string, number>;
+  };
+}
+
+interface RigJson {
+  rig_id: string;
+  name: string;
+  tags: string[];
+  notes: string;
+  scenes: { A: RigJsonScene; B: RigJsonScene };
+}
+
+interface PresetEntry {
+  id: string;
+  name: string;
+  file: string;
+  tags: string[];
+  notes: string;
+}
+
+function rigJsonSceneToRigP(scene: RigJsonScene): RigP {
+  const p = scene.params;
+  return {
+    dyn: {
+      enable: p.dyn.enable !== false,
+      thresh_db: (p.dyn.thresh_db as number) ?? -22,
+      ratio: (p.dyn.ratio as number) ?? 2.5,
+      attack_ms: (p.dyn.attack_ms as number) ?? 18,
+      release_ms: (p.dyn.release_ms as number) ?? 220,
+      makeup_db: (p.dyn.makeup_db as number) ?? 4,
+      mix: (p.dyn.mix as number) ?? 0.55,
+    },
+    drv: {
+      type: p.drv.type ?? 1,
+      pre_gain_db: p.drv.pre_gain_db ?? 9,
+      asym: p.drv.asym ?? 0.25,
+      tone_tilt: p.drv.tone_tilt ?? -0.15,
+      low_cut_hz: p.drv.low_cut_hz ?? 90,
+      high_cut_hz: p.drv.high_cut_hz ?? 8500,
+      mix: p.drv.mix ?? 0.65,
+      level_db: p.drv.level_db ?? 0,
+    },
+    chr: {
+      mode: p.chr.mode ?? 1,
+      rate_hz: p.chr.rate_hz ?? 0.45,
+      depth: p.chr.depth ?? 0.25,
+      mix: p.chr.mix ?? 0.30,
+      tone: p.chr.tone ?? -0.10,
+    },
+    stp: {
+      width: p.stp.width ?? 0.55,
+      micro_delay_ms: p.stp.micro_delay_ms ?? 6.5,
+    },
+    spc: {
+      decay_s: p.spc.decay_s ?? 3.2,
+      damp: p.spc.damp ?? 0.45,
+      wet: p.spc.wet ?? 0.38,
+      dry: p.spc.dry ?? 1.0,
+    },
+    cab: {
+      low_res_hz: p.cab.low_res_hz ?? 110,
+      high_roll_hz: p.cab.high_roll_hz ?? 6800,
+      air: p.cab.air ?? 0.30,
+    },
+    out: {
+      level_db: p.out.level_db ?? -3,
+      lim_thresh_db: p.out.lim_thresh_db ?? -6,
+      lim_release_ms: p.out.lim_release_ms ?? 160,
+    },
+  };
+}
+
+function rigJsonToSoundDef(rj: RigJson): SoundDef {
+  return {
+    name: rj.name,
+    sceneA: rigJsonSceneToRigP(rj.scenes.A),
+    sceneB: rigJsonSceneToRigP(rj.scenes.B),
+  };
+}
+
+// --- Preset Browser ---
+function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
+  const [presets, setPresets] = useState<PresetEntry[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState<string>("");
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    fetch("/rigs/index.json")
+      .then(r => r.json())
+      .then((data: PresetEntry[]) => setPresets(data))
+      .catch(() => {});
+  }, []);
+
+  const loadPreset = useCallback(async (entry: PresetEntry) => {
+    setLoading(true);
+    setSelected(entry.id);
+    try {
+      const resp = await fetch(`/rigs/${entry.file}`);
+      const rj: RigJson = await resp.json();
+      onLoad(rigJsonToSoundDef(rj));
+    } catch (e) {
+      console.error("Failed to load preset:", e);
+    }
+    setLoading(false);
+  }, [onLoad]);
+
+  if (!presets.length) return null;
+
+  return (
+    <div style={{ marginBottom: 32 }}>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        style={{
+          background: "none",
+          border: "1px solid var(--border, #2a2725)",
+          color: "var(--fg-dim, #8a8278)",
+          padding: "8px 16px",
+          fontSize: 11,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          cursor: "pointer",
+          fontWeight: 600,
+          borderRadius: 0,
+          width: "100%",
+          maxWidth: 480,
+          display: "block",
+          margin: "0 auto",
+          textAlign: "left",
+        }}
+      >
+        {expanded ? "Hide" : "Load"} Artist Presets {selected && !expanded ? `-- ${presets.find(p => p.id === selected)?.name}` : ""}
+      </button>
+      {expanded && (
+        <div style={{
+          maxWidth: 480,
+          margin: "0 auto",
+          border: "1px solid var(--border, #2a2725)",
+          borderTop: "none",
+          background: "var(--surface, #111)",
+          maxHeight: 320,
+          overflowY: "auto",
+        }}>
+          {presets.map(entry => (
+            <button
+              key={entry.id}
+              onClick={() => { loadPreset(entry); setExpanded(false); }}
+              disabled={loading}
+              style={{
+                display: "block",
+                width: "100%",
+                background: selected === entry.id ? "rgba(201,185,154,0.1)" : "none",
+                border: "none",
+                borderBottom: "1px solid var(--border, #2a2725)",
+                padding: "12px 16px",
+                textAlign: "left",
+                cursor: "pointer",
+                borderRadius: 0,
+              }}
+            >
+              <span style={{
+                fontSize: 13,
+                fontWeight: 500,
+                color: "var(--fg, #e8e4dc)",
+                display: "block",
+                marginBottom: 2,
+              }}>{entry.name}</span>
+              <span style={{
+                fontSize: 11,
+                color: "var(--fg-dim, #8a8278)",
+                lineHeight: 1.4,
+                display: "block",
+              }}>{entry.notes.length > 80 ? entry.notes.slice(0, 80) + "..." : entry.notes}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
 // Main Component
 // ============================================================
 
@@ -1094,10 +1288,12 @@ export default function RigSimulator() {
     morphAnimRef.current = requestAnimationFrame(stepMorph);
   }, [stepMorph]);
 
+  const presetSoundRef = useRef<SoundDef | null>(null);
+
   const recomputeAndApply = useCallback(() => {
     const engine = engineRef.current;
     if (!engine) return;
-    const sound = SOUNDS[currentSound];
+    const sound = presetSoundRef.current || SOUNDS[currentSound];
     if (!sound) return;
     const shaped = smoothstep(morphRef.current);
     const base = lerpRig(sound.sceneA, sound.sceneB, shaped);
@@ -1171,6 +1367,8 @@ export default function RigSimulator() {
   }, []);
 
   const onNextSound = useCallback(() => {
+    setPresetSound(null);
+    presetSoundRef.current = null;
     setCurrentSound(prev => {
       const next = (prev + 1) % 12;
       morphRef.current = 0;
@@ -1183,6 +1381,8 @@ export default function RigSimulator() {
   }, [triggerGhost, applySubOctave]);
 
   const onPrevSound = useCallback(() => {
+    setPresetSound(null);
+    presetSoundRef.current = null;
     setCurrentSound(prev => {
       const next = (prev - 1 + 12) % 12;
       morphRef.current = 0;
@@ -1313,6 +1513,24 @@ export default function RigSimulator() {
   const onDepth = useCallback((v: number) => { macrosRef.current.depth = v; recomputeAndApply(); }, [recomputeAndApply]);
   const onMotion = useCallback((v: number) => { macrosRef.current.motion = v; recomputeAndApply(); }, [recomputeAndApply]);
 
+  // Preset loading
+  const [presetSound, setPresetSound] = useState<SoundDef | null>(null);
+
+  const onPresetLoad = useCallback((sd: SoundDef) => {
+    setPresetSound(sd);
+    presetSoundRef.current = sd;
+    morphRef.current = 0;
+    morphTargetRef.current = 0;
+    setScene("A");
+    triggerGhost();
+    // Reapply immediately
+    const engine = engineRef.current;
+    if (engine) {
+      const p = applyMacroMaps(sd.sceneA, macrosRef.current);
+      updateEngineParams(engine, p);
+    }
+  }, [triggerGhost]);
+
   // Recompute when sound changes
   useEffect(() => { recomputeAndApply(); }, [currentSound, recomputeAndApply]);
 
@@ -1327,7 +1545,7 @@ export default function RigSimulator() {
     };
   }, []);
 
-  const sound = SOUNDS[currentSound];
+  const sound = presetSound || SOUNDS[currentSound];
 
   return (
     <div>
@@ -1355,6 +1573,9 @@ export default function RigSimulator() {
         Interactive pedal simulator. Turn the knobs, switch scenes, navigate sounds --
         hear the Chaincraft DSP engine in real-time.
       </p>
+
+      {/* Preset browser */}
+      <PresetBrowser onLoad={onPresetLoad} />
 
       {/* Pedal enclosure */}
       <div className="pedal-body" style={{
