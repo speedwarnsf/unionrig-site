@@ -40,6 +40,7 @@ interface SoundDef {
   name: string;
   sceneA: RigP;
   sceneB: RigP;
+  subOctave?: number; // 0-1 mix level for sub-octave generator
 }
 
 function makeRig(overrides: Partial<{
@@ -81,6 +82,7 @@ const SOUNDS: SoundDef[] = [
   },
   {
     name: "Octdown",
+    subOctave: 0.45,
     sceneA: makeRig({
       dyn: { thresh_db: -18, ratio: 3.8, attack_ms: 12, release_ms: 180, makeup_db: 5, mix: 0.60 },
       drv: { type: 1, pre_gain_db: 7, asym: 0.35, tone_tilt: -0.25, low_cut_hz: 70, high_cut_hz: 7200, mix: 0.55, level_db: -1 },
@@ -441,6 +443,8 @@ function makeDriveCurve(type: number, asym: number, preGainLin: number, toneTilt
 interface AudioEngine {
   ctx: AudioContext;
   source: AudioBufferSourceNode;
+  subOctaveSource: AudioBufferSourceNode | null;
+  subOctaveGain: GainNode;
   audioBuffer: AudioBuffer;
   sourceMix: GainNode;
   inputGain: GainNode;
@@ -489,11 +493,14 @@ function buildEngine(): AudioEngine {
   const ctx = new AudioContext({ sampleRate: 48000 });
 
   // ====== GUITAR LOOP SOURCE ======
-  // Placeholder source; real buffer loaded async via loadGuitarLoop()
   const source = ctx.createBufferSource();
   source.loop = true;
   const sourceMix = ctx.createGain(); sourceMix.gain.value = 1.0;
   source.connect(sourceMix);
+
+  // Sub-octave source: pitched down 1 octave (-1200 cents), mixed in for octave effects
+  const subOctaveGain = ctx.createGain(); subOctaveGain.gain.value = 0; // off by default
+  // subOctaveSource created when audio loads
   // ====== END GUITAR LOOP SOURCE ======
 
   const inputGain = ctx.createGain(); inputGain.gain.value = 1;
@@ -631,7 +638,7 @@ function buildEngine(): AudioEngine {
   // source.start() called after buffer is loaded
 
   return {
-    ctx, source, audioBuffer: source.buffer!, sourceMix,
+    ctx, source, subOctaveSource: null, subOctaveGain, audioBuffer: source.buffer!, sourceMix,
     inputGain, compressor, compMakeupGain, compDryGain, compWetGain, compMerge,
     driveHP, driveLP, waveshaper, driveDryGain, driveWetGain, driveLevelGain, driveMerge,
     chorusDelay, chorusLFO, chorusLFOGain, chorusDryGain, chorusWetGain, chorusMerge,
@@ -1086,6 +1093,16 @@ export default function RigSimulator() {
       engine.source.buffer = audioBuffer;
       engine.source.loop = true;
       engine.source.start();
+
+      // Create sub-octave source (pitched down 1 octave)
+      const subSrc = engine.ctx.createBufferSource();
+      subSrc.buffer = audioBuffer;
+      subSrc.loop = true;
+      subSrc.detune.value = -1200; // -1 octave
+      subSrc.connect(engine.subOctaveGain);
+      engine.subOctaveGain.connect(engine.sourceMix);
+      engine.subOctaveSource = subSrc;
+      subSrc.start();
     } catch (e) {
       console.error("Failed to load guitar loop:", e);
       return;
@@ -1098,7 +1115,7 @@ export default function RigSimulator() {
   const stopAudio = useCallback(() => {
     const engine = engineRef.current;
     if (!engine) return;
-    try { engine.source.stop(); engine.chorusLFO.stop(); } catch { /* */ }
+    try { engine.source.stop(); if (engine.subOctaveSource) engine.subOctaveSource.stop(); engine.chorusLFO.stop(); } catch { /* */ }
     engine.ctx.close();
     engineRef.current = null;
     setAnalyser(null);
@@ -1126,6 +1143,14 @@ export default function RigSimulator() {
   }, [scene, startMorph]);
 
   // Sound navigation
+  const applySubOctave = useCallback((soundIdx: number) => {
+    const engine = engineRef.current;
+    if (!engine) return;
+    const level = SOUNDS[soundIdx]?.subOctave ?? 0;
+    const t = engine.ctx.currentTime;
+    engine.subOctaveGain.gain.linearRampToValueAtTime(level, t + 0.015);
+  }, []);
+
   const onNextSound = useCallback(() => {
     setCurrentSound(prev => {
       const next = (prev + 1) % 12;
@@ -1133,9 +1158,10 @@ export default function RigSimulator() {
       morphTargetRef.current = 0;
       setScene("A");
       triggerGhost();
+      applySubOctave(next);
       return next;
     });
-  }, [triggerGhost]);
+  }, [triggerGhost, applySubOctave]);
 
   const onPrevSound = useCallback(() => {
     setCurrentSound(prev => {
@@ -1144,9 +1170,10 @@ export default function RigSimulator() {
       morphTargetRef.current = 0;
       setScene("A");
       triggerGhost();
+      applySubOctave(next);
       return next;
     });
-  }, [triggerGhost]);
+  }, [triggerGhost, applySubOctave]);
 
   // Looper
   const onLooperTap = useCallback(() => {
