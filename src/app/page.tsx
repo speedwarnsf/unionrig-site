@@ -120,10 +120,7 @@ export default function Home() {
         <ScrollReveal delay={150}>
           <div
             style={{
-              width: "100vw",
-              position: "relative",
-              left: "50%",
-              transform: "translateX(-50%)",
+              width: "100%",
               marginBottom: 32,
             }}
           >
