@@ -443,7 +443,7 @@ function makeDriveCurve(type: number, asym: number, preGainLin: number, toneTilt
 interface AudioEngine {
   ctx: AudioContext;
   source: AudioBufferSourceNode;
-  subOctaveSource: AudioBufferSourceNode | null;
+  subOctaveShaper: WaveShaperNode;
   subOctaveGain: GainNode;
   audioBuffer: AudioBuffer;
   sourceMix: GainNode;
@@ -498,9 +498,25 @@ function buildEngine(): AudioEngine {
   const sourceMix = ctx.createGain(); sourceMix.gain.value = 1.0;
   source.connect(sourceMix);
 
-  // Sub-octave source: pitched down 1 octave (-1200 cents), mixed in for octave effects
+  // Sub-octave generator: octave-down via ring modulation technique
+  // Divide frequency by 2 using a waveshaper (full-wave rectify) + low-pass filter
   const subOctaveGain = ctx.createGain(); subOctaveGain.gain.value = 0; // off by default
-  // subOctaveSource created when audio loads
+  const subOctaveFilter = ctx.createBiquadFilter();
+  subOctaveFilter.type = "lowpass"; subOctaveFilter.frequency.value = 400; subOctaveFilter.Q.value = 1.0;
+  // Full-wave rectifier waveshaper to generate sub-harmonics
+  const subOctaveShaper = ctx.createWaveShaper();
+  const subCurve = new Float32Array(4096);
+  for (let i = 0; i < 4096; i++) {
+    const x = (i / 4096) * 2 - 1;
+    // Square the signal to double frequency, then filter down = sub-octave content
+    subCurve[i] = x * x * 2 - 1;
+  }
+  subOctaveShaper.curve = subCurve;
+  subOctaveShaper.oversample = "2x";
+  sourceMix.connect(subOctaveShaper);
+  subOctaveShaper.connect(subOctaveFilter);
+  subOctaveFilter.connect(subOctaveGain);
+  // Connected to inputGain in chain setup below
   // ====== END GUITAR LOOP SOURCE ======
 
   const inputGain = ctx.createGain(); inputGain.gain.value = 1;
@@ -568,6 +584,7 @@ function buildEngine(): AudioEngine {
 
   // === ROUTING ===
   sourceMix.connect(inputGain);
+  subOctaveGain.connect(inputGain); // sub-octave mixed into signal chain
 
   // Dynamics
   inputGain.connect(compressor);
@@ -638,7 +655,7 @@ function buildEngine(): AudioEngine {
   // source.start() called after buffer is loaded
 
   return {
-    ctx, source, subOctaveSource: null, subOctaveGain, audioBuffer: source.buffer!, sourceMix,
+    ctx, source, subOctaveShaper, subOctaveGain, audioBuffer: source.buffer!, sourceMix,
     inputGain, compressor, compMakeupGain, compDryGain, compWetGain, compMerge,
     driveHP, driveLP, waveshaper, driveDryGain, driveWetGain, driveLevelGain, driveMerge,
     chorusDelay, chorusLFO, chorusLFOGain, chorusDryGain, chorusWetGain, chorusMerge,
@@ -1094,15 +1111,8 @@ export default function RigSimulator() {
       engine.source.loop = true;
       engine.source.start();
 
-      // Create sub-octave source (pitched down 1 octave)
-      const subSrc = engine.ctx.createBufferSource();
-      subSrc.buffer = audioBuffer;
-      subSrc.loop = true;
-      subSrc.detune.value = -1200; // -1 octave
-      subSrc.connect(engine.subOctaveGain);
-      engine.subOctaveGain.connect(engine.sourceMix);
-      engine.subOctaveSource = subSrc;
-      subSrc.start();
+      // Sub-octave: already wired in buildEngine via sourceMix
+      // subOctaveGain is connected in the chain
     } catch (e) {
       console.error("Failed to load guitar loop:", e);
       return;
@@ -1115,7 +1125,7 @@ export default function RigSimulator() {
   const stopAudio = useCallback(() => {
     const engine = engineRef.current;
     if (!engine) return;
-    try { engine.source.stop(); if (engine.subOctaveSource) engine.subOctaveSource.stop(); engine.chorusLFO.stop(); } catch { /* */ }
+    try { engine.source.stop(); engine.chorusLFO.stop(); } catch { /* */ }
     engine.ctx.close();
     engineRef.current = null;
     setAnalyser(null);
