@@ -8,7 +8,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = "https://unionrig-site.vercel.app";
+const siteUrl = "https://unionrig.com";
 
 export const metadata: Metadata = {
   title: {

@@ -32,7 +32,7 @@ export default function Contact() {
               Get in touch.
             </h1>
             <p style={{ ...body, marginBottom: 48 }}>
-              Union Rig ships in 2026. Leave your email to get notified when it
+              Union Rig ships in 2027. Leave your email to get notified when it
               is ready. No spam. No marketing. Just the one email that matters.
             </p>
           </FadeIn>

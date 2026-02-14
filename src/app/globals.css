@@ -77,6 +77,10 @@ button:hover {
   opacity: 0.9;
 }
 
+button {
+  transition: opacity 0.15s, background 0.2s, color 0.2s, border-color 0.2s;
+}
+
 a:hover {
   color: var(--fg) !important;
 }

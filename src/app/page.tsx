@@ -38,7 +38,7 @@ export default function Home() {
         >
           <Image
             src="/images/guitarist-hero.jpg"
-            alt="Union Rig — AI-powered guitar instrument"
+            alt="Union Rig — mono-in, stereo-out guitar instrument"
             fill
             priority
             sizes="100vw"

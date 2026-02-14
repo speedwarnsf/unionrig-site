@@ -831,8 +831,8 @@ function Knob({ label, value: initialValue = 0.5, size = 72, onChange }: {
 }
 
 // --- E-ink Display ---
-function EinkDisplay({ soundName, soundNumber, scene, looperState, ghosting }: {
-  soundName: string; soundNumber: number; scene: "A" | "B";
+function EinkDisplay({ soundName, soundNumber, totalSounds, scene, looperState, ghosting }: {
+  soundName: string; soundNumber: number; totalSounds: number; scene: "A" | "B";
   looperState: LooperState; ghosting: boolean;
 }) {
   return (
@@ -876,7 +876,7 @@ function EinkDisplay({ soundName, soundNumber, scene, looperState, ghosting }: {
         <span style={{
           fontSize: 11, letterSpacing: "0.1em", color: "#5a5650",
           fontFamily: "Inter, sans-serif",
-        }}>{String(soundNumber).padStart(2, "0")} / 12</span>
+        }}>{String(soundNumber).padStart(2, "0")} / {totalSounds}</span>
       </div>
       {/* Looper state */}
       {looperState !== "idle" && (
@@ -948,11 +948,15 @@ function Footswitch({ label, ledOn, ledColor, onTap, onHoldStart, onHoldEnd }: {
           display: "flex", alignItems: "center", justifyContent: "center",
           margin: "0 auto", borderRadius: 0,
           boxShadow: "0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
+          transition: "box-shadow 0.15s, border-color 0.15s",
         }}
+        onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#5a5755")}
+        onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#3a3735")}
       >
         <div style={{
           width: 20, height: 20,
           border: `1px solid ${ledOn ? col : "#3a3735"}`,
+          transition: "border-color 0.15s",
         }} />
       </button>
       <p style={{
@@ -1201,7 +1205,10 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
                 textAlign: "left",
                 cursor: "pointer",
                 borderRadius: 0,
+                transition: "background 0.15s",
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201,185,154,0.08)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = selected === entry.id ? "rgba(201,185,154,0.1)" : "none")}
             >
               <span style={{
                 fontSize: 13,
@@ -1370,7 +1377,7 @@ export default function RigSimulator() {
     setPresetSound(null);
     presetSoundRef.current = null;
     setCurrentSound(prev => {
-      const next = (prev + 1) % 12;
+      const next = (prev + 1) % SOUNDS.length;
       morphRef.current = 0;
       morphTargetRef.current = 0;
       setScene("A");
@@ -1384,7 +1391,7 @@ export default function RigSimulator() {
     setPresetSound(null);
     presetSoundRef.current = null;
     setCurrentSound(prev => {
-      const next = (prev - 1 + 12) % 12;
+      const next = (prev - 1 + SOUNDS.length) % SOUNDS.length;
       morphRef.current = 0;
       morphTargetRef.current = 0;
       setScene("A");
@@ -1609,6 +1616,7 @@ export default function RigSimulator() {
           <EinkDisplay
             soundName={sound?.name || ""}
             soundNumber={currentSound + 1}
+            totalSounds={presetSound ? SOUNDS.length : SOUNDS.length}
             scene={scene}
             looperState={looperState}
             ghosting={ghosting}
