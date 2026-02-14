@@ -1129,23 +1129,30 @@ function rigJsonToSoundDef(rj: RigJson): SoundDef {
 
 // --- Preset Browser ---
 function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
-  const [presets, setPresets] = useState<PresetEntry[]>([]);
+  const [basePresets, setBasePresets] = useState<PresetEntry[]>([]);
+  const [userPresets, setUserPresets] = useState<PresetEntry[]>([]);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string>("");
   const [expanded, setExpanded] = useState(false);
+  const [activeSet, setActiveSet] = useState<"base" | "user1">("base");
 
   useEffect(() => {
     fetch("/rigs/index.json")
       .then(r => r.json())
-      .then((data: PresetEntry[]) => setPresets(data))
+      .then((data: PresetEntry[]) => setBasePresets(data))
       .catch(() => {});
+    fetch("/rigs/user1/index.json")
+      .then(r => r.json())
+      .then((data: PresetEntry[]) => setUserPresets(data))
+      .catch(() => setUserPresets([]));
   }, []);
 
-  const loadPreset = useCallback(async (entry: PresetEntry) => {
+  const loadPreset = useCallback(async (entry: PresetEntry, setKey: "base" | "user1") => {
     setLoading(true);
     setSelected(entry.id);
     try {
-      const resp = await fetch(`/rigs/${entry.file}`);
+      const path = setKey === "base" ? `/rigs/${entry.file}` : `/rigs/user1/${entry.file}`;
+      const resp = await fetch(path);
       const rj: RigJson = await resp.json();
       onLoad(rigJsonToSoundDef(rj));
     } catch (e) {
@@ -1154,7 +1161,23 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
     setLoading(false);
   }, [onLoad]);
 
-  if (!presets.length) return null;
+  if (!basePresets.length && !userPresets.length) return null;
+
+  const activePresets = activeSet === "base" ? basePresets : userPresets;
+  const tabStyle = (active: boolean) => ({
+    background: active ? "rgba(201,185,154,0.12)" : "none",
+    border: "none",
+    borderBottom: active ? "2px solid #c9b99a" : "2px solid transparent",
+    color: active ? "var(--fg, #e8e4dc)" : "var(--fg-dim, #8a8278)",
+    padding: "8px 16px",
+    fontSize: 11,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase" as const,
+    cursor: "pointer",
+    fontWeight: active ? 700 : 500,
+    borderRadius: 0,
+    transition: "all 0.15s",
+  });
 
   return (
     <div style={{ marginBottom: 32 }}>
@@ -1178,7 +1201,7 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
           textAlign: "left",
         }}
       >
-        {expanded ? "Hide" : "Load"} Artist Presets {selected && !expanded ? `-- ${presets.find(p => p.id === selected)?.name}` : ""}
+        {expanded ? "Hide" : "Load"} Presets {selected && !expanded ? `-- ${[...basePresets, ...userPresets].find(p => p.id === selected)?.name}` : ""}
       </button>
       {expanded && (
         <div style={{
@@ -1187,44 +1210,60 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
           border: "1px solid var(--border, #2a2725)",
           borderTop: "none",
           background: "var(--surface, #111)",
-          maxHeight: 320,
-          overflowY: "auto",
         }}>
-          {presets.map(entry => (
-            <button
-              key={entry.id}
-              onClick={() => { loadPreset(entry); setExpanded(false); }}
-              disabled={loading}
-              style={{
-                display: "block",
-                width: "100%",
-                background: selected === entry.id ? "rgba(201,185,154,0.1)" : "none",
-                border: "none",
-                borderBottom: "1px solid var(--border, #2a2725)",
-                padding: "12px 16px",
-                textAlign: "left",
-                cursor: "pointer",
-                borderRadius: 0,
-                transition: "background 0.15s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201,185,154,0.08)")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = selected === entry.id ? "rgba(201,185,154,0.1)" : "none")}
-            >
-              <span style={{
-                fontSize: 13,
-                fontWeight: 500,
-                color: "var(--fg, #e8e4dc)",
-                display: "block",
-                marginBottom: 2,
-              }}>{entry.name}</span>
-              <span style={{
-                fontSize: 11,
-                color: "var(--fg-dim, #8a8278)",
-                lineHeight: 1.4,
-                display: "block",
-              }}>{entry.notes.length > 80 ? entry.notes.slice(0, 80) + "..." : entry.notes}</span>
+          {/* Set tabs */}
+          <div style={{ display: "flex", borderBottom: "1px solid var(--border, #2a2725)" }}>
+            <button onClick={() => setActiveSet("base")} style={tabStyle(activeSet === "base")}>
+              Base Set ({basePresets.length})
             </button>
-          ))}
+            <button onClick={() => setActiveSet("user1")} style={tabStyle(activeSet === "user1")}>
+              User Set 1 ({userPresets.length})
+            </button>
+          </div>
+          {/* Preset list */}
+          <div style={{ maxHeight: 280, overflowY: "auto" }}>
+            {activePresets.length === 0 ? (
+              <div style={{ padding: "24px 16px", textAlign: "center", color: "var(--fg-dim, #8a8278)", fontSize: 12, fontStyle: "italic" }}>
+                No presets yet -- design rigs to add them here
+              </div>
+            ) : (
+              activePresets.map(entry => (
+                <button
+                  key={entry.id}
+                  onClick={() => { loadPreset(entry, activeSet); setExpanded(false); }}
+                  disabled={loading}
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    background: selected === entry.id ? "rgba(201,185,154,0.1)" : "none",
+                    border: "none",
+                    borderBottom: "1px solid var(--border, #2a2725)",
+                    padding: "12px 16px",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    borderRadius: 0,
+                    transition: "background 0.15s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201,185,154,0.08)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = selected === entry.id ? "rgba(201,185,154,0.1)" : "none")}
+                >
+                  <span style={{
+                    fontSize: 13,
+                    fontWeight: 500,
+                    color: "var(--fg, #e8e4dc)",
+                    display: "block",
+                    marginBottom: 2,
+                  }}>{entry.name}</span>
+                  <span style={{
+                    fontSize: 11,
+                    color: "var(--fg-dim, #8a8278)",
+                    lineHeight: 1.4,
+                    display: "block",
+                  }}>{entry.notes.length > 80 ? entry.notes.slice(0, 80) + "..." : entry.notes}</span>
+                </button>
+              ))
+            )}
+          </div>
         </div>
       )}
     </div>
