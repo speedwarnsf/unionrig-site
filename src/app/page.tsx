@@ -212,7 +212,7 @@ export default function Home() {
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
                   Your signal enters a fixed topology — six processing stages, always in the same
                   order. We tried every other arrangement. This is the one where nothing fights
-                  anything else. The weight of your pickups, the way you dig in — it all passes
+                  anything else. The weight of your pickups, the way you dig in — all of it passes
                   through intact.
                 </p>
               </div>
@@ -247,9 +247,9 @@ export default function Home() {
                 </h2>
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
                   The engine builds your working set — twelve sounds shaped to how you actually
-                  play. Not presets pulled from a library. Each one is a complete signal state:
+                  play. Not presets yanked from a library. Each one is a complete signal state:
                   dynamics, saturation character, spatial depth, stereo field, output shaping.
-                  All tuned together so they work as a set, not a collection.
+                  Tuned together so they work as a set, not a pile.
                 </p>
               </div>
             </div>
@@ -319,7 +319,7 @@ export default function Home() {
                 </h2>
                 <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, maxWidth: 540 }}>
                   Hold the scene switch and the engine crossfades every parameter between A and B —
-                  smoothly, with no stepping, no zipper noise, no dropout. Release and it comes back.
+                  smoothly, no stepping, no zipper noise, no dropout. Let go and it comes back.
                   Every transition is shaped so the midpoint sounds as intentional as the endpoints.
                   Twenty-four playable states. Zero interruptions.
                 </p>
@@ -349,7 +349,7 @@ export default function Home() {
               letterSpacing: "-0.02em",
             }}
           >
-            Every sound you have ever loved was made by someone who trusted their gear.
+            Every sound you've ever loved was made by someone who trusted their gear.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={200}>
@@ -411,7 +411,7 @@ export default function Home() {
               marginBottom: 16,
             }}
           >
-            Six stages. Fixed order. Each one exists because we tried removing it and the sound got worse.
+            Six stages. Fixed order. Every one of them is load-bearing.
           </p>
           <p
             style={{
@@ -488,7 +488,7 @@ export default function Home() {
                 <KnobGraphic label="Body" value={0.55} />
               </div>
               <p style={{ color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7 }}>
-                Touch reshapes how your dynamics hit the chain. It&apos;s not a volume knob —
+                Touch reshapes how your dynamics hit the chain. Not a volume knob —
                 it&apos;s a sensitivity curve that changes threshold, ratio, and response time
                 together. Heat is multi-stage saturation with asymmetric harmonics that shift
                 the overtone balance as you push harder. Body moves the tonal center of gravity —
@@ -619,13 +619,13 @@ export default function Home() {
               </p>
               <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7, marginBottom: 24 }}>
                 Your working set is always loaded. Step through sounds with your feet.
-                Switch scenes within a song. Hold the scene switch to morph between A and B,
-                release to come back. Twenty-four playable states, zero menu diving.
+                Switch scenes inside a song. Hold the scene switch to morph between A and B,
+                let go to come back. Twenty-four playable states, zero menu diving.
               </p>
               <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7 }}>
-                The AI learns how you adjust sound over time — not who you are. A local
-                preference memory nudges future changes toward your tendencies. No cloud.
-                No tracking. Reset it whenever you want.
+                The AI learns how you adjust — not who you are. A local
+                preference memory nudges future sounds toward your tendencies. No cloud.
+                No tracking. Wipe it whenever you want.
               </p>
             </div>
           </ScrollReveal>
@@ -688,10 +688,7 @@ export default function Home() {
               Your loop lives inside the instrument.
             </h2>
             <p style={{ color: "var(--fg-dim)", fontSize: 15, lineHeight: 1.7 }}>
-              Single loop, sound-on-sound overdub. Recorded post-dynamics, pre-space —
-              so when you change the space or switch scenes, the loop responds. It is not
-              a separate device bolted on. It is part of the instrument. Change sounds,
-              change scenes — the loop persists. Clear it when you are done.
+              Single loop. Sound-on-sound overdub. Recorded post-dynamics, pre-space — so when you change the room or flip scenes, the loop moves with you. This isn&apos;t a looper bolted onto a rig. It is the rig. Switch sounds, swap scenes — the loop lives inside all of it. Kill it when you&apos;re done.
             </p>
           </div>
         </ScrollReveal>
@@ -784,19 +781,19 @@ export default function Home() {
           {[
             {
               title: "CNC Aluminum Enclosure",
-              desc: "Machined from solid aluminum. No plastic. Stage-proof and studio-grade.",
+              desc: "Milled from a single block of aluminum. No plastic anywhere. It'll outlive your band.",
             },
             {
               title: "Internal Power Supply",
-              desc: "IEC C14 inlet with universal AC-DC conversion. No wall wart. Earth bonded to chassis.",
+              desc: "IEC C14 inlet with universal AC-DC conversion. No wall wart. Earth-grounded to the chassis.",
             },
             {
               title: "Deterministic DSP Engine",
-              desc: "Audio processing is isolated and real-time. No OS jitter. No dropouts. Ever.",
+              desc: "Audio processing runs isolated and in real time. No operating system. No jitter. No dropouts. Full stop.",
             },
             {
               title: "AI on the Control Plane",
-              desc: "The AI shapes parameters and builds sounds. It never touches your audio signal. That stays analog.",
+              desc: "The AI shapes parameters and builds sounds. It never touches your signal. That stays analogue.",
             },
           ].map((item, i) => (
             <ScrollReveal key={item.title} delay={i * 100}>
@@ -840,7 +837,7 @@ export default function Home() {
               letterSpacing: "-0.02em",
             }}
           >
-            $849. Shipping 2027.
+            $849. Ships 2027.
           </h2>
           <p
             style={{
@@ -851,7 +848,7 @@ export default function Home() {
               lineHeight: 1.6,
             }}
           >
-            Leave your email and we will let you know the moment Union Rig is ready.
+            Leave your email. We&apos;ll let you know the second Union Rig is ready.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={150}>
