@@ -641,7 +641,7 @@ function ParamGroup({ title, children }: { title: string; children: React.ReactN
 // MAIN COMPONENT
 // ============================================================
 
-type Tab = "lab" | "library" | "sets";
+type Tab = "lab" | "library" | "sets" | "science";
 
 export default function ResearchPage() {
   const [tab, setTab] = useState<Tab>("lab");
@@ -897,6 +897,7 @@ export default function ResearchPage() {
         <button onClick={() => setTab("lab")} style={tabStyle("lab")}>Sound Lab</button>
         <button onClick={() => setTab("library")} style={tabStyle("library")}>Library ({sounds.length})</button>
         <button onClick={() => setTab("sets")} style={tabStyle("sets")}>Set Builder ({sets.length})</button>
+        <button onClick={() => setTab("science")} style={tabStyle("science")}>Signal Chain Science</button>
       </div>
 
       <div style={{ padding: "24px 32px", maxWidth: 1200, margin: "0 auto" }}>
@@ -1140,7 +1141,121 @@ export default function ResearchPage() {
             setSets={setSets}
           />
         )}
+
+        {tab === "science" && (
+          <SignalChainScience />
+        )}
       </div>
+    </div>
+  );
+}
+
+// ============================================================
+// SIGNAL CHAIN SCIENCE
+// ============================================================
+
+function SignalChainScience() {
+  const sections = [
+    {
+      title: "Why Order Matters",
+      content: `The signal chain in Union Rig follows a deliberate order: Dynamics, Drive, Character (modulation), Stereo, Space (reverb), Cabinet, Output. This is not arbitrary.
+
+Compression before drive means the compressor evens out your picking dynamics before they hit the drive stage. The drive responds to a more consistent input, producing a more uniform distortion. If you reversed this -- drive before compression -- the compressor would try to even out an already-distorted signal, pumping and breathing in unmusical ways.
+
+Modulation after drive means the chorus or flanger processes the already-distorted signal. This sounds more natural because the modulation varies the pitch of the harmonically-rich distorted tone. Modulation before drive would mean the drive stage is processing a pitch-wobbling signal, creating intermodulation distortion artifacts that sound harsh.
+
+Reverb after modulation and stereo means the reverb captures the full spatial picture. Reverb before stereo widening would create a mono reverb tail that then gets artificially widened -- less convincing than reverbing an already-wide signal.
+
+Cabinet last (before output) is how real amplifiers work. The speaker cabinet is the final acoustic filter. Placing EQ or effects after the cabinet simulation would add frequencies that a real speaker would never reproduce, breaking the illusion.`,
+    },
+    {
+      title: "The Physics of Clipping",
+      content: `When a guitar signal exceeds the voltage limits of a circuit, the waveform peaks are "clipped" -- flattened at the maximum value the circuit can handle. This is distortion, and it is the most important effect in rock music.
+
+Soft clipping (tube-style) rounds the peaks gradually. As the signal approaches the limit, it compresses smoothly. This generates primarily odd-order harmonics (3rd, 5th, 7th) which the ear perceives as warm and musical. The transition from clean to distorted is gradual and responsive to pick dynamics.
+
+Hard clipping chops the peaks abruptly at a fixed threshold. This generates both odd and even harmonics plus higher-order harmonics, creating a brighter, more aggressive sound. The transition from clean to clipped is more sudden -- there is less dynamic range in the distortion.
+
+Asymmetric clipping treats the positive and negative halves of the waveform differently. One side clips harder than the other. This generates even-order harmonics (2nd, 4th, 6th) which the ear perceives as especially warm and pleasing -- similar to the natural harmonics of musical instruments. Many classic overdrive circuits (the Tube Screamer being the most famous) use asymmetric clipping.
+
+Fuzz is extreme clipping -- the signal is squared off so aggressively that it approaches a square wave. The harmonic content is dense and the sustain is essentially infinite until the note decays below the noise floor. Gated fuzz circuits cut off abruptly when the signal drops, creating a sputtery, velcro-like decay.`,
+    },
+    {
+      title: "Reverb: Simulating Physical Space",
+      content: `Natural reverb is the sum of thousands of sound reflections bouncing off surfaces in a room. The first reflections arrive quickly and are distinct; later reflections blur together into a diffuse tail. The size of the space determines the time between reflections. The materials on the surfaces determine which frequencies are absorbed (damping).
+
+Algorithmic reverb (what Union Rig uses) generates this mathematically. A network of delay lines with feedback and filtering creates a pattern of reflections that approximates a real space. The decay parameter controls how long the feedback loops sustain. The damping parameter applies a low-pass filter inside the feedback loop -- each time a reflection bounces, high frequencies are reduced, simulating absorption by soft surfaces.
+
+The impulse response (IR) approach captures a real space by playing a known signal (an impulse or sweep) through it and recording the result. The recording becomes a fingerprint of that space's acoustics. Convolution reverb applies this fingerprint to your guitar signal. It is more realistic but less flexible -- you cannot easily adjust decay or damping independently.
+
+Spring reverb, found in classic Fender amps, works by sending the signal through a physical spring. The vibrations travel through the coiled metal, creating a characteristic "boing" with dense, metallic reflections. It is technically primitive but musically distinctive -- surf rock and blues are defined by this sound.`,
+    },
+    {
+      title: "Cabinet Simulation: The Hidden EQ",
+      content: `A guitar speaker is not designed for flat frequency response. Unlike studio monitors, guitar speakers deliberately color the sound. A typical 12-inch guitar speaker rolls off sharply above 5-6 kHz, has a resonant bump around 80-120 Hz, and has a complex midrange response shaped by the cone material, magnet, and enclosure.
+
+This roll-off is essential. Raw distortion contains frequencies up to 15-20 kHz that sound harsh and fizzy. The speaker acts as a natural low-pass filter, removing those frequencies and leaving only the musical content. This is why plugging a distortion pedal directly into a PA system sounds terrible -- there is no cabinet filtering.
+
+Microphone placement adds another layer. A microphone pointed at the center of the speaker cone (on-axis) captures more high frequencies and a tighter sound. Moving the mic toward the edge of the cone (off-axis) rolls off highs and sounds warmer. The distance from the cone affects proximity effect (bass boost) and room reflections.
+
+In Union Rig, the cabinet block models these characteristics with three controls: low resonance frequency (the bass bump), high roll-off frequency (where treble cuts), and air (a high-shelf boost that simulates close-miking brightness). These three parameters cover the range of tonal variation you would get from swapping cabinets and moving microphones in a studio.`,
+    },
+    {
+      title: "Stereo from Mono: Micro-Delay Widening",
+      content: `Union Rig takes a mono guitar input and produces stereo output. The stereo width is created using micro-delay techniques -- a psychoacoustic trick that exploits how the brain localizes sound.
+
+When the same signal arrives at your left and right ears at slightly different times (1-15 milliseconds difference), the brain perceives a single sound source positioned to one side. By delaying the signal differently for left and right channels, Union Rig creates a sense of width without the comb-filtering artifacts that simple panning would cause.
+
+The key constraint is mono compatibility. When the stereo output is summed to mono (as happens in many PA systems, phone speakers, and broadcast), the micro-delayed signals should combine constructively rather than canceling. Union Rig's stereo algorithm is designed to collapse cleanly to mono -- the width disappears but the tone is preserved.
+
+The "width" control adjusts the balance between the direct (center) signal and the delayed (wide) signal. At zero width, output is mono. At maximum width, the stereo spread is at its widest. The "micro delay" parameter sets the actual delay time, which affects the perceived width and the tonal coloration when summed to mono.`,
+    },
+    {
+      title: "Compression: The Invisible Effect",
+      content: `Compression is the most misunderstood effect in guitar. When set correctly, you should not hear it working -- you should only notice that your guitar feels better to play.
+
+The compressor watches the input level. When the signal exceeds the threshold, the compressor reduces the gain by an amount determined by the ratio. A 4:1 ratio means that for every 4 dB the signal exceeds the threshold, only 1 dB passes through. The attack time determines how quickly the compressor reacts. The release time determines how quickly it lets go.
+
+For guitar, attack time is the most critical parameter. A slow attack (20-40ms) lets the initial pick transient through before the compressor kicks in. This preserves the percussive attack of each note while smoothing out the sustain. A fast attack (1-5ms) catches the transient and smooths everything -- good for sustained lead tones but it removes the rhythmic articulation of funk and country playing.
+
+Parallel compression (using the mix/blend control) is the modern approach. Instead of processing 100% of the signal through the compressor, you blend the compressed signal with the original dry signal. This gives you the sustain and consistency of compression while preserving the natural dynamics and transients of the dry signal. It is more forgiving to set up and sounds more natural than series compression.
+
+Makeup gain compensates for the volume reduction caused by compression. When the compressor reduces peaks by 6 dB, makeup gain brings the overall level back up by 6 dB. The result: peaks stay at the same level but quiet passages are louder. The dynamic range is reduced, and the average perceived loudness increases.`,
+    },
+  ];
+
+  return (
+    <div>
+      <SectionHeader title="Signal Chain Science" subtitle="The physics and psychoacoustics behind guitar tone processing" />
+      <p style={{ fontSize: 13, color: "#8a8278", marginBottom: 32, lineHeight: 1.7, maxWidth: 700 }}>
+        Understanding why the signal chain works the way it does helps you make better
+        decisions when designing sounds. This reference covers the technical foundations
+        behind each processing stage in Union Rig.
+      </p>
+
+      {sections.map((section) => (
+        <div key={section.title} style={{
+          marginBottom: 32,
+          paddingBottom: 32,
+          borderBottom: "1px solid #2a2725",
+        }}>
+          <h3 style={{
+            fontSize: 16,
+            fontWeight: 500,
+            color: "#c9b99a",
+            marginBottom: 12,
+            letterSpacing: "0.02em",
+          }}>{section.title}</h3>
+          {section.content.split("\n\n").map((paragraph, i) => (
+            <p key={i} style={{
+              fontSize: 13,
+              color: "#e8e4dc",
+              lineHeight: 1.75,
+              marginBottom: 12,
+            }}>{paragraph}</p>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
