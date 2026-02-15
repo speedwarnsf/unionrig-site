@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     waitlist.emails.push({ email: normalized, ts: new Date().toISOString() });
 
     await fs.writeFile(WAITLIST_FILE, JSON.stringify(waitlist, null, 2));
-    console.log(`[waitlist] ${normalized} added at ${new Date().toISOString()}`);
+    // waitlist entry recorded
 
     return NextResponse.json({ ok: true });
   } catch (err) {
