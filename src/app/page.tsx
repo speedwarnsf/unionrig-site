@@ -12,6 +12,10 @@ import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
 import RigSimulator from "@/components/RigSimulator";
 import SoundBrowser from "@/components/SoundBrowser";
 import PresetCompare from "@/components/PresetCompare";
+import AmpSimulator from "@/components/AmpSimulator";
+import Tuner from "@/components/Tuner";
+import RigSharing from "@/components/RigSharing";
+import RandomizeRig from "@/components/RandomizeRig";
 
 export default function Home() {
   return (
@@ -596,6 +600,48 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal delay={200}>
           <RigSimulator />
+        </ScrollReveal>
+
+        {/* Amp Simulator */}
+        <ScrollReveal delay={250}>
+          <div style={{ marginTop: 64 }}>
+            <h3 style={{
+              fontSize: "clamp(20px, 3.5vw, 32px)", fontWeight: 300,
+              letterSpacing: "-0.02em", marginBottom: 12,
+            }}>Amp Simulator</h3>
+            <p style={{
+              color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7,
+              maxWidth: 480, marginBottom: 32,
+            }}>
+              Choose your amp model and dial in the EQ. Clean sparkle, British crunch, or full high-gain saturation.
+            </p>
+            <AmpSimulator />
+          </div>
+        </ScrollReveal>
+
+        {/* Tuner */}
+        <ScrollReveal delay={300}>
+          <div style={{ marginTop: 64 }}>
+            <h3 style={{
+              fontSize: "clamp(20px, 3.5vw, 32px)", fontWeight: 300,
+              letterSpacing: "-0.02em", marginBottom: 12,
+            }}>Chromatic Tuner</h3>
+            <p style={{
+              color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7,
+              maxWidth: 480, marginBottom: 32,
+            }}>
+              Built-in tuner using your microphone. No external apps needed.
+            </p>
+            <Tuner />
+          </div>
+        </ScrollReveal>
+
+        {/* Randomize + Share */}
+        <ScrollReveal delay={350}>
+          <div style={{ marginTop: 64, display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
+            <RandomizeRig />
+            <RigSharing />
+          </div>
         </ScrollReveal>
       </section>
 

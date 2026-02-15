@@ -102,3 +102,77 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--fg-dim);
 }
+
+/* Hardware textures */
+.metal-surface {
+  background-image:
+    linear-gradient(180deg, #1e1c1a 0%, #161412 40%, #0e0d0c 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.008) 2px, rgba(255,255,255,0.008) 4px);
+}
+
+.brushed-metal {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255,255,255,0.015) 1px,
+      rgba(255,255,255,0.015) 2px
+    );
+}
+
+/* LED glow */
+.led-on {
+  box-shadow: 0 0 8px currentColor;
+  transition: box-shadow 0.15s, background 0.15s;
+}
+
+/* Cable connection dots */
+.jack-socket {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #5a5650;
+  background: #0a0908;
+  position: relative;
+}
+
+.jack-socket::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #3a3735;
+  transform: translate(-50%, -50%);
+}
+
+.jack-socket.connected {
+  border-color: var(--accent);
+}
+
+.jack-socket.connected::after {
+  background: var(--accent);
+}
+
+/* Panel rivets */
+.rivet {
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle at 35% 35%, #4a4745, #252321);
+  border: 1px solid #3a3735;
+}
+
+/* Knob hover glow */
+@keyframes knobPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Cable visual */
+.cable-line {
+  stroke: #5a5650;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 4 2;
+}

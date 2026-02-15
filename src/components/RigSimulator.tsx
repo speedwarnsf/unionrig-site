@@ -1725,12 +1725,46 @@ export default function RigSimulator() {
         <Screw style={{ bottom: 8, left: 8 }} />
         <Screw style={{ bottom: 8, right: 8 }} />
 
-        {/* Brand mark */}
+        {/* Brand mark with engraved look */}
         <div style={{
           textAlign: "center", marginBottom: 20,
-          fontSize: 11, letterSpacing: "0.3em", textTransform: "uppercase",
-          color: "#5a5650", fontWeight: 600,
-        }}>UNION RIG</div>
+        }}>
+          <div style={{
+            fontSize: 11, letterSpacing: "0.3em", textTransform: "uppercase",
+            color: "#5a5650", fontWeight: 600,
+            textShadow: "0 1px 0 rgba(0,0,0,0.5)",
+          }}>UNION RIG</div>
+          <div style={{
+            width: 40, height: 1, margin: "6px auto 0",
+            background: "linear-gradient(90deg, transparent, #3a3735, transparent)",
+          }} />
+        </div>
+
+        {/* I/O Jacks */}
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          marginBottom: 16, padding: "0 8px",
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div className="jack-socket connected" style={{ width: 14, height: 14, border: "2px solid #c9b99a", background: "#0a0908", position: "relative" }}>
+              <div style={{ position: "absolute", top: "50%", left: "50%", width: 4, height: 4, background: "#c9b99a", transform: "translate(-50%, -50%)" }} />
+            </div>
+            <span style={{ fontSize: 7, color: "#3a3735", letterSpacing: "0.1em", textTransform: "uppercase" }}>IN</span>
+          </div>
+          <div style={{ flex: 1, height: 1, margin: "0 12px", background: "repeating-linear-gradient(90deg, #2a2725 0px, #2a2725 4px, transparent 4px, transparent 8px)" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: 7, color: "#3a3735", letterSpacing: "0.1em", textTransform: "uppercase" }}>OUT</span>
+            <div style={{ display: "flex", gap: 3 }}>
+              <div className="jack-socket connected" style={{ width: 14, height: 14, border: "2px solid #c9b99a", background: "#0a0908", position: "relative" }}>
+                <div style={{ position: "absolute", top: "50%", left: "50%", width: 4, height: 4, background: "#c9b99a", transform: "translate(-50%, -50%)" }} />
+              </div>
+              <div className="jack-socket connected" style={{ width: 14, height: 14, border: "2px solid #c9b99a", background: "#0a0908", position: "relative" }}>
+                <div style={{ position: "absolute", top: "50%", left: "50%", width: 4, height: 4, background: "#c9b99a", transform: "translate(-50%, -50%)" }} />
+              </div>
+            </div>
+            <span style={{ fontSize: 7, color: "#3a3735", letterSpacing: "0.05em" }}>L/R</span>
+          </div>
+        </div>
 
         {/* E-ink display */}
         <div style={{ marginBottom: 24 }}>
