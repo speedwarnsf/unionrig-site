@@ -1128,7 +1128,7 @@ function rigJsonToSoundDef(rj: RigJson): SoundDef {
 }
 
 // --- Preset Browser ---
-function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
+function PresetBrowser({ onLoad, onLoadSet }: { onLoad: (sound: SoundDef) => void; onLoadSet: (sounds: SoundDef[], setName: string) => void }) {
   const [basePresets, setBasePresets] = useState<PresetEntry[]>([]);
   const [userPresets, setUserPresets] = useState<PresetEntry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -1160,6 +1160,27 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
     }
     setLoading(false);
   }, [onLoad]);
+
+  const loadEntireSet = useCallback(async (presets: PresetEntry[], setKey: "base" | "user1", setName: string) => {
+    setLoading(true);
+    try {
+      const sounds: SoundDef[] = [];
+      for (const entry of presets) {
+        const path = setKey === "base" ? `/rigs/${entry.file}` : `/rigs/user1/${entry.file}`;
+        const resp = await fetch(path);
+        const rj: RigJson = await resp.json();
+        sounds.push(rigJsonToSoundDef(rj));
+      }
+      if (sounds.length > 0) {
+        onLoadSet(sounds, setName);
+        setSelected("");
+        setExpanded(false);
+      }
+    } catch (e) {
+      console.error("Failed to load set:", e);
+    }
+    setLoading(false);
+  }, [onLoadSet]);
 
   if (!basePresets.length && !userPresets.length) return null;
 
@@ -1220,6 +1241,34 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
               Famous Rigs ({userPresets.length})
             </button>
           </div>
+          {/* Load entire set button */}
+          {activePresets.length > 0 && (
+            <button
+              onClick={() => loadEntireSet(activePresets, activeSet, activeSet === "base" ? "My Rigs" : "Famous Rigs")}
+              disabled={loading}
+              style={{
+                display: "block",
+                width: "100%",
+                background: "rgba(201,185,154,0.08)",
+                border: "none",
+                borderBottom: "1px solid var(--border, #2a2725)",
+                padding: "12px 16px",
+                textAlign: "center",
+                cursor: "pointer",
+                borderRadius: 0,
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#c9b99a",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201,185,154,0.15)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(201,185,154,0.08)")}
+            >
+              {loading ? "Loading..." : `Load All ${activePresets.length} Rigs`}
+            </button>
+          )}
           {/* Preset list */}
           <div style={{ maxHeight: 280, overflowY: "auto" }}>
             {activePresets.length === 0 ? (
@@ -1286,6 +1335,8 @@ export default function RigSimulator() {
   const [playing, setPlaying] = useState(false);
   const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
   const [currentSound, setCurrentSound] = useState(0);
+  const [sounds, setSounds] = useState<SoundDef[]>(SOUNDS);
+  const [loadedSetName, setLoadedSetName] = useState<string>("");
   const [scene, setScene] = useState<"A" | "B">("A");
   const [ghosting, setGhosting] = useState(false);
   const [looperState, setLooperState] = useState<LooperState>("idle");
@@ -1339,7 +1390,7 @@ export default function RigSimulator() {
   const recomputeAndApply = useCallback(() => {
     const engine = engineRef.current;
     if (!engine) return;
-    const sound = presetSoundRef.current || SOUNDS[currentSound];
+    const sound = presetSoundRef.current || sounds[currentSound];
     if (!sound) return;
     const shaped = smoothstep(morphRef.current);
     const base = lerpRig(sound.sceneA, sound.sceneB, shaped);
@@ -1420,7 +1471,7 @@ export default function RigSimulator() {
   const applySubOctave = useCallback((soundIdx: number) => {
     const engine = engineRef.current;
     if (!engine) return;
-    const level = SOUNDS[soundIdx]?.subOctave ?? 0;
+    const level = sounds[soundIdx]?.subOctave ?? 0;
     const t = engine.ctx.currentTime;
     engine.subOctaveGain.gain.linearRampToValueAtTime(level, t + 0.015);
   }, []);
@@ -1429,7 +1480,7 @@ export default function RigSimulator() {
     setPresetSound(null);
     presetSoundRef.current = null;
     setCurrentSound(prev => {
-      const next = (prev + 1) % SOUNDS.length;
+      const next = (prev + 1) % sounds.length;
       morphRef.current = 0;
       morphTargetRef.current = 0;
       setScene("A");
@@ -1443,7 +1494,7 @@ export default function RigSimulator() {
     setPresetSound(null);
     presetSoundRef.current = null;
     setCurrentSound(prev => {
-      const next = (prev - 1 + SOUNDS.length) % SOUNDS.length;
+      const next = (prev - 1 + sounds.length) % sounds.length;
       morphRef.current = 0;
       morphTargetRef.current = 0;
       setScene("A");
@@ -1590,6 +1641,23 @@ export default function RigSimulator() {
     }
   }, [triggerGhost]);
 
+  const onLoadSet = useCallback((newSounds: SoundDef[], setName: string) => {
+    setSounds(newSounds);
+    setLoadedSetName(setName);
+    setCurrentSound(0);
+    setPresetSound(null);
+    presetSoundRef.current = null;
+    morphRef.current = 0;
+    morphTargetRef.current = 0;
+    setScene("A");
+    triggerGhost();
+    const engine = engineRef.current;
+    if (engine) {
+      const p = applyMacroMaps(newSounds[0].sceneA, macrosRef.current);
+      updateEngineParams(engine, p);
+    }
+  }, [triggerGhost]);
+
   // Recompute when sound changes
   useEffect(() => { recomputeAndApply(); }, [currentSound, recomputeAndApply]);
 
@@ -1604,7 +1672,7 @@ export default function RigSimulator() {
     };
   }, []);
 
-  const sound = presetSound || SOUNDS[currentSound];
+  const sound = presetSound || sounds[currentSound];
 
   return (
     <div>
@@ -1634,7 +1702,7 @@ export default function RigSimulator() {
       </p>
 
       {/* Preset browser */}
-      <PresetBrowser onLoad={onPresetLoad} />
+      <PresetBrowser onLoad={onPresetLoad} onLoadSet={onLoadSet} />
 
       {/* Pedal enclosure */}
       <div className="pedal-body" style={{
@@ -1668,7 +1736,7 @@ export default function RigSimulator() {
           <EinkDisplay
             soundName={sound?.name || ""}
             soundNumber={currentSound + 1}
-            totalSounds={presetSound ? SOUNDS.length : SOUNDS.length}
+            totalSounds={sounds.length}
             scene={scene}
             looperState={looperState}
             ghosting={ghosting}
