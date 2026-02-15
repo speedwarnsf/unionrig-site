@@ -16,6 +16,11 @@ import AmpSimulator from "@/components/AmpSimulator";
 import Tuner from "@/components/Tuner";
 import RigSharing from "@/components/RigSharing";
 import RandomizeRig from "@/components/RandomizeRig";
+import PedalboardLayout from "@/components/PedalboardLayout";
+import IRLoader from "@/components/IRLoader";
+import SignalPathPreview from "@/components/SignalPathPreview";
+import UserAccounts from "@/components/UserAccounts";
+import PrintRigSheet from "@/components/PrintRigSheet";
 
 export default function Home() {
   return (
@@ -100,6 +105,45 @@ export default function Home() {
               <span style={{ fontWeight: 700 }}>You&apos;re welcome.</span>
             </p>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ═══════ FEATURE HIGHLIGHTS ═══════ */}
+      <section
+        style={{
+          borderBottom: "1px solid var(--border)",
+          padding: "80px 24px",
+          background: "var(--surface)",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: 48,
+          }}
+        >
+          {[
+            { title: "Real-Time DSP", desc: "Web Audio signal chain with compression, drive, chorus, delay, reverb -- all processing live in your browser." },
+            { title: "Pedalboard View", desc: "Top-down visual layout of your board. Drag pedals to rearrange, toggle bypass with a click." },
+            { title: "Cabinet IR Loader", desc: "Six cabinet impulse responses with visual frequency response curves. Compare any two side by side." },
+            { title: "Save & Export Rigs", desc: "Save rig configurations to localStorage. Export to JSON for backup, import to restore on any device." },
+            { title: "Print Rig Sheet", desc: "Formatted, print-friendly view of every parameter in your rig. Take it to rehearsal." },
+            { title: "12 Working Sounds", desc: "Preset browser with famous rigs, scene morphing, macro knobs, and a built-in looper." },
+          ].map((feat, i) => (
+            <ScrollReveal key={feat.title} delay={i * 80}>
+              <div>
+                <h3 style={{
+                  fontSize: 16, fontWeight: 500, marginBottom: 8, color: "var(--fg)",
+                }}>{feat.title}</h3>
+                <p style={{
+                  color: "var(--fg-dim)", fontSize: 13, lineHeight: 1.7,
+                }}>{feat.desc}</p>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
@@ -636,8 +680,33 @@ export default function Home() {
           </div>
         </ScrollReveal>
 
-        {/* Randomize + Share */}
+        {/* Pedalboard Layout */}
+        <ScrollReveal delay={300}>
+          <PedalboardLayout />
+        </ScrollReveal>
+
+        {/* IR Loader */}
+        <ScrollReveal delay={320}>
+          <IRLoader />
+        </ScrollReveal>
+
+        {/* Signal Path Audio Preview */}
+        <ScrollReveal delay={340}>
+          <SignalPathPreview />
+        </ScrollReveal>
+
+        {/* User Accounts / Saved Rigs */}
         <ScrollReveal delay={350}>
+          <UserAccounts />
+        </ScrollReveal>
+
+        {/* Print Rig Sheet */}
+        <ScrollReveal delay={360}>
+          <PrintRigSheet />
+        </ScrollReveal>
+
+        {/* Randomize + Share */}
+        <ScrollReveal delay={380}>
           <div style={{ marginTop: 64, display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
             <RandomizeRig />
             <RigSharing />
