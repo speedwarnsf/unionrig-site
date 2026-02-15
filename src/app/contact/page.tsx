@@ -1,13 +1,7 @@
-import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
 import FadeIn from "@/components/FadeIn";
-
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Get in touch with the Union Rig team. Questions, partnerships, or just want to talk tone.",
-};
 
 const section: React.CSSProperties = {
   maxWidth: 640,

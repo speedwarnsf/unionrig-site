@@ -64,34 +64,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              name: "Union Rig",
-              description:
-                "Mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper, and nothing you don't need.",
-              url: "https://unionrig.com",
-              image: "https://unionrig.com/og-image.jpg",
-              brand: {
-                "@type": "Brand",
-                name: "Union Rig",
-              },
-              offers: {
-                "@type": "Offer",
-                price: "849",
-                priceCurrency: "USD",
-                availability: "https://schema.org/PreOrder",
-                url: "https://unionrig.com",
-              },
-              category: "Musical Instruments & Accessories > Guitar Effects Pedals",
-            }),
-          }}
-        />
-      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );

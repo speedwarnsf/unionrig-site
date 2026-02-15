@@ -5,22 +5,10 @@ import WaitlistForm from "@/components/WaitlistForm";
 import ScrollReveal from "@/components/ScrollReveal";
 import UnionLogo from "@/components/UnionLogo";
 import SignalChainGraphic from "@/components/SignalChainGraphic";
-import SignalChainView from "@/components/SignalChainView";
 import KnobGraphic from "@/components/KnobGraphic";
 import FootswitchGraphic from "@/components/FootswitchGraphic";
 import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
 import RigSimulator from "@/components/RigSimulator";
-import SoundBrowser from "@/components/SoundBrowser";
-import PresetCompare from "@/components/PresetCompare";
-import AmpSimulator from "@/components/AmpSimulator";
-import Tuner from "@/components/Tuner";
-import RigSharing from "@/components/RigSharing";
-import RandomizeRig from "@/components/RandomizeRig";
-import PedalboardLayout from "@/components/PedalboardLayout";
-import IRLoader from "@/components/IRLoader";
-import SignalPathPreview from "@/components/SignalPathPreview";
-import UserAccounts from "@/components/UserAccounts";
-import PrintRigSheet from "@/components/PrintRigSheet";
 
 export default function Home() {
   return (
@@ -105,45 +93,6 @@ export default function Home() {
               <span style={{ fontWeight: 700 }}>You&apos;re welcome.</span>
             </p>
           </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ═══════ FEATURE HIGHLIGHTS ═══════ */}
-      <section
-        style={{
-          borderBottom: "1px solid var(--border)",
-          padding: "80px 24px",
-          background: "var(--surface)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: 48,
-          }}
-        >
-          {[
-            { title: "Real-Time DSP", desc: "Web Audio signal chain with compression, drive, chorus, delay, reverb -- all processing live in your browser." },
-            { title: "Pedalboard View", desc: "Top-down visual layout of your board. Drag pedals to rearrange, toggle bypass with a click." },
-            { title: "Cabinet IR Loader", desc: "Six cabinet impulse responses with visual frequency response curves. Compare any two side by side." },
-            { title: "Save & Export Rigs", desc: "Save rig configurations to localStorage. Export to JSON for backup, import to restore on any device." },
-            { title: "Print Rig Sheet", desc: "Formatted, print-friendly view of every parameter in your rig. Take it to rehearsal." },
-            { title: "12 Working Sounds", desc: "Preset browser with famous rigs, scene morphing, macro knobs, and a built-in looper." },
-          ].map((feat, i) => (
-            <ScrollReveal key={feat.title} delay={i * 80}>
-              <div>
-                <h3 style={{
-                  fontSize: 16, fontWeight: 500, marginBottom: 8, color: "var(--fg)",
-                }}>{feat.title}</h3>
-                <p style={{
-                  color: "var(--fg-dim)", fontSize: 13, lineHeight: 1.7,
-                }}>{feat.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
         </div>
       </section>
 
@@ -484,15 +433,6 @@ export default function Home() {
         <ScrollReveal delay={150}>
           <SignalChainGraphic />
         </ScrollReveal>
-        <ScrollReveal delay={250}>
-          <div style={{ marginTop: 32 }}>
-            <p style={{
-              fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase",
-              color: "var(--fg-dim)", marginBottom: 8,
-            }}>Interactive signal flow -- drag to reorder</p>
-            <SignalChainView interactive />
-          </div>
-        </ScrollReveal>
       </section>
 
       {/* ═══════ CONTROLS — Knobs + Footswitches ═══════ */}
@@ -636,81 +576,8 @@ export default function Home() {
             Sound is math with a little bit of chaos.
           </p>
         </ScrollReveal>
-        <ScrollReveal delay={100}>
-          <SoundBrowser />
-        </ScrollReveal>
         <ScrollReveal delay={150}>
-          <PresetCompare />
-        </ScrollReveal>
-        <ScrollReveal delay={200}>
           <RigSimulator />
-        </ScrollReveal>
-
-        {/* Amp Simulator */}
-        <ScrollReveal delay={250}>
-          <div style={{ marginTop: 64 }}>
-            <h3 style={{
-              fontSize: "clamp(20px, 3.5vw, 32px)", fontWeight: 300,
-              letterSpacing: "-0.02em", marginBottom: 12,
-            }}>Amp Simulator</h3>
-            <p style={{
-              color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7,
-              maxWidth: 480, marginBottom: 32,
-            }}>
-              Choose your amp model and dial in the EQ. Clean sparkle, British crunch, or full high-gain saturation.
-            </p>
-            <AmpSimulator />
-          </div>
-        </ScrollReveal>
-
-        {/* Tuner */}
-        <ScrollReveal delay={300}>
-          <div style={{ marginTop: 64 }}>
-            <h3 style={{
-              fontSize: "clamp(20px, 3.5vw, 32px)", fontWeight: 300,
-              letterSpacing: "-0.02em", marginBottom: 12,
-            }}>Chromatic Tuner</h3>
-            <p style={{
-              color: "var(--fg-dim)", fontSize: 14, lineHeight: 1.7,
-              maxWidth: 480, marginBottom: 32,
-            }}>
-              Built-in tuner using your microphone. No external apps needed.
-            </p>
-            <Tuner />
-          </div>
-        </ScrollReveal>
-
-        {/* Pedalboard Layout */}
-        <ScrollReveal delay={300}>
-          <PedalboardLayout />
-        </ScrollReveal>
-
-        {/* IR Loader */}
-        <ScrollReveal delay={320}>
-          <IRLoader />
-        </ScrollReveal>
-
-        {/* Signal Path Audio Preview */}
-        <ScrollReveal delay={340}>
-          <SignalPathPreview />
-        </ScrollReveal>
-
-        {/* User Accounts / Saved Rigs */}
-        <ScrollReveal delay={350}>
-          <UserAccounts />
-        </ScrollReveal>
-
-        {/* Print Rig Sheet */}
-        <ScrollReveal delay={360}>
-          <PrintRigSheet />
-        </ScrollReveal>
-
-        {/* Randomize + Share */}
-        <ScrollReveal delay={380}>
-          <div style={{ marginTop: 64, display: "grid", gridTemplateColumns: "1fr", gap: 24 }}>
-            <RandomizeRig />
-            <RigSharing />
-          </div>
         </ScrollReveal>
       </section>
 
