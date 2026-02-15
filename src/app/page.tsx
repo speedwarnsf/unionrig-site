@@ -5,10 +5,13 @@ import WaitlistForm from "@/components/WaitlistForm";
 import ScrollReveal from "@/components/ScrollReveal";
 import UnionLogo from "@/components/UnionLogo";
 import SignalChainGraphic from "@/components/SignalChainGraphic";
+import SignalChainView from "@/components/SignalChainView";
 import KnobGraphic from "@/components/KnobGraphic";
 import FootswitchGraphic from "@/components/FootswitchGraphic";
 import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
 import RigSimulator from "@/components/RigSimulator";
+import SoundBrowser from "@/components/SoundBrowser";
+import PresetCompare from "@/components/PresetCompare";
 
 export default function Home() {
   return (
@@ -433,6 +436,15 @@ export default function Home() {
         <ScrollReveal delay={150}>
           <SignalChainGraphic />
         </ScrollReveal>
+        <ScrollReveal delay={250}>
+          <div style={{ marginTop: 32 }}>
+            <p style={{
+              fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase",
+              color: "var(--fg-dim)", marginBottom: 8,
+            }}>Interactive signal flow -- drag to reorder</p>
+            <SignalChainView interactive />
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* ═══════ CONTROLS — Knobs + Footswitches ═══════ */}
@@ -576,7 +588,13 @@ export default function Home() {
             Sound is math with a little bit of chaos.
           </p>
         </ScrollReveal>
+        <ScrollReveal delay={100}>
+          <SoundBrowser />
+        </ScrollReveal>
         <ScrollReveal delay={150}>
+          <PresetCompare />
+        </ScrollReveal>
+        <ScrollReveal delay={200}>
           <RigSimulator />
         </ScrollReveal>
       </section>

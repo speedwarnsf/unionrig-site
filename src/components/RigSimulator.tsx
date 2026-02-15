@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
+import SignalChainView from "@/components/SignalChainView";
 
 // ============================================================
 // CHAINCRAFT DSP ENGINE -- ported from firmware chaincraft.h
@@ -1744,8 +1745,13 @@ export default function RigSimulator() {
         </div>
 
         {/* Waveform */}
-        <div style={{ marginBottom: 24 }}>
+        <div style={{ marginBottom: 16 }}>
           <Waveform analyser={analyser} />
+        </div>
+
+        {/* Signal chain mini view */}
+        <div style={{ marginBottom: 16, overflow: "hidden" }}>
+          <SignalChainView compact />
         </div>
 
         {/* Knob clusters -- side by side on desktop, stacked on mobile */}
