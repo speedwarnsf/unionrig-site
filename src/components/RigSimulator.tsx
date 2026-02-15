@@ -1349,23 +1349,36 @@ export default function RigSimulator() {
 
   const startAudio = useCallback(async () => {
     if (engineRef.current) return;
-    const engine = buildEngine();
-    // Mobile Safari fix
-    if (engine.ctx.state === "suspended") await engine.ctx.resume();
+    let engine: AudioEngine;
+    try {
+      engine = buildEngine();
+    } catch (e) {
+      console.error("Failed to build audio engine:", e);
+      return;
+    }
+    // Mobile Safari fix — resume on user gesture
+    try {
+      if (engine.ctx.state === "suspended") await engine.ctx.resume();
+    } catch (e) {
+      console.error("Failed to resume AudioContext:", e);
+    }
     // Load guitar loop
     try {
       const resp = await fetch("/audio/guitar-loop.mp3");
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const arrayBuf = await resp.arrayBuffer();
       const audioBuffer = await engine.ctx.decodeAudioData(arrayBuf);
       engine.audioBuffer = audioBuffer;
-      engine.source.buffer = audioBuffer;
-      engine.source.loop = true;
-      engine.source.start();
-
-      // Sub-octave: already wired in buildEngine via sourceMix
-      // subOctaveGain is connected in the chain
+      // Create a fresh source node (can only start once)
+      const newSource = engine.ctx.createBufferSource();
+      newSource.buffer = audioBuffer;
+      newSource.loop = true;
+      newSource.connect(engine.sourceMix);
+      engine.source = newSource;
+      newSource.start(0);
     } catch (e) {
       console.error("Failed to load guitar loop:", e);
+      try { engine.ctx.close(); } catch { /* */ }
       return;
     }
     engineRef.current = engine;
