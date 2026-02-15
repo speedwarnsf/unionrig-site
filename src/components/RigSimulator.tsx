@@ -1134,7 +1134,7 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState<string>("");
   const [expanded, setExpanded] = useState(false);
-  const [activeSet, setActiveSet] = useState<"base" | "user1">("base");
+  const [activeSet, setActiveSet] = useState<"base" | "user1">("user1");
 
   useEffect(() => {
     fetch("/rigs/index.json")
@@ -1214,10 +1214,10 @@ function PresetBrowser({ onLoad }: { onLoad: (sound: SoundDef) => void }) {
           {/* Set tabs */}
           <div style={{ display: "flex", borderBottom: "1px solid var(--border, #2a2725)" }}>
             <button onClick={() => setActiveSet("base")} style={tabStyle(activeSet === "base")}>
-              Base Set ({basePresets.length})
+              My Rigs ({basePresets.length})
             </button>
             <button onClick={() => setActiveSet("user1")} style={tabStyle(activeSet === "user1")}>
-              User Set 1 ({userPresets.length})
+              Famous Rigs ({userPresets.length})
             </button>
           </div>
           {/* Preset list */}

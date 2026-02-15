@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "tom_morello_rage_whammy",
+  "name": "Tom Morello Rage Whammy",
+  "tags": [
+    "rage-against-machine",
+    "tom-morello",
+    "whammy",
+    "effects",
+    "extreme",
+    "precision"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Morello's whammy-influenced extreme tones. Hard clipping with tight delay, no reverb for precision effects work and radical pitch manipulation sounds.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Clean Effects",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -14.0,
+          "ratio": 2.0,
+          "knee_db": 3.0,
+          "attack_ms": 6.0,
+          "release_ms": 100.0,
+          "makeup_db": 2.5,
+          "mix": 0.45
+        },
+        "drv": {
+          "type": 0,
+          "pre_gain_db": 5.0,
+          "asym": 0.1,
+          "tone_tilt": 0.4,
+          "low_cut_hz": 80.0,
+          "high_cut_hz": 15000.0,
+          "mix": 0.35,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.3,
+          "micro_delay_ms": 2.0,
+          "micro_pitch_cents": 1.0,
+          "seed": 0.7
+        },
+        "spc": {
+          "mode": 3,
+          "pre_delay_ms": 30.0,
+          "decay_s": 0.4,
+          "damp": 0.8,
+          "diffusion": 0.3,
+          "mod": 0.0,
+          "wet": 0.15,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 1,
+          "low_res_hz": 110.0,
+          "low_res_q": 1.2,
+          "mid_scoop_db": 0.0,
+          "high_roll_hz": 8000.0,
+          "air": 0.2
+        },
+        "out": {
+          "level_db": -2.5,
+          "lim_thresh_db": -5.0,
+          "lim_release_ms": 80.0
+        }
+      }
+    },
+    "B": {
+      "label": "Hard Attack",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -10.0,
+          "ratio": 3.5,
+          "knee_db": 2.0,
+          "attack_ms": 3.0,
+          "release_ms": 60.0,
+          "makeup_db": 4.0,
+          "mix": 0.6
+        },
+        "drv": {
+          "type": 2,
+          "pre_gain_db": 24.0,
+          "asym": 0.4,
+          "tone_tilt": 0.6,
+          "low_cut_hz": 120.0,
+          "high_cut_hz": 9000.0,
+          "mix": 0.9,
+          "level_db": 4.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.2,
+          "micro_delay_ms": 1.5,
+          "micro_pitch_cents": 0.8,
+          "seed": 0.7
+        },
+        "spc": {
+          "mode": 3,
+          "pre_delay_ms": 45.0,
+          "decay_s": 0.3,
+          "damp": 0.9,
+          "diffusion": 0.2,
+          "mod": 0.0,
+          "wet": 0.1,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 1,
+          "low_res_hz": 130.0,
+          "low_res_q": 1.4,
+          "mid_scoop_db": -1.0,
+          "high_roll_hz": 7500.0,
+          "air": 0.15
+        },
+        "out": {
+          "level_db": 1.5,
+          "lim_thresh_db": -2.0,
+          "lim_release_ms": 50.0
+        }
+      }
+    }
+  }
+}

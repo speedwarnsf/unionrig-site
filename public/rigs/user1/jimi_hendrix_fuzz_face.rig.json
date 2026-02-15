@@ -1,0 +1,144 @@
+{
+  "version": "1.0.0",
+  "rig_id": "jimi_hendrix_fuzz_face",
+  "name": "Jimi Hendrix Fuzz Face",
+  "tags": [
+    "hendrix",
+    "fuzz-face",
+    "marshall",
+    "psychedelic",
+    "feedback",
+    "vintage"
+  ],
+  "parent": null,
+  "created": "2026-02-14T07:43:00Z",
+  "notes": "Hendrix's Fuzz Face into Marshall stack. Extreme asymmetric germanium fuzz with wah-influenced midrange scoop and controlled feedback sustain.",
+  "io": {
+    "in": "mono",
+    "out": "stereo"
+  },
+  "scenes": {
+    "A": {
+      "label": "Clean Funk",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -12.0,
+          "ratio": 1.8,
+          "knee_db": 2.0,
+          "attack_ms": 5.0,
+          "release_ms": 80.0,
+          "makeup_db": 1.5,
+          "mix": 0.35
+        },
+        "drv": {
+          "type": 1,
+          "pre_gain_db": 8.0,
+          "asym": 0.2,
+          "tone_tilt": 0.6,
+          "low_cut_hz": 70.0,
+          "high_cut_hz": 12000.0,
+          "mix": 0.4,
+          "level_db": 0.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.3,
+          "micro_delay_ms": 2.0,
+          "micro_pitch_cents": 0.8,
+          "seed": 0.7
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 5.0,
+          "decay_s": 0.8,
+          "damp": 0.7,
+          "diffusion": 0.4,
+          "mod": 0.05,
+          "wet": 0.15,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 4,
+          "low_res_hz": 100.0,
+          "low_res_q": 1.0,
+          "mid_scoop_db": -3.0,
+          "high_roll_hz": 8500.0,
+          "air": 0.3
+        },
+        "out": {
+          "level_db": -3.0,
+          "lim_thresh_db": -6.0,
+          "lim_release_ms": 80.0
+        }
+      }
+    },
+    "B": {
+      "label": "Fuzz Face Wild",
+      "params": {
+        "dyn": {
+          "enable": true,
+          "thresh_db": -18.0,
+          "ratio": 2.5,
+          "knee_db": 6.0,
+          "attack_ms": 3.0,
+          "release_ms": 60.0,
+          "makeup_db": 4.0,
+          "mix": 0.6
+        },
+        "drv": {
+          "type": 5,
+          "pre_gain_db": 28.0,
+          "asym": 0.75,
+          "tone_tilt": 0.4,
+          "low_cut_hz": 120.0,
+          "high_cut_hz": 7500.0,
+          "mix": 0.95,
+          "level_db": 4.0
+        },
+        "chr": {
+          "mode": 0,
+          "rate_hz": 0.5,
+          "depth": 0.0,
+          "mix": 0.0,
+          "tone": 0.0
+        },
+        "stp": {
+          "width": 0.35,
+          "micro_delay_ms": 2.5,
+          "micro_pitch_cents": 1.2,
+          "seed": 0.7
+        },
+        "spc": {
+          "mode": 0,
+          "pre_delay_ms": 8.0,
+          "decay_s": 1.0,
+          "damp": 0.65,
+          "diffusion": 0.45,
+          "mod": 0.1,
+          "wet": 0.2,
+          "dry": 1.0
+        },
+        "cab": {
+          "voicing": 4,
+          "low_res_hz": 110.0,
+          "low_res_q": 1.1,
+          "mid_scoop_db": -4.5,
+          "high_roll_hz": 7000.0,
+          "air": 0.15
+        },
+        "out": {
+          "level_db": 1.0,
+          "lim_thresh_db": -2.0,
+          "lim_release_ms": 60.0
+        }
+      }
+    }
+  }
+}
