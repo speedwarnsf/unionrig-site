@@ -9,6 +9,7 @@ import KnobGraphic from "@/components/KnobGraphic";
 import FootswitchGraphic from "@/components/FootswitchGraphic";
 import EinkDisplayGraphic from "@/components/EinkDisplayGraphic";
 import RigSimulator from "@/components/RigSimulator";
+import SoundBrowser from "@/components/SoundBrowser";
 
 export default function Home() {
   return (
@@ -578,6 +579,9 @@ export default function Home() {
         </ScrollReveal>
         <ScrollReveal delay={150}>
           <RigSimulator />
+        </ScrollReveal>
+        <ScrollReveal delay={200}>
+          <SoundBrowser />
         </ScrollReveal>
       </section>
 
