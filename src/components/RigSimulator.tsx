@@ -53,7 +53,7 @@ function makeRig(overrides: Partial<{
     drv: { type: 1, pre_gain_db: 9, asym: 0.25, tone_tilt: -0.15, low_cut_hz: 90, high_cut_hz: 8500, mix: 0.65, level_db: 0 },
     chr: { mode: 1, rate_hz: 0.45, depth: 0.25, mix: 0.30, tone: -0.10 },
     stp: { width: 0.55, micro_delay_ms: 6.5 },
-    spc: { damp: 0.45, wet: 0.38, dry: 1.0, decay_s: 3.2 },
+    spc: { damp: 0.55, wet: 0.15, dry: 1.0, decay_s: 1.6 },
     cab: { low_res_hz: 110, high_roll_hz: 6800, air: 0.30 },
     out: { level_db: -3, lim_thresh_db: -6, lim_release_ms: 160 },
   };
