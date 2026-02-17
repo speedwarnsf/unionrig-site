@@ -69,6 +69,29 @@ function makeRig(overrides: Partial<{
 
 const SOUNDS: SoundDef[] = [
   {
+    name: "d_york",
+    sceneA: makeRig({
+      // Fender side — warm blackface clean, slapback echo, studio room
+      dyn: { thresh_db: -20, ratio: 2.0, attack_ms: 25, release_ms: 280, makeup_db: 3, mix: 0.40 },
+      drv: { type: 1, pre_gain_db: 4, asym: 0.10, tone_tilt: 0.05, low_cut_hz: 80, high_cut_hz: 9500, mix: 0.20, level_db: 0 },
+      chr: { mode: 1, rate_hz: 0.22, depth: 0.10, mix: 0.12, tone: 0.0 },
+      stp: { width: 0.90, micro_delay_ms: 14.0 }, // wide stereo, slapback feel via L/R offset
+      spc: { decay_s: 1.8, damp: 0.48, wet: 0.32, dry: 1.0 }, // studio room — present but not washy
+      cab: { low_res_hz: 95, high_roll_hz: 8200, air: 0.38 }, // Fender open-back: extended highs, air
+      out: { level_db: -3, lim_thresh_db: -5, lim_release_ms: 180 },
+    }),
+    sceneB: makeRig({
+      // Gibson GA-55 RVT side — edge of breakup, cathode-biased sag, warm mids
+      dyn: { thresh_db: -24, ratio: 3.0, attack_ms: 20, release_ms: 240, makeup_db: 5, mix: 0.60 },
+      drv: { type: 1, pre_gain_db: 11, asym: 0.30, tone_tilt: -0.18, low_cut_hz: 85, high_cut_hz: 7200, mix: 0.55, level_db: -1 },
+      chr: { mode: 0, rate_hz: 0, depth: 0, mix: 0, tone: 0 }, // no chorus on the Gibson
+      stp: { width: 0.90, micro_delay_ms: 14.0 },
+      spc: { decay_s: 1.8, damp: 0.48, wet: 0.32, dry: 1.0 }, // same room
+      cab: { low_res_hz: 120, high_roll_hz: 6200, air: 0.18 }, // Gibson 1x12 Jensen: rolled highs, more mids
+      out: { level_db: -2, lim_thresh_db: -5, lim_release_ms: 180 },
+    }),
+  },
+  {
     name: "Velvet Static",
     sceneA: makeRig({}),
     sceneB: makeRig({
