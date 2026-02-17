@@ -1342,6 +1342,7 @@ export default function RigSimulator() {
   const [ghosting, setGhosting] = useState(false);
   const [looperState, setLooperState] = useState<LooperState>("idle");
   const [looperLed, setLooperLed] = useState(false);
+  const [dryMode, setDryMode] = useState(false);
 
   // Looper buffer refs
   const looperBufferRef = useRef<Float32Array | null>(null);
@@ -1448,6 +1449,25 @@ export default function RigSimulator() {
     setPlaying(false);
     setLooperState("idle");
     setLooperLed(false);
+  }, []);
+
+  // DRY bypass toggle
+  const toggleDry = useCallback(() => {
+    const engine = engineRef.current;
+    if (!engine) return;
+    const t = engine.ctx.currentTime;
+    const ramp = 0.02;
+    setDryMode(prev => {
+      const next = !prev;
+      if (next) {
+        engine.effectGain.gain.linearRampToValueAtTime(0.0001, t + ramp);
+        engine.bypassGain.gain.linearRampToValueAtTime(1, t + ramp);
+      } else {
+        engine.effectGain.gain.linearRampToValueAtTime(1, t + ramp);
+        engine.bypassGain.gain.linearRampToValueAtTime(0.0001, t + ramp);
+      }
+      return next;
+    });
   }, []);
 
   // Scene footswitch
@@ -1874,6 +1894,20 @@ export default function RigSimulator() {
             cursor: "pointer", fontWeight: 600, borderRadius: 0,
           }}
         >{playing ? "Stop" : "Play Demo"}</button>
+        {playing && (
+          <button
+            onClick={toggleDry}
+            style={{
+              background: dryMode ? "var(--accent)" : "none",
+              color: dryMode ? "var(--bg)" : "var(--fg)",
+              border: "1px solid var(--accent)",
+              padding: "10px 24px", fontSize: 12,
+              letterSpacing: "0.12em", textTransform: "uppercase",
+              cursor: "pointer", fontWeight: 600, borderRadius: 0,
+              marginLeft: 12,
+            }}
+          >DRY</button>
+        )}
       </div>
     </div>
   );
