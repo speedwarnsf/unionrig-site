@@ -302,9 +302,9 @@ function buildEngine(): AudioEngine {
   const stereoRWet = ctx.createGain(); stereoRWet.gain.value = 0.55;
 
   const convolver = ctx.createConvolver();
-  convolver.buffer = generateReverbIR(ctx, 3.2, 0.45);
+  convolver.buffer = generateReverbIR(ctx, 1.6, 0.55);
   const reverbDryGain = ctx.createGain(); reverbDryGain.gain.value = 1.0;
-  const reverbWetGain = ctx.createGain(); reverbWetGain.gain.value = 0.38;
+  const reverbWetGain = ctx.createGain(); reverbWetGain.gain.value = 0.15;
 
   const cabLowRes = ctx.createBiquadFilter(); cabLowRes.type = "lowshelf"; cabLowRes.frequency.value = 110; cabLowRes.gain.value = 4;
   const cabHighRoll = ctx.createBiquadFilter(); cabHighRoll.type = "lowpass"; cabHighRoll.frequency.value = 6800; cabHighRoll.Q.value = 0.7;
@@ -413,6 +413,8 @@ function updateEngineParams(engine: AudioEngine, p: RigP) {
 
   engine.reverbDryGain.gain.linearRampToValueAtTime(p.spc.dry, t + ramp);
   engine.reverbWetGain.gain.linearRampToValueAtTime(p.spc.wet, t + ramp);
+  // Regenerate reverb IR when decay/damp change
+  engine.convolver.buffer = generateReverbIR(engine.convolver.context as AudioContext, p.spc.decay_s, p.spc.damp);
 
   engine.cabLowRes.frequency.linearRampToValueAtTime(p.cab.low_res_hz, t + ramp);
   engine.cabHighRoll.frequency.linearRampToValueAtTime(p.cab.high_roll_hz, t + ramp);
