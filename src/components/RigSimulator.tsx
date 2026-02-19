@@ -53,7 +53,7 @@ function makeRig(overrides: Partial<{
     drv: { type: 1, pre_gain_db: 9, asym: 0.25, tone_tilt: -0.15, low_cut_hz: 90, high_cut_hz: 8500, mix: 0.65, level_db: 0 },
     chr: { mode: 1, rate_hz: 0.45, depth: 0.25, mix: 0.30, tone: -0.10 },
     stp: { width: 0.55, micro_delay_ms: 6.5 },
-    spc: { damp: 0.55, wet: 0.15, dry: 1.0, decay_s: 1.6 },
+    spc: { damp: 0.55, wet: 0.15, dry: 1.0, decay_s: 0.7 },
     cab: { low_res_hz: 110, high_roll_hz: 6800, air: 0.30 },
     out: { level_db: -3, lim_thresh_db: -6, lim_release_ms: 160 },
   };
@@ -76,7 +76,7 @@ const SOUNDS: SoundDef[] = [
       drv: { type: 1, pre_gain_db: 4, asym: 0.10, tone_tilt: 0.05, low_cut_hz: 80, high_cut_hz: 9500, mix: 0.20, level_db: 0 },
       chr: { mode: 1, rate_hz: 0.22, depth: 0.10, mix: 0.12, tone: 0.0 },
       stp: { width: 0.90, micro_delay_ms: 14.0 }, // wide stereo, slapback feel via L/R offset
-      spc: { decay_s: 1.8, damp: 0.48, wet: 0.32, dry: 1.0 }, // studio room — present but not washy
+      spc: { decay_s: 0.8, damp: 0.48, wet: 0.14, dry: 1.0 }, // studio room — present but not washy
       cab: { low_res_hz: 95, high_roll_hz: 8200, air: 0.38 }, // Fender open-back: extended highs, air
       out: { level_db: -3, lim_thresh_db: -5, lim_release_ms: 180 },
     }),
@@ -86,7 +86,7 @@ const SOUNDS: SoundDef[] = [
       drv: { type: 1, pre_gain_db: 11, asym: 0.30, tone_tilt: -0.18, low_cut_hz: 85, high_cut_hz: 7200, mix: 0.55, level_db: -1 },
       chr: { mode: 0, rate_hz: 0, depth: 0, mix: 0, tone: 0 }, // no chorus on the Gibson
       stp: { width: 0.90, micro_delay_ms: 14.0 },
-      spc: { decay_s: 1.8, damp: 0.48, wet: 0.32, dry: 1.0 }, // same room
+      spc: { decay_s: 0.8, damp: 0.48, wet: 0.14, dry: 1.0 }, // same room
       cab: { low_res_hz: 120, high_roll_hz: 6200, air: 0.18 }, // Gibson 1x12 Jensen: rolled highs, more mids
       out: { level_db: -2, lim_thresh_db: -5, lim_release_ms: 180 },
     }),
@@ -99,7 +99,7 @@ const SOUNDS: SoundDef[] = [
       drv: { type: 3, pre_gain_db: 14, asym: 0.55, tone_tilt: -0.05, low_cut_hz: 100, high_cut_hz: 7800, mix: 0.75, level_db: 1.5 },
       chr: { rate_hz: 0.38, depth: 0.35, mix: 0.38, tone: -0.05 },
       stp: { width: 0.75, micro_delay_ms: 9.0 },
-      spc: { decay_s: 6.8, damp: 0.35, wet: 0.52, dry: 1.0 },
+      spc: { decay_s: 1.2, damp: 0.35, wet: 0.22, dry: 1.0 },
       cab: { low_res_hz: 120, high_roll_hz: 6400, air: 0.45 },
       out: { level_db: -2, lim_thresh_db: -6, lim_release_ms: 200 },
     }),
@@ -112,7 +112,7 @@ const SOUNDS: SoundDef[] = [
       drv: { type: 1, pre_gain_db: 7, asym: 0.35, tone_tilt: -0.25, low_cut_hz: 70, high_cut_hz: 7200, mix: 0.55, level_db: -1 },
       chr: { mode: 1, rate_hz: 0.28, depth: 0.18, mix: 0.22, tone: -0.18 },
       stp: { width: 0.82, micro_delay_ms: 11.0 },
-      spc: { decay_s: 1.8, damp: 0.52, wet: 0.28, dry: 1.0 },
+      spc: { decay_s: 0.8, damp: 0.52, wet: 0.12, dry: 1.0 },
       cab: { low_res_hz: 95, high_roll_hz: 7400, air: 0.38 },
       out: { level_db: -3, lim_thresh_db: -5, lim_release_ms: 140 },
     }),
@@ -121,7 +121,7 @@ const SOUNDS: SoundDef[] = [
       drv: { type: 3, pre_gain_db: 16, asym: 0.48, tone_tilt: -0.18, low_cut_hz: 75, high_cut_hz: 6400, mix: 0.72, level_db: 1 },
       chr: { mode: 1, rate_hz: 0.32, depth: 0.30, mix: 0.28, tone: -0.12 },
       stp: { width: 0.88, micro_delay_ms: 11.5 },
-      spc: { decay_s: 2.4, damp: 0.42, wet: 0.35, dry: 1.0 },
+      spc: { decay_s: 1.1, damp: 0.42, wet: 0.15, dry: 1.0 },
       cab: { low_res_hz: 88, high_roll_hz: 6800, air: 0.42 },
       out: { level_db: -2, lim_thresh_db: -5, lim_release_ms: 180 },
     }),
@@ -132,13 +132,13 @@ const SOUNDS: SoundDef[] = [
       dyn: { thresh_db: -18, ratio: 1.8, attack_ms: 12, release_ms: 180, makeup_db: 2, mix: 0.4 },
       drv: { type: 0, pre_gain_db: 3, asym: 0.1, tone_tilt: 0.1, mix: 0.2, level_db: 0 },
       chr: { mode: 1, rate_hz: 0.3, depth: 0.15, mix: 0.2, tone: 0.05 },
-      spc: { decay_s: 2.0, damp: 0.5, wet: 0.25, dry: 1.0 },
+      spc: { decay_s: 0.9, damp: 0.5, wet: 0.11, dry: 1.0 },
     }),
     sceneB: makeRig({
       dyn: { thresh_db: -20, ratio: 2.2, attack_ms: 15, release_ms: 200, makeup_db: 3, mix: 0.5 },
       drv: { type: 1, pre_gain_db: 6, asym: 0.15, tone_tilt: 0.0, mix: 0.4, level_db: 0 },
       chr: { mode: 1, rate_hz: 0.5, depth: 0.3, mix: 0.35, tone: 0.0 },
-      spc: { decay_s: 3.5, damp: 0.4, wet: 0.4, dry: 1.0 },
+      spc: { decay_s: 0.7, damp: 0.4, wet: 0.16, dry: 1.0 },
       stp: { width: 0.65, micro_delay_ms: 8 },
     }),
   },
@@ -146,11 +146,11 @@ const SOUNDS: SoundDef[] = [
     name: "Edge Crunch",
     sceneA: makeRig({
       drv: { type: 1, pre_gain_db: 14, asym: 0.3, tone_tilt: -0.1, mix: 0.7, level_db: -1 },
-      spc: { decay_s: 1.8, wet: 0.2 },
+      spc: { decay_s: 0.8, wet: 0.2 },
     }),
     sceneB: makeRig({
       drv: { type: 2, pre_gain_db: 20, asym: 0.45, tone_tilt: -0.2, mix: 0.85, level_db: -2 },
-      spc: { decay_s: 2.5, wet: 0.3 },
+      spc: { decay_s: 1.2, wet: 0.13 },
       stp: { width: 0.7, micro_delay_ms: 8 },
     }),
   },
@@ -160,13 +160,13 @@ const SOUNDS: SoundDef[] = [
       dyn: { thresh_db: -26, ratio: 3.5, makeup_db: 6, mix: 0.7 },
       drv: { type: 3, pre_gain_db: 22, asym: 0.5, tone_tilt: -0.2, mix: 0.9, level_db: 1 },
       chr: { mode: 0, depth: 0, mix: 0 },
-      spc: { decay_s: 2.0, wet: 0.25 },
+      spc: { decay_s: 0.9, wet: 0.11 },
     }),
     sceneB: makeRig({
       dyn: { thresh_db: -28, ratio: 4.0, makeup_db: 7, mix: 0.75 },
       drv: { type: 3, pre_gain_db: 26, asym: 0.6, tone_tilt: -0.25, mix: 0.95, level_db: 2 },
       chr: { mode: 1, rate_hz: 0.2, depth: 0.15, mix: 0.2 },
-      spc: { decay_s: 4.0, wet: 0.4, damp: 0.3 },
+      spc: { decay_s: 0.8, wet: 0.16, damp: 0.3 },
       stp: { width: 0.8, micro_delay_ms: 10 },
     }),
   },
@@ -175,13 +175,13 @@ const SOUNDS: SoundDef[] = [
     sceneA: makeRig({
       drv: { type: 1, pre_gain_db: 5, mix: 0.3, level_db: 0 },
       chr: { mode: 1, rate_hz: 0.2, depth: 0.4, mix: 0.5, tone: -0.15 },
-      spc: { decay_s: 8.0, damp: 0.3, wet: 0.65, dry: 0.8 },
+      spc: { decay_s: 2.8, damp: 0.3, wet: 0.12, dry: 0.8 },
       stp: { width: 0.85, micro_delay_ms: 10 },
     }),
     sceneB: makeRig({
       drv: { type: 1, pre_gain_db: 8, mix: 0.45, level_db: 0 },
       chr: { mode: 1, rate_hz: 0.15, depth: 0.55, mix: 0.6, tone: -0.2 },
-      spc: { decay_s: 11.0, damp: 0.2, wet: 0.8, dry: 0.6 },
+      spc: { decay_s: 1.4, damp: 0.2, wet: 0.28, dry: 0.6 },
       stp: { width: 0.95, micro_delay_ms: 11 },
     }),
   },
@@ -190,12 +190,12 @@ const SOUNDS: SoundDef[] = [
     sceneA: makeRig({
       drv: { type: 1, pre_gain_db: 16, asym: 0.35, tone_tilt: -0.2, low_cut_hz: 100, high_cut_hz: 7000, mix: 0.75, level_db: -1 },
       cab: { low_res_hz: 100, high_roll_hz: 5800, air: 0.2 },
-      spc: { decay_s: 1.5, wet: 0.18 },
+      spc: { decay_s: 0.7, wet: 0.18 },
     }),
     sceneB: makeRig({
       drv: { type: 3, pre_gain_db: 21, asym: 0.5, tone_tilt: -0.15, low_cut_hz: 110, high_cut_hz: 7500, mix: 0.85, level_db: 0 },
       cab: { low_res_hz: 105, high_roll_hz: 6200, air: 0.35 },
-      spc: { decay_s: 3.0, wet: 0.35 },
+      spc: { decay_s: 1.4, wet: 0.15 },
       stp: { width: 0.6, micro_delay_ms: 7 },
     }),
   },
@@ -204,12 +204,12 @@ const SOUNDS: SoundDef[] = [
     sceneA: makeRig({
       drv: { type: 1, pre_gain_db: 7, mix: 0.5 },
       chr: { mode: 3, rate_hz: 2.5, depth: 0.3, mix: 0.35, tone: -0.1 },
-      spc: { decay_s: 2.2, wet: 0.3 },
+      spc: { decay_s: 1.0, wet: 0.13 },
     }),
     sceneB: makeRig({
       drv: { type: 1, pre_gain_db: 10, mix: 0.6 },
       chr: { mode: 3, rate_hz: 4.0, depth: 0.5, mix: 0.55, tone: -0.15 },
-      spc: { decay_s: 3.5, wet: 0.45 },
+      spc: { decay_s: 0.7, wet: 0.18 },
       stp: { width: 0.7, micro_delay_ms: 8 },
     }),
   },
@@ -218,12 +218,12 @@ const SOUNDS: SoundDef[] = [
     sceneA: makeRig({
       dyn: { thresh_db: -30, ratio: 5, makeup_db: 8, mix: 0.8 },
       drv: { type: 4, pre_gain_db: 28, asym: 0.7, tone_tilt: -0.3, mix: 0.95, level_db: -2 },
-      spc: { decay_s: 1.5, wet: 0.15 },
+      spc: { decay_s: 0.7, wet: 0.15 },
     }),
     sceneB: makeRig({
       dyn: { thresh_db: -32, ratio: 6, makeup_db: 9, mix: 0.85 },
       drv: { type: 5, pre_gain_db: 32, asym: 0.8, tone_tilt: -0.35, mix: 1.0, level_db: -1 },
-      spc: { decay_s: 5.0, wet: 0.5, damp: 0.25 },
+      spc: { decay_s: 1.8, wet: 0.20, damp: 0.25 },
       stp: { width: 0.9, micro_delay_ms: 11 },
     }),
   },
@@ -232,14 +232,14 @@ const SOUNDS: SoundDef[] = [
     sceneA: makeRig({
       drv: { type: 0, pre_gain_db: 2, mix: 0.1 },
       chr: { mode: 1, rate_hz: 0.25, depth: 0.5, mix: 0.6, tone: 0.1 },
-      spc: { decay_s: 9.0, damp: 0.25, wet: 0.7, dry: 0.7 },
+      spc: { decay_s: 2.2, damp: 0.25, wet: 0.22, dry: 0.7 },
       stp: { width: 0.9, micro_delay_ms: 11 },
       cab: { air: 0.5 },
     }),
     sceneB: makeRig({
       drv: { type: 1, pre_gain_db: 6, mix: 0.3 },
       chr: { mode: 1, rate_hz: 0.18, depth: 0.65, mix: 0.7, tone: 0.15 },
-      spc: { decay_s: 12.0, damp: 0.15, wet: 0.85, dry: 0.5 },
+      spc: { decay_s: 1.5, damp: 0.4, wet: 0.15, dry: 0.5 },
       stp: { width: 1.0, micro_delay_ms: 12 },
       cab: { air: 0.65 },
     }),
@@ -256,7 +256,7 @@ const SOUNDS: SoundDef[] = [
       dyn: { thresh_db: -18, ratio: 3.5, attack_ms: 10, release_ms: 150, makeup_db: 4, mix: 0.7 },
       drv: { type: 1, pre_gain_db: 13, mix: 0.6, level_db: 0 },
       chr: { mode: 3, rate_hz: 3.0, depth: 0.2, mix: 0.25 },
-      spc: { decay_s: 1.5, wet: 0.2 },
+      spc: { decay_s: 0.7, wet: 0.2 },
     }),
   },
   {
@@ -264,13 +264,13 @@ const SOUNDS: SoundDef[] = [
     sceneA: makeRig({
       drv: { type: 1, pre_gain_db: 8, tone_tilt: -0.3, mix: 0.55 },
       chr: { mode: 1, rate_hz: 0.1, depth: 0.3, mix: 0.4, tone: -0.25 },
-      spc: { decay_s: 5.5, damp: 0.6, wet: 0.5, dry: 0.9 },
+      spc: { decay_s: 1.8, damp: 0.6, wet: 0.20, dry: 0.9 },
       cab: { high_roll_hz: 5000, air: 0.15 },
     }),
     sceneB: makeRig({
       drv: { type: 3, pre_gain_db: 15, tone_tilt: -0.25, mix: 0.7 },
       chr: { mode: 1, rate_hz: 0.08, depth: 0.45, mix: 0.55, tone: -0.3 },
-      spc: { decay_s: 9.0, damp: 0.5, wet: 0.7, dry: 0.7 },
+      spc: { decay_s: 2.2, damp: 0.5, wet: 0.22, dry: 0.7 },
       cab: { high_roll_hz: 4500, air: 0.25 },
       stp: { width: 0.8, micro_delay_ms: 10 },
     }),
@@ -281,14 +281,14 @@ const SOUNDS: SoundDef[] = [
       dyn: { thresh_db: -20, ratio: 2, attack_ms: 14, release_ms: 180, makeup_db: 3, mix: 0.45 },
       drv: { type: 1, pre_gain_db: 6, tone_tilt: 0.15, high_cut_hz: 12000, mix: 0.4 },
       chr: { mode: 1, rate_hz: 0.6, depth: 0.2, mix: 0.25, tone: 0.1 },
-      spc: { decay_s: 2.5, damp: 0.35, wet: 0.3 },
+      spc: { decay_s: 1.2, damp: 0.35, wet: 0.13 },
       cab: { high_roll_hz: 9000, air: 0.45 },
     }),
     sceneB: makeRig({
       dyn: { thresh_db: -22, ratio: 2.5, attack_ms: 16, release_ms: 200, makeup_db: 4, mix: 0.55 },
       drv: { type: 1, pre_gain_db: 11, tone_tilt: 0.1, high_cut_hz: 11000, mix: 0.55 },
       chr: { mode: 1, rate_hz: 0.5, depth: 0.3, mix: 0.35, tone: 0.05 },
-      spc: { decay_s: 4.0, damp: 0.3, wet: 0.45 },
+      spc: { decay_s: 0.8, damp: 0.3, wet: 0.18 },
       cab: { high_roll_hz: 8500, air: 0.55 },
       stp: { width: 0.7, micro_delay_ms: 8 },
     }),
