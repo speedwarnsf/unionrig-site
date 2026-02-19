@@ -375,8 +375,8 @@ function applyMacroMaps(p: RigP, m: Macros): RigP {
   r.chr.tone += -0.20 * mo;
 
   const d = m.depth, d2 = d * d;
-  r.spc.wet += 0.55 * d;
-  r.spc.decay_s += 3.5 * d2;
+  r.spc.wet += 0.35 * d;
+  r.spc.decay_s += 2.0 * d2;
   r.spc.damp += -0.20 * d;
 
   const b = m.body, b2 = b * b;
@@ -401,7 +401,7 @@ function applyMacroMaps(p: RigP, m: Macros): RigP {
   r.chr.mix = clampf(r.chr.mix, 0, 1);
   r.stp.width = clampf(r.stp.width, 0, 1);
   r.stp.micro_delay_ms = clampf(r.stp.micro_delay_ms, 0, 12);
-  r.spc.decay_s = clampf(r.spc.decay_s, 0.2, 12);
+  r.spc.decay_s = clampf(r.spc.decay_s, 0.2, 4);
   r.spc.damp = clampf(r.spc.damp, 0, 1);
   r.spc.wet = clampf(r.spc.wet, 0, 1);
   r.cab.low_res_hz = clampf(r.cab.low_res_hz, 60, 180);
@@ -593,9 +593,9 @@ function buildEngine(): AudioEngine {
 
   // Space
   const convolver = ctx.createConvolver();
-  convolver.buffer = generateReverbIR(ctx, 3.2, 0.45);
+  convolver.buffer = generateReverbIR(ctx, 1.2, 0.55);
   const reverbDryGain = ctx.createGain(); reverbDryGain.gain.value = 1.0;
-  const reverbWetGain = ctx.createGain(); reverbWetGain.gain.value = 0.38;
+  const reverbWetGain = ctx.createGain(); reverbWetGain.gain.value = 0.18;
 
   // Cabinet
   const cabLowRes = ctx.createBiquadFilter(); cabLowRes.type = "lowshelf"; cabLowRes.frequency.value = 110; cabLowRes.gain.value = 4;
@@ -1125,9 +1125,9 @@ function rigJsonSceneToRigP(scene: RigJsonScene): RigP {
       micro_delay_ms: p.stp.micro_delay_ms ?? 6.5,
     },
     spc: {
-      decay_s: p.spc.decay_s ?? 3.2,
-      damp: p.spc.damp ?? 0.45,
-      wet: p.spc.wet ?? 0.38,
+      decay_s: p.spc.decay_s ?? 1.2,
+      damp: p.spc.damp ?? 0.55,
+      wet: p.spc.wet ?? 0.18,
       dry: p.spc.dry ?? 1.0,
     },
     cab: {
