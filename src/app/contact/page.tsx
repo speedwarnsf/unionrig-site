@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
 import FadeIn from "@/components/FadeIn";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Get in touch with Union Rig. Join the waitlist for the mono-in, stereo-out guitar instrument shipping 2027.",
+};
 
 const section: React.CSSProperties = {
   maxWidth: 640,

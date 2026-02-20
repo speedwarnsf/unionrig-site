@@ -50,7 +50,7 @@ export default async function Image() {
             textTransform: "uppercase",
           }}
         >
-          Mono-in, stereo-out guitar instrument -- $849 -- 2026
+          Mono-in, stereo-out guitar instrument -- $849 -- 2027
         </div>
       </div>
     ),

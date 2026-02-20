@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://unionrig-site.vercel.app/sitemap.xml
+Sitemap: https://unionrig.com/sitemap.xml

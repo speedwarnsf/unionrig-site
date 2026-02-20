@@ -1,11 +1,11 @@
 {
-  "name": "UNION RIG",
+  "name": "Union Rig",
   "short_name": "Union Rig",
-  "description": "Modular camera rig system built for fast reconfiguration, balanced handheld work, and clean on-set builds.",
+  "description": "Mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper, and nothing you don't need.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b0e12",
-  "theme_color": "#0b0e12",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
   "icons": [
     {
       "src": "/favicon.ico",

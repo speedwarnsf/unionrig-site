@@ -57,6 +57,24 @@ export const viewport: Viewport = {
   themeColor: "#0a0a0a",
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Union Rig",
+  description:
+    "Mono-in, stereo-out guitar instrument. 12 sounds, 2 scenes each, a performance looper, and nothing you don't need.",
+  brand: { "@type": "Brand", name: "Union Rig" },
+  url: siteUrl,
+  image: `${siteUrl}/images/union-logo.png`,
+  offers: {
+    "@type": "Offer",
+    price: "849",
+    priceCurrency: "USD",
+    availability: "https://schema.org/PreOrder",
+    url: siteUrl,
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -64,7 +82,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
